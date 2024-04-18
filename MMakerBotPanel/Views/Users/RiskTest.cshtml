@@ -1,0 +1,511 @@
+﻿@model MMakerBotPanel.Database.Model.RiskTest
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/assets/css/pages/privacy/privacy.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/assets/css/forms/theme-checkbox-radio.css">
+<link href="~/Content/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+<script src="~/Content/plugins/sweetalerts/promise-polyfill.js"></script>
+<link href="~/Content/plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+<style>
+    .table-bordered td, .table-bordered th {
+        border: 1px solid #ebedf2;
+    }
+</style>
+<div id="privacyWrapper" class="">
+    <div class="privacy-container">
+        <div class="privacyContent">
+
+            <div class="d-flex justify-content-between privacy-head">
+                <div class="privacyHeader">
+                    <h2>Risk Profile Calculation Test</h2>
+                </div>
+            </div>
+            <div class="privacy-content-container">
+                <section>
+                    <h6>1.What is your experience level with market maker bots?</h6>
+
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer1" name="answer1" value="1">
+                            <span class="new-control-indicator"></span>Beginner
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+
+                            <input type="radio" class="new-control-input answer1" name="answer1" value="2">
+                            <span class="new-control-indicator"></span>Intermediate
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer1" name="answer1" value="3">
+                            <span class="new-control-indicator"></span>Advanced
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+
+                            <input type="radio" class="new-control-input answer1" name="answer1" value="4">
+                            <span class="new-control-indicator"></span>Expert
+                        </label>
+                    </div>
+                    <div class="validation1"></div>
+                </section>
+
+                <section>
+                    <h6>2.How experienced are you with spread strategies?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer2" name="answer2" value="1">
+                            <span class="new-control-indicator"></span>Beginner
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer2" name="answer2" value="2">
+                            <span class="new-control-indicator"></span>Intermediate
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer2" name="answer2" value="3">
+                            <span class="new-control-indicator"></span>Advanced
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer2" name="answer2" value="4">
+                            <span class="new-control-indicator"></span>Expert
+                        </label>
+                    </div>
+                    <div class="validation2"></div>
+                </section>
+
+                <section>
+                    <h6>3.What is your willingness to use leverage?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer3" name="answer3" value="1">
+                            <span class="new-control-indicator"></span>I prefer not to use leverage (1:1)
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer3" name="answer3" value="2">
+                            <span class="new-control-indicator"></span>Low leverage (e.g., 1:2, 1:5)
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer3" name="answer3" value="3">
+                            <span class="new-control-indicator"></span>Medium leverage (e.g., 1:10, 1:20)
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer3" name="answer3" value="4">
+                            <span class="new-control-indicator"></span>High leverage (e.g., 1:50, 1:100)
+                        </label>
+                    </div>
+                    <div class="validation3"></div>
+                </section>
+
+                <section>
+                    <h6>4.How much trading volume will you have?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer4" name="answer4" value="1">
+                            <span class="new-control-indicator"></span>Low trading volume
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer4" name="answer4" value="2">
+                            <span class="new-control-indicator"></span>Medium trading volume
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer4" name="answer4" value="3">
+                            <span class="new-control-indicator"></span>High trading volume
+                        </label>
+                    </div>
+                    <div class="validation4"></div>
+                </section>
+
+                <section>
+                    <h6>5.What would be your reaction when the cryptocurrency market declines?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer5" name="answer5" value="1">
+                            <span class="new-control-indicator"></span>Close your positions
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer5" name="answer5" value="2">
+                            <span class="new-control-indicator"></span>Continue to wait
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer5" name="answer5" value="3">
+                            <span class="new-control-indicator"></span>Purchase more
+                        </label>
+                    </div>
+                    <div class="validation5"></div>
+                </section>
+
+                <section>
+                    <h6>6.Do you tend to avoid trading during volatile market conditions?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer6" name="answer6" value="1">
+                            <span class="new-control-indicator"></span>I stop trading depending on market conditions
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer6" name="answer6" value="2">
+                            <span class="new-control-indicator"></span>I trade regardless of market conditions
+                        </label>
+                    </div>
+                    <div class="validation6"></div>
+                </section>
+
+                <section>
+                    <h6>7.How do you determine the asset classes you trade in?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer7" name="answer7" value="1">
+                            <span class="new-control-indicator"></span>I only trade in assets I have researched and have knowledge about
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer7" name="answer7" value="2">
+                            <span class="new-control-indicator"></span>I prefer fast-moving or popular assets
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer7" name="answer7" value="3">
+                            <span class="new-control-indicator"></span>I trade based on profitable spread strategies
+                        </label>
+                    </div>
+                    <div class="validation7"></div>
+                </section>
+
+                <section>
+                    <h6>8.What is the likelihood of you trading in an asset you are not familiar with?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer8" name="answer8" value="1">
+                            <span class="new-control-indicator"></span>I would never trade
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer8" name="answer8" value="2">
+                            <span class="new-control-indicator"></span>I would trade cautiously
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer8" name="answer8" value="3">
+                            <span class="new-control-indicator"></span>I would trade if there is a high potential profit forecast
+                        </label>
+                    </div>
+                    <div class="validation8"></div>
+                </section>
+
+                <section>
+                    <h6>9.How thoroughly do you determine your strategy and risk management before each trade?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer9" name="answer9" value="1">
+                            <span class="new-control-indicator"></span>I set a detailed strategy and risk management for each trade
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer9" name="answer9" value="2">
+                            <span class="new-control-indicator"></span>I occasionally review my strategy and risk management
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer9" name="answer9" value="3">
+                            <span class="new-control-indicator"></span>I only set my strategy and risk management at the beginning
+                        </label>
+                    </div>
+                    <div class="validation9"></div>
+                </section>
+
+                <section>
+                    <h6>10.Would you use a non-transparent market maker bot or spread strategy service?</h6>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer10" name="answer10" value="1">
+                            <span class="new-control-indicator"></span>I absolutely would not use it
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer10" name="answer10" value="2">
+                            <span class="new-control-indicator"></span>I would need to have great trust
+                        </label>
+                    </div>
+                    <div class="n-chk">
+                        <label class="new-control new-radio radio-classic-success">
+                            <input type="radio" class="new-control-input answer10" name="answer10" value="3">
+                            <span class="new-control-indicator"></span>I would use it if the potential returns are promising
+                        </label>
+                    </div>
+                    <div class="validation10"></div>
+                </section>
+
+
+                <div style="display:flex; justify-content:center">
+                    <button class="btn btn-success btn-rounded mb-2 success" value="Save" id="save">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        SaveTest();
+        $('.success').on('click', function () {
+            swal({
+                title: 'Good job!',
+                text: "Save Your Test",
+                type: 'success',
+                padding: '2em',
+                onAfterClose: function () {
+                    window.location.href = "/Users/GetProfile";
+                }
+           })
+        });
+
+        $.ajax({
+            url: '/Users/GetUserTest',
+            type: "Get",
+            dataType: "json",
+            success: function (result) {
+                if (!result) {
+
+
+                }
+                else {
+                    var radioBtns1 = document.getElementsByName("answer1");
+                    var radioBtns2 = document.getElementsByName("answer2");
+                    var radioBtns3 = document.getElementsByName("answer3");
+                    var radioBtns4 = document.getElementsByName("answer4");
+                    var radioBtns5 = document.getElementsByName("answer5");
+                    var radioBtns6 = document.getElementsByName("answer6");
+                    var radioBtns7 = document.getElementsByName("answer7");
+                    var radioBtns8 = document.getElementsByName("answer8");
+                    var radioBtns9 = document.getElementsByName("answer9");
+                    var radioBtns10 = document.getElementsByName("answer10");
+
+                    for (var i = 0; i < radioBtns1.length; i++) {
+                        if (radioBtns1[i].value == result.answer1) {
+                            radioBtns1[i].checked = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < radioBtns2.length; i++) {
+                        if (radioBtns2[i].value == result.answer2) {
+                            radioBtns2[i].checked = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < radioBtns3.length; i++) {
+                        if (radioBtns3[i].value == result.answer3) {
+                            radioBtns3[i].checked = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < radioBtns4.length; i++) {
+                        if (radioBtns4[i].value == result.answer4) {
+                            radioBtns4[i].checked = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < radioBtns5.length; i++)
+                        if (radioBtns5[i].value == result.answer5) {
+                            radioBtns5[i].checked = true;
+                            break;
+                        }
+                }
+                for (var i = 0; i < radioBtns6.length; i++) {
+                    if (radioBtns6[i].value == result.answer6) {
+                        radioBtns6[i].checked = true;
+                        break;
+                    }
+                }
+                for (var i = 0; i < radioBtns7.length; i++) {
+                    if (radioBtns7[i].value == result.answer7) {
+                        radioBtns7[i].checked = true;
+                        break;
+                    }
+                }
+                for (var i = 0; i < radioBtns8.length; i++) {
+                    if (radioBtns8[i].value == result.answer8) {
+                        radioBtns8[i].checked = true;
+                        break;
+                    }
+                }
+                for (var i = 0; i < radioBtns9.length; i++) {
+                    if (radioBtns9[i].value == result.answer9) {
+                        radioBtns9[i].checked = true;
+                        break;
+                    }
+                }
+                for (var i = 0; i < radioBtns10.length; i++) {
+                    if (radioBtns10[i].value == result.answer10) {
+                        radioBtns10[i].checked = true;
+                        break;
+                    }
+                }
+
+            },
+            error: function () {
+
+            }
+        })
+    });
+
+    function SaveTest() {
+        $('#save').click(function () {
+            $('.val1').remove();;
+            $('.val2').remove();
+            $('.val3').remove();
+            $('.val4').remove();
+            $('.val5').remove();
+            $('.val6').remove();
+            $('.val7').remove();
+            $('.val8').remove();
+            $('.val9').remove();
+            $('.val10').remove();
+            var answer1 = $(".answer1:checked").val();
+            var answer2 = $(".answer2:checked").val();
+            var answer3 = $(".answer3:checked").val();
+            var answer4 = $(".answer4:checked").val();
+            var answer5 = $(".answer5:checked").val();
+            var answer6 = $(".answer6:checked").val();
+            var answer7 = $(".answer7:checked").val();
+            var answer8 = $(".answer8:checked").val();
+            var answer9 = $(".answer9:checked").val();
+            var answer10 = $(".answer10:checked").val();
+            if (answer1 == undefined) {
+                $('.val1').remove();
+                var validation = "<div class='val1' style='color:red'>This question cannot be empty</div>";
+                $('.validation1').append(validation);
+            }
+
+            if (answer2 == undefined) {
+                $('.val2').remove();
+                var validation = "<div class='val2' style='color:red'>This question cannot be empty</div>";
+                $('.validation2').append(validation);
+            }
+
+            if (answer3 == undefined) {
+                $('.val3').remove();
+                var validation = "<div  class='val3' style='color:red'>This question cannot be empty</div>";
+                $('.validation3').append(validation);
+            }
+            if (answer4 == undefined) {
+                $('.val4').remove();
+                var validation = "<div class='val4' style='color:red'>This question cannot be empty</div>";
+                $('.validation4').append(validation);
+            }
+            if (answer5 == undefined) {
+                $('.val5').remove();
+                var validation = "<div class='val5' style='color:red'>This question cannot be empty</div>";
+                $('.validation5').append(validation);
+            }
+
+            if (answer6 == undefined) {
+                $('.val6').remove();
+                var validation = "<div class='val6' style='color:red'>This question cannot be empty</div>";
+                $('.validation6').append(validation);
+            }
+            if (answer7 == undefined) {
+                $('.val7').remove();
+                var validation = "<div class='val7' style='color:red'>This question cannot be empty</div>";
+                $('.validation7').append(validation);
+            }
+
+            if (answer8 == undefined) {
+                $('.val8').remove();
+                var validation = "<div class='val8' style='color:red'>This question cannot be empty</div>";
+                $('.validation8').append(validation);
+            }
+
+            if (answer9 == undefined) {
+                $('.val9').remove();
+                var validation = "<div class='val9' style='color:red'>This question cannot be empty</div>";
+                $('.validation9').append(validation);
+            }
+
+            if (answer10 == undefined) {
+                $('.val10').remove();
+                var validation = "<div class='val10' style='color:red'>This question cannot be empty</div>";
+                $('.validation10').append(validation);
+            }
+
+            if (answer1 != undefined && answer2 != undefined && answer3 != undefined && answer4 != undefined && answer5 != undefined && answer6 != undefined && answer7 != undefined && answer8 != undefined && answer9 != undefined && answer10 != undefined) {
+                $.ajax({
+                    url: '/Users/SaveTest',
+                    type: "Post",
+                    dataType: "json",
+                    data: {
+                        'answer1': answer1,
+                        'answer2': answer2,
+                        'answer3': answer3,
+                        'answer4': answer4,
+                        'answer5': answer5,
+                        'answer6': answer6,
+                        'answer7': answer7,
+                        'answer8': answer8,
+                        'answer9': answer9,
+                        'answer10': answer10
+                    },
+                    success: function (result) {
+                        if (result) {
+                            $(".btn-success").addClass("success");
+
+                        } else {
+
+                        }
+                    },
+                    error: function () {
+
+                    }
+
+                });
+
+            }
+        });
+    }
+
+    // Scroll To Top
+    $(document).on('click', '.arrow', function (event) {
+        event.preventDefault();
+        var body = $("html, body");
+        body.stop().animate({ scrollTop: 0 }, 500, 'swing');
+    });
+</script>
+<script src="~/Content/plugins/sweetalerts/sweetalert2.min.js"></script>
+<script src="~/Content/plugins/sweetalerts/custom-sweetalert.js"></script>

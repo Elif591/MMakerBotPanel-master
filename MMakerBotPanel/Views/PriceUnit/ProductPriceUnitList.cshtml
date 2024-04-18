@@ -1,0 +1,327 @@
+﻿@model  IEnumerable<MMakerBotPanel.Database.Model.PriceUnit>
+
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/datatables.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/assets/css/forms/theme-checkbox-radio.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/custom_dt_custom.css">
+<link href="~/Content/light/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL CUSTOM STYLES -->
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+        <button type="button" class="btn btn-secondary mb-2 mr-2" id="addContractModal" data-toggle="modal" data-target="#addContract" style="margin-top:2rem">
+            Add Contract
+        </button>
+        <div class="row layout-spacing">
+            <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content widget-content-area">
+                        <div class="table-responsive mb-4">
+                            <table id="style-3" class="table style-3  table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">@Html.DisplayNameFor(model => model.Name)</th>
+                                        <th class="text-center">@Html.DisplayNameFor(model => model.ShortName)</th>
+                                        <th class="text-center">@Html.DisplayNameFor(model => model.Contract)</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.Name)</td>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.ShortName)</td>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.Contract)</td>
+                                            <td class="text-center">
+                                                <ul class="table-controls">
+                                                    <li><a  class="bs-tooltip EditContractModal" data="@item.PriceUnitID" data-toggle="modal" data-target="#EditContract" data-placement="top" title="Edit" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                                    <li><a  class="bs-tooltip DeleteContract" data="@item.PriceUnitID" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    } 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addContract" class="modal animated fadeInDown" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="widget-header">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+                    <div class="form-group mb-4">
+                        <label>Price Name</label>
+                        <input type="text" class="form-control mb-4" id="PriceName" placeholder="Price Name..." required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label>Price Short Name</label>
+                        <input type="text" class="form-control mb-4" id="PriceShortName" placeholder="Price Short Name..." required>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label>Contract</label>
+                        <input type="text" class="form-control mb-4" id="ContractAddress" placeholder="Contract Address..." required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                <button type="button" class="btn btn-primary" id="AddContractModal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="EditContract" class="modal animated fadeInDown" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="widget-header">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+                    <div class="form-group mb-4">
+                        <label>Price Name</label>
+                        <input type="text" class="form-control mb-4" id="EditPriceName" placeholder="Price Name..." disabled>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label>Price Short Name</label>
+                        <input type="text" class="form-control mb-4" id="EditPriceShortName" placeholder="Price Short Name..." disabled>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label>Contract</label>
+                        <input type="text" class="form-control mb-4" id="EditContractAddress" placeholder="Contract Address..." required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                <button type="button" class="btn btn-primary" id="SaveEditContract">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/light/plugins/table/datatable/datatables.js"></script>
+<script src="~/Content/light/assets/js/scrollspyNav.js"></script>
+<script>
+
+    c3 = $('#style-3').DataTable({
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+            "sLengthMenu": "Results :  _MENU_",
+        },
+        "stripeClasses": [],
+        "lengthMenu": [5, 10, 20, 50],
+        "pageLength": 5
+    });
+
+    multiCheck(c3);
+</script>
+
+<script>
+    $(document).ready(function (){
+        SaveContractModal();
+        EditContractModal();
+        SaveEditContract();
+        DeleteContract();
+    })
+
+    function SaveContractModal()
+    {
+        $('#AddContractModal').click(function () {
+            var PriceName = $('#PriceName').val();
+            var PriceShortName = $('#PriceShortName').val();
+            var ContractAddress = $('#ContractAddress').val();
+
+            if (PriceName != "" & PriceShortName != "" & ContractAddress != "") {
+                $.ajax({
+                    url: '/PriceUnit/SavePriceModal',
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        "PriceName": PriceName,
+                        "PriceShortName": PriceShortName,
+                        "ContractAdress": ContractAddress
+                    },
+                    success: function (result) {
+                        if (result) {
+                            window.location.reload();
+                        }
+                        else {
+                            Snackbar.show({
+                                text: 'There is a record for this price',
+                                actionTextColor: '#fff',
+                                backgroundColor: '#e7515a',
+                                pos: 'top-left'
+                            });
+                        }
+                    }
+                });
+            }
+            else
+            {
+                Snackbar.show({
+                    text: 'Required',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-left'
+                });
+
+            }     
+        });
+    }
+
+    function EditContractModal() {
+        $('.EditContractModal').click(function () {
+            var PriceUnitID = $(this).attr('data');
+            $.ajax({
+                url: '/PriceUnit/EditContractModal?id=' + PriceUnitID,
+                type: "Get",
+                dataType: "json",
+                success: function (result) {
+                    if (!result) {
+                        Snackbar.show({
+                            text: 'Something went wrong',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-left'
+                        });
+                    }
+                    else {
+                        $('#EditPriceName').val(result.Name);
+                        $('#EditPriceShortName').val(result.ShortName);
+                        $('#EditContractAddress').val(result.Contract);
+                        $('#SaveEditContract').attr('data', result.PriceUnitID);
+                    }
+
+                }
+            });
+        });
+    }
+
+    function SaveEditContract()
+    {
+        $('#SaveEditContract').click(function () {
+            var PriceUnitID = $(this).attr('data');
+            var contractAddress = $('#EditContractAddress').val();
+            $.ajax({
+                url: '/PriceUnit/SaveEditContract' ,
+                type: "Post",
+                dataType: "json",
+                data: {
+                    "id": PriceUnitID,
+                    "contract": contractAddress,
+                    },
+                success: function (result) {
+                    if (!result) {
+                        Snackbar.show({
+                            text: 'Something went wrong',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-left'
+                        });
+                    } else {
+                  
+                        Snackbar.show({
+                            text: 'Succesfully',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#8dbf42',
+                            pos: 'top-left'
+                        });
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    }
+                }
+            });
+        });
+
+    }
+
+    function DeleteContract() {
+        $('.DeleteContract').click(function () {
+            var PriceUnitID = $(this).attr('data');
+            $.ajax({
+                url: '/PriceUnit/DeleteContract?id=' + PriceUnitID ,
+                type: "Get",
+                dataType: "json",
+                success: function (result)
+                {
+                    if (result == "success") {
+                        Snackbar.show({
+                            text: 'Succesfully',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#8dbf42',
+                            pos: 'top-left'
+                        });
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    }
+                    else
+                    {
+                        Snackbar.show({
+                            text: result ,
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-left'
+                        });
+                    }
+                }
+            });
+        });
+    }
+
+</script>
+<script src="~/Content/light/plugins/notification/snackbar/snackbar.min.js"></script>
+<script src="~/Content/light/assets/js/components/notification/custom-snackbar.js"></script>
+
+<script>
+    // Get the Toast button
+    var toastButton = document.getElementById("toast-btn");
+    var toastElement = document.getElementsByClassName("toast")[0];
+
+</script>

@@ -1,0 +1,477 @@
+﻿
+@model MMakerBotPanel.Database.Model.Product
+
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<link href="~/Content/light/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/light/assets/css/forms/switches.css">
+
+<link rel="stylesheet" type="text/css" href="~/Content/light/assets/css/elements/alert.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/datatables.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/custom_dt_custom.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/select2/select2.min.css">
+<link href="~/Content/light/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+<style>
+    .btn-light {
+        border-color: transparent;
+    }
+
+    .select2-container {
+        z-index: 100000;
+    }
+</style>
+
+<div id="content" class="main-content">
+    <div id="alert" style=" margin-top: 1.3rem; width: 17rem; margin-left: 2rem; ">
+
+    </div>
+    <div class="layout-px-spacing">
+        <div class="row layout-spacing" style="padding-bottom: 0px;">
+            <div class="col-lg-12">
+                <div class="statbox widget box box-shadow" style="margin-top:1.3rem">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4 style="margin-left: 7.5rem; margin-top: 3rem">Edit Product</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-content widget-content-area custom-autocomplete">
+
+                        <form id="form" style="padding:1rem">
+
+                            <div class="row">
+                                <div class="col-md-1">
+
+                                </div>
+                                <div class="col-lg-6" style="margin-top:1.75rem">
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="width:8.5rem">Product Name</span>
+                                        </div>
+
+
+                                        @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control alloptions", id = "ProductName", disabled = "disabled" } })
+                                    </div>
+
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-4 col-6">
+                                        <h6 style="margin-bottom: 1rem; margin-right: 1rem"> Trial</h6>
+                                        <label class="switch s-icons s-outline  s-outline-secondary  mb-4 mr-2">
+                                            <input type="checkbox" id="Demo" name="Demo" for="Demo" value="true" checked="@Model.Demo">
+
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-center SaveBtn" style="float: left; margin-top:1rem">
+                                        <button class="btn btn-success mb-2" id="save" data="@Model.ProductID">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row layout-spacing">
+            <div class="text-center" style="float:left; margin-left:1rem">
+                <button type="button" class="btn btn-secondary mb-2 mr-2" id="addPriceModal" data-toggle="modal" data-target="#addPrice" style="margin-top:2rem">
+                    Add Price
+                </button>
+            </div>
+            <div class="col-lg-12">
+                <div class="text-center"><h3>Price List</h3></div>
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-content widget-content-area">
+                        <div class="table-responsive mb-4">
+                            <table id="style-3" class="table style-3  table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Monthly Price</th>
+                                        <th class="text-center">Yearly Price)</th>
+                                        <th class="text-center">Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ProductPrices)
+                                    {
+                                        <tr>
+                                            <td class="text-center"> @item.PriceUnit.Name</td>
+                                            <td class="text-center"> @item.MonthlyPrice</td>
+                                            <td class="text-center"> @item.YearlyPrice</td>
+                                            <td class="text-center">
+                                                <ul class="table-controls">
+                                                    <li><a href="" class="bs-tooltip EditModal" data-toggle="modal" data-target="#fadeinModal" data="@item.ProductPriceID" data-placement="top" title="" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                                    <li><a href="" class="bs-tooltip DeleteModal" data="@item.ProductPriceID" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="fadeinModal" class="modal animated fadeInDown" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="widget-header">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+
+
+                    <select class="form-control  basic" id="priceSelect" disabled></select>
+
+                    <div class="form-group mb-4">
+                        <label>Monthly Price</label>
+                        <input type="text" class="form-control mb-4" id="MonthlyPrice" placeholder="Monthly Price...">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label>Yearly Price</label>
+                        <input type="text" class="form-control mb-4" id="YearlyPrice" placeholder="Yearly Price...">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                <button type="button" class="btn btn-primary" id="EditPriceModal">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="addPrice" class="modal animated fadeInDown" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="widget-header">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+
+
+                    <select class="form-control  basic" id="priceSelect2"></select>
+
+                    <div class="form-group mb-4">
+                        <label>Monthly Price</label>
+                        <input type="text" class="form-control mb-4" id="AddMonthlyPrice" placeholder="Monthly Price...">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label>Yearly Price</label>
+                        <input type="text" class="form-control mb-4" id="AddYearlyPrice" placeholder="Yearly Price...">
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                <button type="button" class="btn btn-primary" id="CreatePriceModal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/light/assets/js/scrollspyNav.js"></script>
+<script src="~/Content/light/plugins/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+<script src="~/Content/light/plugins/bootstrap-maxlength/custom-bs-maxlength.js"></script>
+<script src="~/Content/light/plugins/table/datatable/datatables.js"></script>
+<script src="~/Content/light/plugins/select2/select2.min.js"></script>
+<script src="~/Content/light/plugins/select2/custom-select2.js"></script>
+
+<script>
+    c3 = $('#style-3').DataTable({
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+            "sLengthMenu": "Results :  _MENU_",
+        },
+        "stripeClasses": [],
+        "lengthMenu": [5, 10, 20, 50],
+        "pageLength": 5
+    });
+
+    multiCheck(c3);
+
+    $(document).ready(function () {
+        var ss = $(".basic").select2({
+            tags: true,
+        });
+
+        document.querySelector("#form").addEventListener("submit", function (e) {
+            e.preventDefault();
+        });
+
+        checkbox();
+        SaveProduct();
+        EditModal();
+        EditProduct();
+        AddPrice();
+        DeletePrice();
+        $('#addPriceModal').click(function () {
+            $('option').remove();
+            GetPrice2();
+        });
+    });
+
+    function checkbox() {
+        $("input[type=checkbox]").change(function () {
+            $(this).prop("checked")
+            {
+                if ($(this)[0].checked) {
+                    $(this).val(true);
+                }
+                if (!$(this)[0].checked) {
+                    $(this).val(false);
+                }
+            };
+        });
+    }
+
+    function SaveProduct() {
+        $('#form').on('click', '#save', function () {
+            var ProductID = $('#save').attr('data');
+            var Demo = $('#Demo').attr('value');
+            $.ajax({
+                url: '/Product/ProductEdit',
+                type: "Post",
+                dataType: "json",
+                data: {
+                    'ProductID': ProductID,
+                    'Demo': Demo
+                },
+                success: function (result) {
+                    if (result) {
+                        var html = " <div class='alert alert-success mb-4' role='alert'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x close' data-dismiss='alert'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></button> <strong>Successfuly !</strong> </div>";
+                        $('#alert').append(html);
+                    }
+                },
+                error: function () {
+
+                }
+
+            });
+
+        })
+    }
+
+    function DeletePrice() {
+        $('.DeleteModal').click(function () {
+            var ProductPriceID = $(this).attr('data');
+            $.ajax({
+                url: '/Product/PriceDelete?id=' + ProductPriceID,
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    window.location.reload();
+
+                },
+                error: function () {
+
+                }
+
+            });
+
+        })
+    }
+
+
+    function EditModal() {
+        $('.EditModal').click(function () {
+            $('option').remove();
+            var ProductID = $(this).attr('data');
+            $.ajax({
+                url: '/Product/PriceModal?id=' + ProductID,
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    GetPrice(result.PriceName);
+                    $('#MonthlyPrice').val(result.MonthlyPrice);
+                    $('#YearlyPrice').val(result.YearlyPrice);
+                    $('#EditPriceModal').attr('data', result.ProductID);
+
+                },
+                error: function () {
+
+                }
+
+            });
+
+        })
+    }
+
+    function GetPrice(Name) {
+        var option = "";
+        $.ajax({
+            url: '/Product/GetPriceName?name=' + Name,
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    option = "<option>" + result[i].ShortName + "</option>";
+                    $('#priceSelect').append(option);
+                    option = "";
+
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+
+    function GetPrice2() {
+        var option = "";
+        $.ajax({
+            url: '/Product/GetPriceName',
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    option = "<option>" + result[i].ShortName + "</option>";
+                    $('#priceSelect2').append(option);
+                    option = "";
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+
+    function EditProduct() {
+        $('#EditPriceModal').click(function () {
+            var ProductID = $(this).attr('data');
+            var PriceName = $(".select2-selection__rendered")[0].title;
+            var MonthlyPrice = $('#MonthlyPrice').val();
+            var YearlyPrice = $('#YearlyPrice').val();
+
+            $.ajax({
+                url: '/Product/ProductPriceEdit',
+                type: "post",
+                dataType: "json",
+                data: {
+                    "ProductID": ProductID,
+                    "PriceName": PriceName,
+                    "MonthlyPrice": MonthlyPrice,
+                    "YearlyPrice": YearlyPrice
+                },
+                success: function (result) {
+                    window.location.reload();
+
+                },
+                error: function () {
+
+                }
+
+            });
+        })
+    }
+
+    function AddPrice() {
+        $('#CreatePriceModal').click(function () {
+            var ProductID = $('#save').attr('data');
+            var PriceName = $(".select2-selection__rendered")[1].title;
+            var MonthlyPrice = $('#AddMonthlyPrice').val();
+            var YearlyPrice = $('#AddYearlyPrice').val();
+            $.ajax({
+                url: '/Product/AddPrrice',
+                type: "post",
+                dataType: "json",
+                data: {
+                    "ProductID": ProductID,
+                    "PriceName": PriceName,
+                    "MonthlyPrice": MonthlyPrice,
+                    "YearlyPrice": YearlyPrice
+                },
+                success: function (result) {
+                    if (!result) {
+
+                        Snackbar.show({
+                            text: 'There is a record for this price',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-left'
+                        });
+                    }
+                    else {
+                        window.location.reload();
+                    }
+
+
+                },
+                error: function () {
+
+                }
+
+            });
+
+        })
+    }
+
+
+</script>
+<script src="~/Content/light/plugins/notification/snackbar/snackbar.min.js"></script>
+<script src="~/Content/light/assets/js/components/notification/custom-snackbar.js"></script>
+
+<script>
+    // Get the Toast button
+    var toastButton = document.getElementById("toast-btn");
+    // Get the Toast element
+    var toastElement = document.getElementsByClassName("toast")[0];
+
+
+
+</script>

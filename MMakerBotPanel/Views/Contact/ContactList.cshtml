@@ -1,0 +1,208 @@
+﻿@model IEnumerable<MMakerBotPanel.Database.Model.Contact>
+
+@{
+
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/datatables.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/assets/css/forms/theme-checkbox-radio.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/custom_dt_custom.css">
+<!-- END PAGE LEVEL CUSTOM STYLES -->
+
+<div id="content" class="main-content" style="margin-top:1.3rem;">
+    <div class="layout-px-spacing">
+        <div class="row layout-spacing">
+            <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-content widget-content-area">
+                        <div class="table-responsive mb-4">
+
+                            <table id="style-3" class="table style-3  table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width:10rem; padding-left:2rem"> @Html.DisplayNameFor(model => model.ContactUserReply)</th>
+                                        <th style="width:20rem; padding-left:2rem"> @Html.DisplayNameFor(model => model.ContactUserName) </th>
+                                        <th style="width:70rem; padding-left:2rem"> @Html.DisplayNameFor(model => model.ContactUserMessage)</th>
+                                        <th style="width:30rem; padding-left:2rem"> @Html.DisplayNameFor(model => model.ContactUserEmail)</th>
+
+                                        <th class="text-center">Reply</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>
+
+
+                                                @if (item.ContactUserReply != null)
+                                                {
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-success">
+                                                            <input type="checkbox" class="new-control-input" checked="checked" disabled="disabled">
+                                                            <span class="new-control-indicator"></span><span class="new-chk-content">Replied</span>
+                                                        </label>
+                                                    </div>
+
+                                                }
+                                                else
+                                                {
+
+                                                    <div class="n-chk">
+                                                        <label class="new-control new-checkbox new-checkbox-rounded new-checkbox-text checkbox-success">
+                                                            <input type="checkbox" class="new-control-input" disabled="disabled">
+                                                            <span class="new-control-indicator"></span><span class="new-chk-content">Reply</span>
+                                                        </label>
+                                                    </div>
+                                                }
+                                            </td>
+                                            <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem"> @Html.DisplayFor(modelItem => item.ContactUserName)</td>
+                                            <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem"> @Html.DisplayFor(modelItem => item.ContactUserMessage) </td>
+                                            <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem"> @Html.DisplayFor(modelItem => item.ContactUserEmail)</td>
+
+                                            <td class="text-center">
+                                                <ul class="table-controls">
+                                                    <li>
+                                                        <a href="javascript:void(0);" class="bs-tooltip editModal" data="@item.ContactID" data-toggle="modal" data-placement="top" title="" data-original-title="Edit" data-target="#zoomupModal">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1">
+                                                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                                            </svg>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="zoomupModal" class="modal animated zoomInUp custo-zoomInUp" role="dialog">
+    <div class="modal-dialog">
+        Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 type="text" class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="basic" class="col-lg-12 col-sm-12 col-12 layout-spacing">
+                    <div class="statbox widget box box-shadow" style="border: 0px; box-shadow:0 0 0 0">
+
+                        <div class="input-group mb-4">
+                            <h6 type="text" class="form-control" id="email"></h6>
+                        </div>
+                        <div class="input-group mb-4">
+                            <textarea class="form-control" aria-label="With textarea" id="userMessage" readonly="readonly" rows="5" cols="0"></textarea>
+                        </div>
+                        <div class="input-group mb-4">
+                            <textarea class="form-control" aria-label="With textarea" rows="8" cols="0" id="reply-message"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer md-button">
+                <button class="btn" data-dismiss="modal" id="discardBtn"><i class="flaticon-cancel-12"></i> Discard</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="replyBtn">Reply</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/light/plugins/table/datatable/datatables.js"></script>
+
+<script>
+
+    c3 = $('#style-3').DataTable({
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+            "sLengthMenu": "Results :  _MENU_",
+        },
+        "stripeClasses": [],
+        "lengthMenu": [5, 10, 20, 50],
+        "pageLength": 5,
+        "order": [[0, 'desc']]
+    });
+
+    multiCheck(c3);
+
+    $(document).ready(function () {
+
+        $('#style-3').on('click', '.editModal', function () {
+            var id = $(this).attr('data');
+            console.log(id);
+            $.ajax({
+                url: "/Contact/ReplyMessageModal/" + id,
+                type: "get",
+                dataType: "json",
+                cache: false,
+                success: function (result) {
+                    console.log(result);
+                    if (result != null) {
+                        $("#modalTitle").html(result.ContactNumber);
+                        $("#email").html(result.ContactUserEmail);
+                        $("#userMessage").html(result.ContactUserMessage);
+                        if (result.ContactUserReply != null) {
+                            $("#reply-message").html(result.ContactUserReply);
+                            $('#reply-message').attr('readonly', 'true');
+                            $('#replyBtn').attr('disabled', 'false');
+                        } else {
+                            $("#reply-message").html('');
+                            $('#reply-message').removeAttr('readonly');
+                            $('#replyBtn').removeAttr('disabled');
+                        }
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        });
+
+        $('#replyBtn').click(function () {
+            var modalTitle = $('#modalTitle').html();
+            var replyMessage = $('#reply-message').val();
+            $.ajax({
+                url: "/Contact/ReplyMessage/",
+                type: "post",
+                dataType: "json",
+                data: {
+                    'ContactNumber': modalTitle,
+                    'ReplyMessage': replyMessage
+                },
+                success: function (result) {
+                    reloadPage();
+                },
+                error: function () {
+
+                }
+            });
+        });
+
+    });
+    function reloadPage() {
+        window.location.reload()
+    }
+
+</script>
+

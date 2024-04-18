@@ -1,0 +1,100 @@
+﻿@model IEnumerable<MMakerBotPanel.Database.Model.Faq>
+
+@{
+    ViewBag.Title = "GetUserFaqs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+<link href="~/Content/assets/css/pages/faq/faq2.css" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="faq">
+
+            <div class="faq-layouting layout-spacing">
+
+                <div class="fq-tab-section layout-top-spacing">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <h2>Frequently Asked <span>Questions</span></h2>
+
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="accordion" id="simple_faq">
+                                        @for (int i = 0; i < Model.Count(); i += 2)
+                                        {
+                                            <div class="card">
+                                                <div class="card-header" id="fqheadingOne">
+                                                    <div class="mb-0" data-toggle="collapse" role="navigation" data-target="#a-@Model.ToArray()[i].FaqID" aria-expanded="false" aria-controls="a-@Model.ToArray()[i].FaqID">
+                                                        <span class="faq-q-title">@Model.ToArray()[i].Question</span> <div class="icons"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+                                                    </div>
+                                                </div>
+                                                <div id="a-@Model.ToArray()[i].FaqID" class="collapse" aria-labelledby="fqheadingOne" data-parent="#simple_faq">
+                                                    <div class="card-body">
+                                                        <p>@Model.ToArray()[i].Answer</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-lg-6">
+
+                                    <div class="accordion" id="simple_faq1">
+
+
+                                        @for (int i = 1; i < Model.Count(); i += 2)
+                                        {
+                                            <div class="card">
+                                                <div class="card-header" id="fqheadingOne">
+                                                    <div class="mb-0" data-toggle="collapse" role="navigation" data-target="#a-@Model.ToArray()[i].FaqID" aria-expanded="false" aria-controls="a-@Model.ToArray()[i].FaqID">
+                                                        <span class="faq-q-title">@Model.ToArray()[i].Question</span> <div class="icons"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+                                                    </div>
+                                                </div>
+                                                <div id="a-@Model.ToArray()[i].FaqID" class="collapse" aria-labelledby="fqheadingOne" data-parent="#simple_faq1">
+                                                    <div class="card-body">
+                                                        <p>@Model.ToArray()[i].Answer</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-wrapper">
+        <div class="footer-section f-section-1">
+            <p class="">Copyright © 2022 Trading Manitou AI, All rights reserved.</p>
+        </div>
+        <div class="footer-section f-section-2">
+            <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+        </div>
+    </div>
+</div>
+
+
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+<script src="~/Content/assets/js/pages/faq/faq2.js"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

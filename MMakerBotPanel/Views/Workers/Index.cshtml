@@ -1,0 +1,278 @@
+﻿@model IEnumerable<MMakerBotPanel.Database.Model.Worker>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/table/datatable/datatables.css">
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/table/datatable/dt-global_style.css">
+<link href="~/Content/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL STYLES -->
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="row layout-top-spacing" id="cancel-row">
+
+            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                <div class="widget-content widget-content-area br-6">
+                    <div class="table-responsive mb-4 mt-4">
+                        <table id="default-ordering" class="table table-hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Product.ProductName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.WorkerName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.StartingDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DaysRemaining)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.WorkerState)
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Product.ProductName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.WorkerName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartingDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DaysRemaining)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.WorkerState)
+                                        </td>
+                                        <td class="text-center">
+                                            @if (item.WorkerState == MMakerBotPanel.Models.WORKERSTATE.Paused)
+                                            {
+                                                <a class="btn btn-success workerStart" data="@item.WorkerID">Start</a>
+                                                @Html.ActionLink("Settings", "Edit", "Workers", new { id = item.WorkerID }, new { @class = "btn btn-primary" })
+
+                                                <a class="btn btn-dark info" data="@item.WorkerID" data-toggle="modal" data-target=".bd-example-modal-xl">Info</a>
+
+
+                                            }
+                                            else if (item.WorkerState == MMakerBotPanel.Models.WORKERSTATE.Working)
+                                            {
+                                                <a class="btn btn-danger workerStop" data="@item.WorkerID">Stop</a>
+
+                                                @Html.ActionLink("Settings", "Edit", "Workers", new { id = item.WorkerID }, new { @class = "btn btn-primary" })
+
+                                                <a class="btn btn-dark info" data="@item.WorkerID" data-toggle="modal" data-target=".bd-example-modal-xl">Info</a>
+
+                                            }
+                                            else if (item.WorkerState == MMakerBotPanel.Models.WORKERSTATE.Expired)
+                                            {
+                                                @Html.ActionLink("Extend", "Edit", "Workers", new { id = item.WorkerID }, new { @class = "btn btn-warning" })
+                                            }
+                                            else if (item.WorkerState == MMakerBotPanel.Models.WORKERSTATE.PendingTXID)
+                                            {
+
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Product.ProductName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.WorkerName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.StartingDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DaysRemaining)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.WorkerState)
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table mb-4 contextual-table" style="margin-top:1rem">
+                        <thead>
+                            <tr>
+                                <th>Exchange</th>
+                                <th>Parity</th>
+                                <th>Max Price</th>
+                                <th>Min Price</th>
+                                <th>Grid Count</th>
+                                <th>Profit Per Grid</th>
+                                <th>Take Profit</th>
+                                <th>Stop loss</th>
+                                <th>Deposited</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="Exchange"></td>
+                                <td id="Parity"></td>
+                                <td id="MaxPrice"></td>
+                                <td id="MinPrice"></td>
+                                <td id="GridCount" class="text-center"></td>
+                                <td id="ProfitPerGrid"> </td>
+                                <td id="TakeProfit"> </td>
+                                <td id="StopLoss"> </td>
+                                <td id="Amount"> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="~/Content/plugins/table/datatable/datatables.js"></script>
+<script src="~/Content/plugins/notification/snackbar/snackbar.min.js"></script>
+<script src="~/Content/assets/js/components/notification/custom-snackbar.js"></script>>
+<script>
+
+    $('#default-ordering').DataTable({
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+            "sLengthMenu": "Results :  _MENU_",
+        },
+        "order": [],
+        "stripeClasses": [],
+        "lengthMenu": [7, 10, 20, 50],
+        "pageLength": 7,
+        drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
+    });
+
+    $(document).ready(function () {
+        WorkerStart();
+        WorkerStop();
+        WorkerInfo();
+    });
+
+    function WorkerStart() {
+        $('.workerStart').click(function () {
+            $.ajax({
+                url: '/Workers/WorkerStart?workerId=' + $(this).attr('data'),
+                type: 'Get',
+                dataType: 'json',
+                success: function (result) {
+                    if (!result) {
+                        Snackbar.show({
+                            text: 'Insufficient Balance',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a',
+                            pos: 'top-left'
+                        });
+                    }
+                },
+                error: function (result) {
+                    Snackbar.show({
+                        text: 'Something went wrong',
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-left'
+                    });
+                }
+            })
+        });
+    }
+
+    function WorkerStop() {
+        $('.workerStop').click(function () {
+            $.ajax({
+                url: '/Workers/WorkerStop?workerId=' + $(this).attr('data'),
+                type: 'Get',
+                dataType: 'json',
+                success: function (result) {
+                    if (!result) {
+
+                    }
+                },
+                error: function (result) {
+                    Snackbar.show({
+                        text: 'Something went wrong',
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-left'
+                    });
+                }
+            })
+        });
+    }
+
+    function WorkerInfo() {
+        $('.info').click(function () {
+            $.ajax({
+                url: '/Workers/WorkerInfo?workerId=' + $(this).attr('data'),
+                type: 'Get',
+                dataType: 'json',
+                success: function (result) {
+                    if (result != null) {
+                        $("#Exchange").html(result.exchange);
+                        $("#Parity").html(result.parity);
+                        $("#MaxPrice").html(result.maxPrice);
+                        $("#MinPrice").html(result.minPrice);
+                        $("#GridCount").html(result.gridCount);
+                        $("#ProfitPerGrid").html(result.maxProfit + " ~ " + result.minProfit);
+                        $("#TakeProfit").html(result.takeProfit);
+                        $("#StopLoss").html(result.stoploss);
+                        $("#Amount").html(result.deposit + " USDT");
+                    }
+                },
+                error: function (result) {
+
+                }
+            })
+        });
+    }
+
+</script>
+<!-- END PAGE LEVEL SCRIPTS -->

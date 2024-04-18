@@ -1,0 +1,556 @@
+﻿@model MMakerBotPanel.Database.Model.User
+
+@{
+   Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<link href="~/Content/light/assets/css/components/tabs-accordian/custom-tabs.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/Content/light/plugins/font-icons/fontawesome/css/regular.css">
+<link rel="stylesheet" href="~/Content/light/plugins/font-icons/fontawesome/css/fontawesome.css">
+<link href="~/Content/light/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/datatables.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/assets/css/forms/theme-checkbox-radio.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/custom_dt_custom.css">
+<link href="~/Content/light/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/assets/css/elements/tooltip.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .feather-icon .icon-section {
+        padding: 30px;
+    }
+
+        .feather-icon .icon-section h4 {
+            color: #3b3f5c;
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0;
+            margin-bottom: 16px;
+        }
+
+    .feather-icon .icon-content-container {
+        padding: 0 16px;
+        width: 86%;
+        margin: 0 auto;
+        border: 1px solid #bfc9d4;
+        border-radius: 6px;
+    }
+
+    .feather-icon .icon-section p.fs-text {
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+
+    .feather-icon .icon-container {
+        cursor: pointer;
+    }
+
+        .feather-icon .icon-container svg {
+            color: #3b3f5c;
+            margin-right: 6px;
+            vertical-align: middle;
+            width: 20px;
+            height: 20px;
+            fill: rgba(0, 23, 55, 0.08);
+        }
+
+        .feather-icon .icon-container:hover svg {
+            color: #1b55e2;
+            fill: rgba(27, 85, 226, 0.23921568627450981);
+        }
+
+        .feather-icon .icon-container span {
+            display: none;
+        }
+
+        .feather-icon .icon-container:hover span {
+            color: #1b55e2;
+        }
+
+    .feather-icon .icon-link {
+        color: #1b55e2;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+
+    /*FAB*/
+    .fontawesome .icon-section {
+        padding: 30px;
+    }
+
+        .fontawesome .icon-section h4 {
+            color: #3b3f5c;
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0;
+            margin-bottom: 16px;
+        }
+
+    .fontawesome .icon-content-container {
+        padding: 0 16px;
+        width: 86%;
+        margin: 0 auto;
+        border: 1px solid #bfc9d4;
+        border-radius: 6px;
+    }
+
+    .fontawesome .icon-section p.fs-text {
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+
+    .fontawesome .icon-container {
+        cursor: pointer;
+    }
+
+        .fontawesome .icon-container i {
+            font-size: 20px;
+            color: #3b3f5c;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .fontawesome .icon-container:hover i {
+            color: #1b55e2;
+        }
+
+        .fontawesome .icon-container span {
+            color: #888ea8;
+            display: none;
+        }
+
+        .fontawesome .icon-container:hover span {
+            color: #1b55e2;
+        }
+
+    .fontawesome .icon-link {
+        color: #1b55e2;
+        font-weight: 600;
+        font-size: 14px;
+    }
+</style>
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+        <div class="row layout-top-spacing layout-spacing">
+            <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-content widget-content-area">
+                        <div class="widget-content widget-content-area border-tab">
+                            <ul class="nav nav-tabs mt-3" id="border-tabs" role="tablist" data="@Model.UserID">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="border-workers-tab" data-toggle="tab" href="#border-workers" role="tab" aria-controls="border-home" aria-selected="true"><i data-feather="users"></i> Workers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="border-profile-tab" data-toggle="tab" href="#border-profile" role="tab" aria-controls="border-profile" aria-selected="false"> <i data-feather="credit-card"></i> Payment History</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="border-contact-tab" data-toggle="tab" href="#border-contact" role="tab" aria-controls="border-contact" aria-selected="false"> <i data-feather="message-circle"></i> Contact</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content mb-4" id="border-tabsContent">
+                                <div class="tab-pane fade show active" id="border-workers" role="tabpanel" aria-labelledby="border-workers-tab">
+                                    <div id="tableDropdown" class="col-lg-12 col-12 ">
+                                        <div class="widget-content widget-content-area">
+                                            <table class="table" id="workerTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" style="width:13rem">Product</th>
+                                                        <th class="text-center">Start Date</th>
+                                                        <th class="text-center">End Date</th>
+                                                        <th class="text-center">Days</th>
+                                                        <th class="text-center">Status</th>
+                                                        <th class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="border-profile" role="tabpanel" aria-labelledby="border-profile-tab">
+                                    <div class="row layout-top-spacing layout-spacing">
+                                        <div class="col-lg-12">
+                                            <div class="widget-content widget-content-area">
+                                                <div class="table-responsive mb-4">
+                                                    <table id="style-2" class="table style-2  table-hover">
+
+                                                        <thead>
+                                                            <tr style="text-align: center;">
+                                                                <th>Product</th>
+                                                                <th>TimeStamp</th>
+                                                                <th>Token</th>
+                                                                <th>Amount</th>
+                                                                <th>Period</th>
+                                                                <th>From</th>
+                                                                <th>To</th>
+                                                                <th>txhash</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="border-contact" role="tabpanel" aria-labelledby="border-contact-tab">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class=" layout-top-spacing">
+                                                <div class="user-profile layout-spacing">
+                                                    <div class="widget-content widget-content-area tooltip-section">
+                                                        <div class="d-flex justify-content-between">
+                                                            <h3 class="">Info</h3>
+                                                              <a href="@Url.Action("TicketChatAdmin", "Ticket", new { id = ViewBag.id })" type="button" id="openChat" class="btn btn-info mb-2 rounded bs-tooltip" data-placement="top" title="Open Chat"><i data-feather="external-link"></i> Open Chat</a>
+                                                        </div>
+                                                        <div class="text-center user-info">
+                                                            <img id="avatar" alt="avatar" style="width:90px;">
+                                                            <p class="" id="nameSurname"></p>
+                                                        </div>
+                                                        <div class="user-info-list">
+                                                            <div class="">
+                                                                <ul class="contacts-block list-unstyled">
+                                                                    <li class="contacts-block__item">
+                                                                        <a style="display:flex">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
+                                                                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                                                                <polyline points="22,6 12,13 2,6"></polyline>
+                                                                            </svg><p id="email"></p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="contacts-block__item">
+                                                                        <button type="button" class="btn btn-info mb-2 rounded bs-tooltip" data-placement="top" title="Create Ticket" style="margin-left:2.5rem" data-toggle="modal" data-target="#fadeinModal">
+                                                                            Create Ticket
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="exchangeApi  layout-top-spacing">
+                                                <div class="row layout-spacing">
+                                                    <div class="col-lg-12">
+                                                        <div class="statbox widget box box-shadow">
+                                                            <div class="widget-content widget-content-area" id="KeyList" style="display:flex; flex-direction:column; align-items:center">
+                                                                <div class="table-responsive mb-4">
+                                                                    <table id="style-3" class="table style-3 table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th style="width:7rem">Exchange</th>
+                                                                                <th style="width:7rem">Key</th>
+                                                                                <th style="width:25rem">Value</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fadeinModal" class="modal animated fadeInDown" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="widget-header">
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="widget-content widget-content-area">
+
+                    <div class="form-group mb-4">
+                        <label>Header</label>
+                        <input type="text" class="form-control" id="TicketName" placeholder="Ticket Header..." required>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label>Message</label>
+                        <textarea class="form-control" id="TicketMessage" rows="3" required></textarea>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                <button type="button" class="btn btn-primary" id="CreateTicket">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/light/plugins/font-icons/feather/feather.min.js"></script>
+<script src="~/Content/light/plugins/table/datatable/datatables.js"></script>
+<script src="~/Content/light/assets/js/elements/tooltip.js"></script>
+<script src="~/Content/light/assets/js/scrollspyNav.js"></script>
+
+<script type="text/javascript">
+    feather.replace();
+    $(document).ready(function () {
+        var userId = $('#border-tabs').attr('data');
+        PaymentHistory(userId);
+        GetMemberInfo(userId);
+        GetMemberApiKeys(userId);
+        $('#border-workers-tab').click(function () {
+            GetMemberWorker(userId);
+        });
+        GetMemberWorker(userId);
+        CreateTicketMember(userId);
+    });
+
+    function CreateTicketMember(userId) {
+
+        $('#CreateTicket').click(function () {
+            var ticketHeader = $('#TicketName').val();
+            var ticketMessage = $('#TicketMessage').val();
+            $.ajax({
+                url: "/Users/CreateTicketMember",
+                type: "Post",
+                dataType: "json",
+                data: {
+                    ticketHeader: ticketHeader,
+                    ticketMessage: ticketMessage,
+                    memberId: userId,
+                },
+                success: function (result) {
+                    if (result) {
+                        window.location.reload();
+                    }
+                },
+                error: function (result) {
+
+                }
+            });
+        });
+    }
+
+    function ExtendTime(ExtendTime) {
+        var workerId = ExtendTime.attributes[2].value;
+
+        if (ExtendTime.classList[1] == "YearlyExtendTime") {
+            ExtendTimeProcess(workerId, "1");
+        } else if (ExtendTime.classList[1] == "MonthlyExtendTime") {
+            ExtendTimeProcess(workerId, "2");
+        } else if (ExtendTime.classList[1] == "Pause") {
+            ExtendTimeProcess(workerId, "3");
+        } else if (ExtendTime.classList[1] == "Working") {
+            ExtendTimeProcess(workerId, "4");
+        }
+
+    }
+
+    function ExtendTimeProcess(workerId, process) {
+        $.ajax({
+            url: "/Users/AdminExtendTimeForWorker?workerId=" + workerId + "&process=" + process,
+            type: "Get",
+            dataType: "json",
+            succcess: function (result) {
+                window.location.reload();
+
+            },
+            error: function (result) {
+
+            }
+        });
+    }
+
+    function GetMemberWorker(userId) {
+        $.ajax({
+            url: "/Users/MemberWorkers?memberId=" + userId,
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                if (result.length > 0) {
+                    var tr = "";
+                    $('tbody').empty();
+                    for (var i = 0; i < result.length; i++) {
+                        tr = $('<tr></tr>');
+                        tr.append("<td class='text-center'>" + result[i].ProductName + "</td>");
+                        tr.append("<td class='text-center'>" + result[i].StartingDate + "</td>");
+                        tr.append("<td class='text-center'>" + result[i].EndingDate + "</td>");
+                        tr.append("<td class='text-center'>" + result[i].DaysRemaining + "</td>");
+                        if (result[i].WorkerState == 2) {
+                            tr.append("<td class='text-center' id='status'><span class='badge badge-success'>Working</span></td>");
+                        } else if (result[i].WorkerState == 1) {
+                            tr.append("<td class='text-center' id='status'><span class='badge badge-secondary'>Pending</span></td>");
+                        } else if (result[i].WorkerState == 4) {
+                            tr.append("<td class='text-center' id='status'><span class='badge badge-danger'>Paused</span></td>");
+                        } else {
+                            tr.append("<td class='text-center' id='status'><span class='badge badge-primary'>Expired</span></td>");
+                        }
+                        tr.append("<div class='dropdown custom-dropdown'>"
+                            + "<a class= 'dropdown-toggle' href='#' role = 'button' id='" + result[i].WorkerId + "' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> "
+                            + "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-more-horizontal'><circle cx='12' cy='12' r='1'></circle><circle cx='19' cy='12' r='1'></circle><circle cx='5' cy='12' r='1'></circle></svg> "
+                            + "</a >"
+                            + "<div class='dropdown-menu' aria-labelledby='" + result[i].WorkerId + "'>"
+                            + "<a class='dropdown-item YearlyExtendTime' onclick='ExtendTime(this);' data='" + result[i].WorkerId + "'>Yearly Extend Time</a>"
+                            + "<a class='dropdown-item MonthlyExtendTime' onclick='ExtendTime(this);' data='" + result[i].WorkerId + "'>Monthly Extend Time</a>"
+                            + "<a class='dropdown-item Pause' onclick='ExtendTime(this);' data='" + result[i].WorkerId + "'>Pause</a>"
+                            + "<a class='dropdown-item Working' onclick='ExtendTime(this);' data='" + result[i].WorkerId + "'>Work</a>"
+                            + "</div></div>");
+                        $('#workerTable tbody').append(tr);
+                        tr = "";
+                    }
+                }
+
+            },
+            error: function (result) {
+
+            }
+        });
+
+
+
+    }
+
+    function GetMemberInfo(userId) {
+        $('#border-contact-tab').click(function () {
+            $.ajax({
+                url: "/Users/GetMemberInfo?memberId=" + userId,
+                type: "Get",
+                dataType: 'json',
+                success: function (result) {
+                    $('#nameSurname').html(result.Name + " " + result.SurName);
+                    $('#email').html(result.Email)
+                    $('#avatar').attr('src', `data:image/${result.ImageType};base64,${result.Image}`);
+                }
+            });
+        });
+    }
+
+    function GetMemberApiKeys(userId) {
+
+        $('#border-contact-tab').click(function () {
+            $.ajax({
+                url: "/Users/GetMemberApiKeys?memberId=" + userId,
+                type: "Get",
+                dataType: 'json',
+                success: function (result) {
+                    if (result.length > 0) {
+                        var trRow = "";
+                        var tr = "";
+                        $('#style-3').DataTable().clear().draw();
+                        for (var i = 0; i < result.length; i++) {
+                            tr = $('<tr></tr>');
+                            tr.append("<td >" + result[i].Exchange + "</td>");
+                            tr.append("<td >" + result[i].ExchangeApiKey + "</td>");
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>************</td>");
+                            tr.append(trRow);
+                            $('#style-3').DataTable().row.add(tr).draw();
+                            trRow = "";
+                            tr = "";
+                        }
+                    }
+                }
+            });
+        });
+    }
+
+    function PaymentHistory(userId) {
+        $('#border-tabs').click(function () {
+            $.ajax({
+                url: "/Users/PaymentHistory?userId=" + userId,
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    if (result.length > 0) {
+                        var trHistory = "";
+                        var tr = "";
+                        $('#style-2').DataTable().clear().draw();
+                        for (var i = 0; i < result.length; i++) {
+                            tr = $('<tr></tr>');
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>" + result[i].ProductName + "</td>");
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>" + result[i].Timestamp + "</td>");
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>" + result[i].ShortName + "</td>");
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>" + result[i].Amount + "</td>");
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>" + result[i].MonthOrYear + "</td>");
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>" + result[i].AccountWallet + "</td>");
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>" + result[i].ReceiverWallet + "</td>");
+                            tr.append("<td  style='max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem'>" + result[i].TxOrError + "</td>");
+                            if (result[i].PurchaseStatusType == 1) {
+                                trHistory += "<td class='text-center' id='status'><span class='badge badge-success'>Success</span></td>";
+                            } else if (result[i].PurchaseStatusType == 2) {
+                                trHistory += "<td class='text-center' id='status'><span class='badge badge-secondary'>Pending</span></td>";
+                            } else {
+                                trHistory += "<td class='text-center' id='status'><span class='badge badge-danger'>Error</span></td>";
+                            }
+                            tr.append(trHistory);
+                            $('#style-2').DataTable().row.add(tr).draw();
+                            trHistory = "";
+                            tr = "";
+                        }
+                    }
+
+                },
+                error: function (result) {
+
+                }
+            });
+        });
+    }
+
+    c2 = $('#style-2').DataTable({
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+            "sLengthMenu": "Results :  _MENU_",
+        },
+        "lengthMenu": [5, 10, 20, 50],
+        "pageLength": 5
+    });
+
+    multiCheck(c2);
+
+    c3 = $('#style-3').DataTable({
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+            "sLengthMenu": "Results :  _MENU_",
+        },
+        "stripeClasses": [],
+        "lengthMenu": [5, 10, 20, 50],
+        "pageLength": 5
+    });
+
+    multiCheck(c3);
+</script>

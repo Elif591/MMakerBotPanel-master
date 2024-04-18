@@ -1,0 +1,749 @@
+﻿@model MMakerBotPanel.Database.Model.Worker
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link rel="stylesheet" type="text/css" href="~/Content/assets/css/forms/switches.css">
+<link href="~/Content/plugins/pricing-table/css/component.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/bootstrap-select/bootstrap-select.min.css">
+<link href="~/Content/light/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL STYLES -->
+<style>
+    .bootstrap-select {
+        width: 8rem !important;
+    }
+</style>
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+        <div class="row" id="cancel-row">
+            <div class="col-lg-12 layout-spacing layout-top-spacing">
+                <div class="statbox widget box box-shadow">
+
+                    <div class="widget-content widget-content-area">
+                        <button class="enableEthereumButton  btn btn-dark margin-top-20" style="float:right;">Connect Metamask</button>
+                        <div class="container">
+                            <!-- Billing Cycle  -->
+                            <div class="billing-cycle-radios mt-5">
+                                <div class="radio billed-yearly-radio">
+                                    <div class="d-flex justify-content-center">
+                                        <span class="txt-monthly">Monthly</span>
+                                        <label class="switch s-icons s-outline  s-outline-success">
+                                            <input type="checkbox" id="yearlyRadio">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <span class="txt-yearly">Yearly <span class="badge badge-pill badge-success">20% Off</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Pricing Plans Container -->
+                            <div class="pricing-plans-container mt-5 d-md-flex d-block">
+                                <!-- Plan -->
+                                <div class="pricing-plan mb-5 Cex" data-target="">
+                                    <div style="display:flex; justify-content:space-between">
+                                        <h3 id="CexProductName"></h3>
+                                        <select class="selectpicker CexGridWorker" id="CexGridWorker"></select>
+                                        <img id="cex-sold-out" style="width:40%; display:none;" src="~/Content/assets/img/Sold-Out.png" />
+                                    </div>
+                                    <p class="margin-top-10">Binance etc. Supports Popular Cex Exchanges.</p>
+                                    <div class="pricing-plan-label billed-monthly-label"><strong id="CexGridWorkerMonthly"></strong>/ monthly</div>
+                                    <div class="pricing-plan-label billed-yearly-label"><strong id="CexGridWorkerYearly"></strong>/ yearly</div>
+                                    <div class="pricing-plan-features mb-4">
+                                        <strong>Cex Grid Worker Features</strong>
+                                        <ul>
+                                            <li>10+ Cex Exchange </li>
+                                            <li>250+ Parity</li>
+                                        </ul>
+                                    </div>
+                                    <button class="SendEthCexButton button btn btn-dark btn-block margin-top-20" id="EthCexButton">Buy Now</button>
+                                </div>
+                                <!-- Plan -->
+                                <div class="pricing-plan mb-5 mt-md-0 recommended Dex" data-target="">
+                                    <div class="recommended-badge">Most Popular</div>
+                                    <div style="display:flex; justify-content:space-between">
+                                        <h3 id="DexProductName"></h3>
+                                        <select class="selectpicker DexGridWorker" id="DexGridWorker"></select>
+                                        <img id="dex-sold-out" style="width:40%; display:none;" src="~/Content/assets/img/Sold-Out.png" />
+                                    </div>
+                                    <p class="margin-top-10">Supports Popular Dex Exchanges.</p>
+                                    <div class="pricing-plan-label billed-monthly-label"><strong id="DexGridWorkerMonthly"></strong>/ monthly</div>
+                                    <div class="pricing-plan-label billed-yearly-label"><strong id="DexGridWorkerYearly"></strong>/ yearly</div>
+                                    <div class="pricing-plan-features mb-4">
+                                        <strong>Dex Grid Worker Features</strong>
+                                        <ul>
+                                            <li>5+ Dex Exchange</li>
+                                            <li>1000+ parity</li>
+                                            <li>BCS chain</li>
+                                            <li>SOL chain</li>
+                                            <li>ETH chain</li>
+                                        </ul>
+                                    </div>
+                                    <button class="SendEthDexButton button btn btn-dark btn-block margin-top-20" id="EthDexButton">Buy Now</button>
+                                </div>
+                                <!-- Plan -->
+                                <div class="pricing-plan mb-5 MMaker" data-target="">
+
+                                    <div style="display:flex; justify-content:space-between">
+                                        <h3 id="AdvancedProductName"></h3>
+                                        <select class="selectpicker AdvancedMMakerWorker" id="AdvancedMMakerWorker"></select>
+                                        <img id="advanced-sold-out" style="width:40%; display:none;" src="~/Content/assets/img/Sold-Out.png" />
+                                    </div>
+                                    <p class="margin-top-10">Supports Popular Dex & Cex Exchanges.</p>
+                                    <div class="pricing-plan-label billed-monthly-label"><strong id="AdvancedMMakerWorkerMonthly"></strong>/ monthly</div>
+                                    <div class="pricing-plan-label billed-yearly-label"><strong id="AdvancedMMakerWorkerYearly"></strong>/ yearly</div>
+                                    <div class="pricing-plan-features mb-4">
+                                        <strong>Advanced Worker Features</strong>
+                                        <ul>
+                                            <li>10+ Cex Exchange </li>
+                                            <li>5+ Dex Exchange</li>
+                                            <li>250+ Cex Parity</li>
+                                            <li>1000+ parity</li>
+                                            <li>BSC, SOL, ETH</li>
+                                        </ul>
+                                    </div>
+                                    <button class="SendEthMMakerButton button btn btn-dark btn-block margin-top-20" id="EthMMakerButton">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-wrapper">
+        <div class="footer-section f-section-1">
+            <p class="">Copyright © 2022 Trading Manitou AI, All rights reserved.</p>
+        </div>
+        <div class="footer-section f-section-2">
+            <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="~/Content/light/plugins/notification/snackbar/snackbar.min.js"></script>
+<script src="~/Content/light/assets/js/components/notification/custom-snackbar.js"></script>
+<script src="~/Content/dist/web3.min.js"></script>
+<script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script>
+    var getInputStatus = document.getElementById('yearlyRadio');
+    var getPricingContainer = document.getElementsByClassName('pricing-plans-container')[0];
+    var getYearlySwitch = document.getElementsByClassName('billed-yearly-radio')[0];
+    getInputStatus.addEventListener('change', function () {
+        var isChecked = getInputStatus.checked;
+        if (isChecked) {
+            getPricingContainer.classList.add("billed-yearly");
+            getYearlySwitch.classList.add("billed-yearly-switch");
+        } else {
+            getYearlySwitch.classList.remove("billed-yearly-switch");
+            getPricingContainer.classList.remove("billed-yearly");
+        }
+    })
+</script>
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#yearlyRadio').attr('value', false);
+        $("input[type=checkbox]").change(function () {
+            $(this).prop("checked")
+            {
+                if ($(this)[0].checked) {
+                    $(this).val(true);
+                }
+                if (!$(this)[0].checked) {
+                    $(this).val(false);
+                }
+            };
+        });
+        GetProductSelectShortName();
+        SendTransection();
+
+        $.ajax({
+            url: "/Workers/GetProductName",
+            type: "Get",
+            dataType: "json",
+            success: function (result) {
+                $(".Cex").attr("data-target", result[0].productId);
+                $('#CexProductName').html(result[0].productName);
+
+                $(".Dex").attr("data-target", result[1].productId);
+                $('#DexProductName').html(result[1].productName);
+
+                $(".MMaker").attr("data-target", result[2].productId);
+                $('#AdvancedProductName').html(result[2].productName);
+
+            },
+            error: function (result) {
+
+            }
+        })
+
+
+        $('.CexGridWorker').change(function () {
+            var selectedItem = $(this).val();
+            GetSelectedShortName(selectedItem, $(".Cex").attr("data-target"));
+        });
+        $('.DexGridWorker').change(function () {
+            var selectedItem = $(this).val();
+            GetSelectedShortName(selectedItem, $(".Dex").attr("data-target"));
+        });
+        $('.AdvancedMMakerWorker').change(function () {
+            var selectedItem = $(this).val();
+            GetSelectedShortName(selectedItem, $(".MMaker").attr("data-target"));
+        });
+
+        SendButtonDisabled();
+
+    });
+
+    function SendButtonDisabled() {
+        $.ajax({
+            url: '/Workers/GetWallet',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                if (!result) {
+                    $('#EthMMakerButton').attr("disabled", "disabled");
+                    $('#EthCexButton').attr("disabled", "disabled");
+                    $('#EthDexButton').attr("disabled", "disabled");
+                }
+            }
+        });
+    }
+
+    function handleMessage(transection, accountWallet, receiverWallet, priceShortName, price, yearlyCheck, productId, success, gasLimit) {
+        $.ajax({
+            url: "/Workers/PurchaseHistory",
+            type: "POST",
+            dataType: "json",
+            data: {
+                transection: transection,
+                accountWallet: accountWallet,
+                receiverWallet: receiverWallet,
+                priceShortName: priceShortName,
+                price: price,
+                yearlyCheck: yearlyCheck,
+                productId: productId,
+                workerId: "0",
+                success: success,
+                gasfee: gasLimit
+            },
+            success: function (result) {
+                if (success) {
+                    window.location.href = "/Workers/Index";
+                }
+
+                console.log(result);
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        });
+    }
+
+    function BuyWithToken(accounts, walletAddress, priceParse, priceShortName, price, yearlyCheck, productId) {
+        var gas = "3000";
+        $.ajax({
+            url: "/Workers/GetContractAddress?shortName=" + priceShortName,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [{
+                        from: accounts[0],
+                        to: result,
+                        data: getDataFieldValue(walletAddress, priceParse),
+                        gas: gas.toString(16),
+                        maxPriorityFeePerGas: null,
+                        maxFeePerGas: null,
+                    }],
+                }).then((txId) => handleMessage(txId, accounts[0], walletAddress, priceShortName, price, yearlyCheck, productId, true, '0x76c0'))
+                    .catch((err) => handleMessage(err.message, accounts[0], walletAddress, priceShortName, price, yearlyCheck, productId, false, '0x76c0'));
+
+            }
+        });
+    }
+
+    function TokenPriceParse(amount, tokenAddress) {
+        const providerUrl = "https://mainnet.infura.io/v3/4db639d1a0dd4471ba7995ed8b4cc876";
+        const provider = new Web3.providers.HttpProvider(providerUrl);
+        const web3 = new Web3(provider);
+        const tokenABI = [
+            {
+                "constant": true,
+                "inputs": [
+                    {
+                        "name": "_to",
+                        "type": "address"
+                    },
+                    {
+                        "name": "_value",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "transfer",
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [],
+                "name": "decimals",
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "uint8"
+                    }
+                ],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+        const tokenContract = new web3.eth.Contract(tokenABI, tokenAddress);
+
+
+        return new Promise((resolve, reject) => {
+            tokenContract.methods.decimals().call((error, decimalsValue) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    var aa = "";
+                    if (decimalsValue == 1) {
+                        aa = 'wei';
+                    } else if (decimalsValue == 4) {
+                        aa = 'kwei';
+                    } else if (decimalsValue == 6) {
+                        aa = 'mwei';
+                    } else if (decimalsValue == 9) {
+                        aa == 'gwei';
+                    } else if (decimalsValue == 12) {
+                        aa = 'micro';
+                    } else if (decimalsValue == 15) {
+                        aa = 'milliether';
+                    } else if (decimalsValue == 18) {
+                        aa = 'ether';
+                    } else if (decimalsValue == 21) {
+                        aa = 'kether'
+                    } else if (decimalsValue == 24) {
+                        aa = 'mether';
+                    } else if (decimalsValue == 27) {
+                        aa = 'gether'
+                    } else if (decimalsValue == 30) {
+                        aa = 'tether';
+                    } else {
+                        aa = 'noether';
+                    }
+                    const amountInWei = web3.utils.toWei(amount, aa);
+                    resolve(amountInWei);
+                }
+            });
+        });
+
+    }
+
+    function getDataFieldValue(tokenRecipientAddress, tokenAmount) {
+        const web3 = new Web3();
+        const TRANSFER_FUNCTION_ABI = {
+            "constant": false,
+            "inputs": [{ "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" }],
+            "name": "transfer",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        };
+
+        return web3.eth.abi.encodeFunctionCall(TRANSFER_FUNCTION_ABI, [
+            tokenRecipientAddress,
+            tokenAmount
+        ]);
+    }
+
+    function BuyMetamask(accounts, walletAddress, priceParse, priceShortName, price, yearlyCheck, productId) {
+        var gas = "3000";
+        ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [{
+                from: accounts[0],
+                to: walletAddress,
+                gas: gas.toString(16),
+                /*        gasPrice: '0x9184e72a000', // 10000000000000,*/
+                value: priceParse,
+            }],
+        }).then((txId) => handleMessage(txId, accounts[0], walletAddress, priceShortName, price, yearlyCheck, productId, true, '0x76c0'))
+            .catch((err) => handleMessage(err.message, accounts[0], walletAddress, priceShortName, price, yearlyCheck, productId, false, '0x76c0'));
+
+    }
+
+    function EthPriceParse(amount) {
+        var price = Number(amount * 1e18).toString(16);
+        return price;
+    }
+
+    function GetWallet() {
+        return $.ajax({
+            url: '/Workers/GetWallet',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+
+
+            }
+        });
+    }
+
+    function SendTransection() {
+
+        const ethereumButton = document.querySelector('.enableEthereumButton');
+        let accounts = [];
+
+        ethereumButton.addEventListener('click', () => {
+            getAccount();
+            getChainNetwork();
+
+        });
+        window.ethereum.on('networkChanged', function () {
+            getChainNetwork();
+
+        });
+        async function getAccount() {
+            accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            ethereumButton.innerText = accounts;
+        }
+
+        $('.SendEthCexButton').click(function () {
+            if (accounts.length == 0) {
+                Snackbar.show({
+                    text: 'Please connect your metamask wallet',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-left'
+                });
+            }
+        });
+        $('.SendEthDexButton').click(function () {
+            if (accounts.length == 0) {
+                Snackbar.show({
+                    text: 'Please connect your metamask wallet',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-left'
+                });
+            }
+        });
+        $('.SendEthMMakerButton').click(function () {
+            if (accounts.length == 0) {
+                Snackbar.show({
+                    text: 'Please connect your metamask wallet',
+                    actionTextColor: '#fff',
+                    backgroundColor: '#e7515a',
+                    pos: 'top-left'
+                });
+            }
+        });
+
+        async function getChainNetwork() {
+            chainId = await ethereum.request({ method: 'eth_chainId' }).then(chainSymbol => {
+                if (chainSymbol == 0x1) {
+                    $('.SendEthCexButton').click(function () {
+                        if (chainSymbol == 0x1) {
+                            var priceShortName = $('#CexGridWorker').val();
+                            var contractAdress = document.querySelector('#CexGridWorker option:checked').getAttribute('data');
+                            GetWallet().done(function (result) {
+                                var priceYearly = $('#CexGridWorkerYearly').html();
+                                var priceMonthly = $('#CexGridWorkerMonthly').html();
+                                var yearlyCheck = $("#yearlyRadio")[0].attributes[2].value;
+                                var ProductId = $(".Cex").attr("data-target");
+                                if (yearlyCheck == "true") {
+                                    if (priceShortName == "ETH") {
+                                        BuyMetamask(accounts, result, EthPriceParse(priceYearly), priceShortName, priceYearly, yearlyCheck, ProductId);
+                                    }
+                                    else {
+                                        TokenPriceParse(priceYearly, contractAdress)
+                                            .then((amountInWei) => {
+                                                BuyWithToken(accounts, result, amountInWei, priceShortName, priceYearly, yearlyCheck, ProductId);
+                                            })
+                                            .catch((error) => {
+                                                // Hata durumunda burası çalışır
+                                                console.error("Hata:", error);
+                                            });
+                                    }
+                                }
+                                else {
+                                    if (priceShortName == "ETH") {
+                                        BuyMetamask(accounts, result, EthPriceParse(priceMonthly), priceShortName, priceMonthly, yearlyCheck, ProductId);
+                                    }
+                                    else {
+                                        TokenPriceParse(priceMonthly, contractAdress)
+                                            .then((amountInWei) => {
+                                                BuyWithToken(accounts, result, amountInWei, priceShortName, priceMonthly, yearlyCheck, ProductId);
+                                            })
+                                            .catch((error) => {
+                                                // Hata durumunda burası çalışır
+                                                console.error("Hata:", error);
+                                            });
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            Snackbar.show({
+                                text: 'Please connect Ethereum Mainnetwork ',
+                                actionTextColor: '#fff',
+                                backgroundColor: '#e7515a',
+                                pos: 'top-left'
+                            });
+                        }
+                    });
+
+
+                    $('.SendEthDexButton').click(function () {
+                        if (chainSymbol == 0x1) {
+                            var priceShortName = $('#DexGridWorker').val();
+                            var contractAdress = document.querySelector('#DexGridWorker option:checked').getAttribute('data');
+                            GetWallet().done(function (result) {
+                                var priceYearly = $('#DexGridWorkerYearly').html();
+                                var priceMonthly = $('#DexGridWorkerMonthly').html();
+                                var yearlyCheck = $("#yearlyRadio")[0].attributes[2].value;
+                                var ProductId = $(".Dex").attr("data-target");
+                                if (yearlyCheck == "true") {
+                                    if (priceShortName == "ETH") {
+                                        BuyMetamask(accounts, result, EthPriceParse(priceYearly), priceShortName, priceYearly, yearlyCheck, ProductId);
+                                    }
+                                    else {
+                                        TokenPriceParse(priceYearly, contractAdress)
+                                            .then((amountInWei) => {
+                                                BuyWithToken(accounts, result, amountInWei, priceShortName, priceYearly, yearlyCheck, ProductId);
+                                            })
+                                            .catch((error) => {
+                                                // Hata durumunda burası çalışır
+                                                console.error("Hata:", error);
+                                            });
+                                        //BuyWithToken(accounts, result, TokenPriceParse(priceYearly, contractAdress), priceShortName, priceYearly, yearlyCheck, ProductId);
+                                    }
+                                }
+                                else {
+                                    if (priceShortName == "ETH") {
+                                        BuyMetamask(accounts, result, EthPriceParse(priceMonthly), priceShortName, priceMonthly, yearlyCheck, ProductId);
+                                    }
+                                    else {
+                                        TokenPriceParse(priceMonthly, contractAdress)
+                                            .then((amountInWei) => {
+                                                BuyWithToken(accounts, result, amountInWei, priceShortName, priceMonthly, yearlyCheck, ProductId);
+                                            })
+                                            .catch((error) => {
+                                                // Hata durumunda burası çalışır
+                                                console.error("Hata:", error);
+                                            });
+                                        //BuyWithToken(accounts, result, TokenPriceParse(priceMonthly, contractAdress), priceShortName, priceMonthly, yearlyCheck, ProductId);
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            Snackbar.show({
+                                text: 'Please connect Ethereum Mainnetwork ',
+                                actionTextColor: '#fff',
+                                backgroundColor: '#e7515a',
+                                pos: 'top-left'
+                            });
+                        }
+
+
+                    });
+
+
+                    $('.SendEthMMakerButton').click(function () {
+
+                        if (chainSymbol == 0x1) {
+                            var priceShortName = $('#AdvancedMMakerWorker').val();
+                            var contractAdress = document.querySelector('#AdvancedMMakerWorker option:checked').getAttribute('data');
+                            GetWallet().done(function (result) {
+                                var priceYearly = $('#AdvancedMMakerWorkerYearly').html();
+                                var priceMonthly = $('#AdvancedMMakerWorkerMonthly').html();
+                                var yearlyCheck = $("#yearlyRadio")[0].attributes[2].value;
+                                var ProductId = $(".MMaker").attr("data-target");
+                                if (yearlyCheck == "true") {
+                                    if (priceShortName == "ETH") {
+                                        BuyMetamask(accounts, result, EthPriceParse(priceYearly), priceShortName, priceYearly, yearlyCheck, ProductId);
+                                    }
+                                    else {
+                                        TokenPriceParse(priceYearly, contractAdress)
+                                            .then((amountInWei) => {
+                                                BuyWithToken(accounts, result, amountInWei, priceShortName, priceYearly, yearlyCheck, ProductId);
+                                            })
+                                            .catch((error) => {
+                                                // Hata durumunda burası çalışır
+                                                console.error("Hata:", error);
+                                            });
+                                        //BuyWithToken(accounts, result, TokenPriceParse(priceYearly, contractAdress), priceShortName, priceYearly, yearlyCheck, ProductId);
+                                    }
+                                }
+                                else {
+                                    if (priceShortName == "ETH") {
+                                        BuyMetamask(accounts, result, EthPriceParse(priceMonthly), priceShortName, priceMonthly, yearlyCheck, ProductId);
+                                    }
+                                    else {
+                                        TokenPriceParse(priceMonthly, contractAdress)
+                                            .then((amountInWei) => {
+                                                BuyWithToken(accounts, result, amountInWei, priceShortName, priceMonthly, yearlyCheck, ProductId);
+                                            })
+                                            .catch((error) => {
+                                                // Hata durumunda burası çalışır
+                                                console.error("Hata:", error);
+                                            });
+
+                                        //BuyWithToken(accounts, result, TokenPriceParse(priceMonthly, contractAdress), priceShortName, priceMonthly, yearlyCheck, ProductId);
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            Snackbar.show({
+                                text: 'Please connect Ethereum Mainnetwork ',
+                                actionTextColor: '#fff',
+                                backgroundColor: '#e7515a',
+                                pos: 'top-left'
+                            });
+                        }
+
+
+                    });
+
+                }
+                else {
+                    Snackbar.show({
+                        text: 'Please connect Ethereum Mainnet',
+                        actionTextColor: '#fff',
+                        backgroundColor: '#e7515a',
+                        pos: 'top-left'
+                    });
+                    ethereumButton.innerText = "Connect Metamask";
+                    accounts = [];
+                }
+            });
+        }
+
+    }
+
+    function GetProductSelectShortName() {
+        $.ajax({
+            url: '/Workers/CexGridWorker',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                if (!result) {
+                    $('.CexGridWorker').hide();
+                    $('#cex-sold-out').show();
+                }
+                else {
+                    for (var i = 0; i < result.length; i++) {
+                        $("#CexGridWorker").append("<option  style='color:white' data='" + result[i].Contract + "'>" + result[i].ShortName + "</option>").selectpicker('refresh');
+                    }
+                    $('.CexGridWorker').selectpicker('val', result[0].ShortName);
+                    GetSelectedShortName(result[0].ShortName, $(".Cex").attr("data-target"));
+                    $('#CexGridWorker').selectpicker({
+                        size: '10'
+                    });
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+
+        $.ajax({
+            url: '/Workers/DexGridWorker',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                if (!result) {
+                    $('.DexGridWorker').hide();
+                    $('#dex-sold-out').show();
+                }
+                else {
+                    for (var i = 0; i < result.length; i++) {
+                        $("#DexGridWorker").append("<option  style='color:white' data='" + result[i].Contract + "'>" + result[i].ShortName + "</option>").selectpicker('refresh');
+                    }
+                    $('.DexGridWorker').selectpicker('val', result[0].ShortName);
+                    GetSelectedShortName(result[0].ShortName, $(".Dex").attr("data-target"));
+                    $('#DexGridWorker').selectpicker({
+                        size: '10'
+                    });
+                }
+            },
+            error: function () {
+
+            }
+        });
+        $.ajax({
+            url: '/Workers/AdvancedMMakerWorker',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                if (!result) {
+                    $('.AdvancedMMakerWorker').hide();
+                    $('#advanced-sold-out').show();
+                }
+                else {
+                    for (var i = 0; i < result.length; i++) {
+                        $("#AdvancedMMakerWorker").append("<option  style='color:white' data='" + result[i].Contract + "'>" + result[i].ShortName + "</option>").selectpicker('refresh');
+                    }
+                    $('.AdvancedMMakerWorker').selectpicker('val', result[0].ShortName);
+                    GetSelectedShortName(result[0].ShortName, $(".MMaker").attr("data-target"));
+                    $('#AdvancedMMakerWorker').selectpicker({
+                        size: '10'
+                    });
+
+                }
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+
+    function GetSelectedShortName(selectedItem, ProductId) {
+        $.ajax({
+            url: '/Workers/GetPriceSelectedShortName?shortName=' + selectedItem + "&ProductId=" + ProductId,
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                if (ProductId == $(".Cex").attr("data-target")) {
+                    $('#CexGridWorkerMonthly').html(result.MonthlyPrice);
+                    $('#CexGridWorkerYearly').html(result.YearlyPrice);
+                }
+                if (ProductId == $(".Dex").attr("data-target")) {
+                    $('#DexGridWorkerMonthly').html(result.MonthlyPrice);
+                    $('#DexGridWorkerYearly').html(result.YearlyPrice);
+                }
+                if (ProductId == $(".MMaker").attr("data-target")) {
+                    $('#AdvancedMMakerWorkerMonthly').html(result.MonthlyPrice);
+                    $('#AdvancedMMakerWorkerYearly').html(result.YearlyPrice);
+                }
+
+            },
+        });
+
+    }
+
+</script>

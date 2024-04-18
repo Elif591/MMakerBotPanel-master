@@ -1,0 +1,363 @@
+﻿@model MMakerBotPanel.Database.Model.ExchangeApi
+
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<link href="~/Content/light/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/assets/css/elements/popover.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/plugins/loaders/custom-loader.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .card-body {
+        display: block !important;
+        padding: 10px 40px 30px 40px !important;
+    }
+</style>
+
+<div class="main-container" id="container">
+
+    <div id="content" class="main-content" style=" justify-content: center; display: flex;flex-wrap: wrap; align-content: center; margin-top:2rem">
+
+        <div class="row">
+            <div class="col-6">
+                <div class="card component-card_4" id="paymentControl">
+                    <div class="card-body">
+                        <div class="user-profile"></div>
+                        <div class="user-info">
+                            <h5 class="card-user_name">Payment Control Service</h5>
+                            <div class="card-star_rating"></div>
+                            <p class="card-text" style="margin-top:2rem; float:right" id="paymentControlText"> </p>
+                            <div style="margin-top:2rem" id="paymentControlRepair">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card component-card_4" id="taskScheduler">
+                    <div class="card-body">
+                        <div class="user-profile"></div>
+                        <div class="user-info">
+                            <h5 class="card-user_name">Task Scheduler Service</h5>
+                            <div class="card-star_rating"></div>
+                            <p class="card-text" style="margin-top:2rem; float:right" id="taskSchedulerText"> </p>
+                            <div style="margin-top:2rem" id="taskSchedulerRepair">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content" class="main-content" style=" justify-content: center; display: flex;flex-wrap: wrap; align-content: center; margin-top:2rem">
+        <div class="row">
+            <div class="col-6">
+                <div class="card component-card_4" id="workerSubscription">
+                    <div class="card-body">
+                        <div class="user-profile"></div>
+                        <div class="user-info">
+                            <h5 class="card-user_name">Worker Subscription Service</h5>
+                            <div class="card-star_rating"></div>
+                            <p class="card-text" style="margin-top:2rem; float:right" id="workerSubscriptionText"> </p>
+                            <div style="margin-top:2rem" id="workerSubscriptionRepair">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card component-card_4" id="workerWorkingControl">
+                    <div class="card-body">
+                        <div class="user-profile"></div>
+                        <div class="user-info">
+                            <h5 class="card-user_name">Worker Working Control Service</h5>
+                            <div class="card-star_rating"></div>
+                            <p class="card-text" style="margin-top:2rem; float:right" id="workerWorkingControlText"> </p>
+                            <div style="margin-top:2rem" id="workerWorkingControlRepair">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/light/plugins/notification/snackbar/snackbar.min.js"></script>
+<script src="~/Content/light/assets/js/components/notification/custom-snackbar.js"></script>
+
+<script>
+    $('.btn-popover-danger').popover({
+        template: '<div class="popover popover-danger" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
+        title: "Repair"
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        PaymentControlServiceStatus();
+        PaymentControlServiceRepair();
+        TaskSchedulerService();
+        TaskSchedulerRepair();
+        WorkerSubscriptionService();
+        WorkerSubscriptionRepair();
+        WorkerWorkingControlService();
+        WorkerWorkingControlRepair();
+    });
+
+    function PaymentControlServiceStatus() {
+        $.ajax({
+            url: "/CexExchangeApi/PaymentControlServiceStatus",
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                if (result) {
+                    var text = "Working";
+                    $('#paymentControlText').append(text);
+                } else {
+                    var repair = "";
+                    repair += "<button type='button' id='paymentControlButton' class='btn btn-danger btn-popover-danger mb-2 rounded' data-container='body' data-html='true' data-placement='top'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-settings'><circle cx='12' cy='12' r='3'></circle><path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'></path></svg></button>";
+                    $('#paymentControlRepair').append(repair);
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function PaymentControlServiceRepair() {
+        $(document).on('click', '#paymentControlButton', function () {
+            var loader = "<div class='spinner-grow text-info align-self-center loader-sm' id='paymentLoader' ></div>";
+            $('#paymentControlButton').remove();
+            $('#paymentControlRepair').append(loader);
+            $.ajax({
+                url: "/CexExchangeApi/RepairPaymentControlService",
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        setTimeout(function () { paymentLoader(); }, 7000);
+
+                    } else {
+                        Snackbar.show({
+                            text: 'Something went wrong',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a'
+                        });
+                    }
+                },
+                error: function (result) {
+
+                }
+
+            });
+
+        });
+
+    }
+
+    function paymentLoader() {
+        $('#paymentLoader').remove();
+        PaymentControlServiceStatus();
+        Snackbar.show({
+            text: 'Successfully',
+            actionTextColor: '#fff',
+            backgroundColor: '#8dbf42'
+        });
+
+    }
+
+    function TaskSchedulerService() {
+        $.ajax({
+            url: "/CexExchangeApi/TaskSchedulerServiceStatus",
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                if (result) {
+                    var text = "Working";
+                    $('#taskSchedulerText').append(text);
+                } else {
+                    var repair = "";
+                    repair += "<button type='button' id='taskSchedulerButton' class='btn btn-danger btn-popover-danger mb-2 rounded ' data-container='body' data-html='true' data-placement='top'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-settings'><circle cx='12' cy='12' r='3'></circle><path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'></path></svg></button>";
+                    $('#taskSchedulerRepair').append(repair);
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function TaskSchedulerRepair() {
+        $(document).on('click', '#taskSchedulerButton', function () {
+            var loader = "<div class='spinner-grow text-info align-self-center loader-sm' id='taskSchedulerLoader' ></div>";
+            $('#taskSchedulerButton').remove();
+            $('#taskSchedulerRepair').append(loader);
+            $.ajax({
+                url: "/CexExchangeApi/RepairTaskSchedulerService",
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        setTimeout(function () { taskSchedulerLoader(); }, 7000);
+
+                    } else {
+                        Snackbar.show({
+                            text: 'Something went wrong',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a'
+                        });
+                    }
+                },
+                error: function (result) {
+
+                }
+
+            });
+
+        });
+
+    }
+
+    function taskSchedulerLoader() {
+        $('#taskSchedulerLoader').remove();
+        TaskSchedulerService();
+        Snackbar.show({
+            text: 'Successfully',
+            actionTextColor: '#fff',
+            backgroundColor: '#8dbf42'
+        });
+    }
+
+    function WorkerSubscriptionService() {
+        $.ajax({
+            url: "/CexExchangeApi/WorkerSubscriptionServiceStatus",
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                if (result) {
+                    var text = "Working";
+                    $('#workerSubscriptionText').append(text);
+                } else {
+                    var repair = "";
+                    repair += "<button type='button' id='workerSubscriptionButton' class='btn btn-danger btn-popover-danger mb-2 rounded ' data-container='body' data-html='true' data-placement='top'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-settings'><circle cx='12' cy='12' r='3'></circle><path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'></path></svg></button>";
+                    $('#workerSubscriptionRepair').append(repair);
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function WorkerSubscriptionRepair() {
+        $(document).on('click', '#workerSubscriptionButton', function () {
+            var loader = "<div class='spinner-grow text-info align-self-center loader-sm' id='workerSubscriptionLoader' ></div>";
+            $('#workerSubscriptionButton').remove();
+            $('#workerSubscriptionRepair').append(loader);
+            $.ajax({
+                url: "/CexExchangeApi/RepairWorkerSubscriptionService",
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        setTimeout(function () { workerSubscriptionLoader(); }, 7000);
+
+                    } else {
+                        Snackbar.show({
+                            text: 'Something went wrong',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a'
+                        });
+                    }
+                },
+                error: function (result) {
+
+                }
+
+            });
+
+        });
+
+    }
+
+    function workerSubscriptionLoader() {
+        $('#workerSubscriptionLoader').remove();
+        WorkerSubscriptionService();
+        Snackbar.show({
+            text: 'Successfully',
+            actionTextColor: '#fff',
+            backgroundColor: '#8dbf42'
+        });
+    }
+
+    function WorkerWorkingControlService() {
+        $.ajax({
+            url: "/CexExchangeApi/WorkerWorkingControlServiceStatus",
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                if (result) {
+                    var text = "Working";
+                    $('#workerWorkingControlText').append(text);
+                } else {
+                    var repair = "";
+                    repair += "<button type='button' id='workerWorkingControlButton' class='btn btn-danger btn-popover-danger mb-2 rounded ' data-container='body' data-html='true' data-placement='top'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-settings'><circle cx='12' cy='12' r='3'></circle><path d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'></path></svg></button>";
+                    $('#workerWorkingControlRepair').append(repair);
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function WorkerWorkingControlRepair() {
+        $(document).on('click', '#workerWorkingControlButton', function () {
+            var loader = "<div class='spinner-grow text-info align-self-center loader-sm' id='workerWorkingLoader' ></div>";
+            $('#workerWorkingControlButton').remove();
+            $('#workerWorkingControlRepair').append(loader);
+            $.ajax({
+                url: "/CexExchangeApi/RepairWorkerWorkingControlService",
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        setTimeout(function () { workerWorkingLoader(); }, 7000);
+
+                    } else {
+                        Snackbar.show({
+                            text: 'Something went wrong',
+                            actionTextColor: '#fff',
+                            backgroundColor: '#e7515a'
+                        });
+                    }
+                },
+                error: function (result) {
+
+                }
+
+            });
+
+        });
+
+    }
+
+    function workerWorkingLoader() {
+        $('#workerWorkingLoader').remove();
+        WorkerWorkingControlService();
+        Snackbar.show({
+            text: 'Successfully',
+            actionTextColor: '#fff',
+            backgroundColor: '#8dbf42'
+        });
+    }
+</script>
+
+<script src="~/Content/light/assets/js/elements/popovers.js"></script>

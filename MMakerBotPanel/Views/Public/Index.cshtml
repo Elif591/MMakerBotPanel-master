@@ -1,0 +1,657 @@
+﻿@model IEnumerable<MMakerBotPanel.Database.Model.Faq>
+@{
+    Layout = "~/Views/Shared/_PublicLayout.cshtml"; ;
+}
+<main>
+    <!-- Hero -->
+    <section class="relative h-screen">
+        <img src="~/Content/publicAssets/img/hero/hero_v1.jpg" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+        <div class="ml-auto mr-auto h-full max-w-[91rem] px-4">
+            <div class="grid h-full items-center gap-4 md:grid-cols-12">
+                <div class="col-span-5 flex h-full flex-col items-center justify-center py-10 md:items-start lg:py-20">
+                    <h1 class="mb-6 text-center font-display text-5xl text-white md:text-left lg:text-6xl">
+                        Trading Manitou AI - Trade Crypto Smarter
+                    </h1>
+                    <p class="mb-8 max-w-md text-center text-lg text-white md:text-left">
+                        Powerful, AI-powered crypto trading botto help you save time, trade 24/7, and automate your trading.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="@Url.Action("Login","Users")"
+                           class="rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+                            Get Started
+                        </a>
+                        <a href="@Url.Action("Features","Public")"
+                           class="rounded-full bg-white py-3 px-8 text-center font-semibold text-accent shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="relative col-span-6 col-start-7 hidden h-full md:block">
+                    <div class="absolute bottom-[17%] left-12 animate-fly">
+                        <div class="flex items-center space-x-4 rounded-2lg bg-[#8247E5]/50 p-2.5 pr-6 pl-0 backdrop-blur-md">
+                            <div class="-ml-6 flex h-12 w-12 items-center justify-center rounded-full bg-white">
+                                <img src="~/Content/publicAssets/img/chains/polygon@2x.png" alt="" class="max-w-[50%]" />
+                            </div>
+                            <span class="font-display text-sm text-white">Polygon</span>
+                            <span class="font-display text-sm text-white/40">PY</span>
+                        </div>
+                    </div>
+                    <div class="absolute right-8 top-1/2 animate-fly">
+                        <div class="flex items-center space-x-4 rounded-2lg bg-[#62688F]/50 p-2.5 pr-6 pl-0 backdrop-blur-md">
+                            <div class="-ml-6 flex h-12 w-12 items-center justify-center rounded-full bg-white">
+                                <img src="~/Content/publicAssets/img/chains/ethereum@2x.png" alt="" class="max-w-[50%]" />
+                            </div>
+                            <span class="font-display text-sm text-white">Ethereum</span>
+                            <span class="font-display text-sm text-white/40">ETH</span>
+                        </div>
+                    </div>
+                    <div class="absolute right-1/3 top-1/4 animate-fly">
+                        <div class="flex items-center space-x-4 rounded-2lg bg-[#000000]/50 p-2.5 pr-6 pl-0 backdrop-blur-md">
+                            <div class="-ml-6 flex h-12 w-12 items-center justify-center rounded-full bg-white">
+                                <img src="~/Content/publicAssets/img/chains/cri.png" alt="" class="max-w-[50%]" />
+                            </div>
+                            <span class="font-display text-sm text-white">Crypto International</span>
+                            <span class="font-display text-sm text-white/40">CRI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end hero -->
+    <!-- Partners -->
+    <div class="dark:bg-jacarta-900" style="border-bottom: 1px solid #242158">
+        <div class="container">
+            <div class="grid grid-cols-2 py-8 sm:grid-cols-5">
+                <a href="#"><img src="~/Content/publicAssets/img/partners/bitfinex.png" alt="partner 1" /> </a>
+                <a href="#"><img src="~/Content/publicAssets/img/partners/coinbase.png" alt="partner 1" /> </a>
+                <a href="#"><img src="~/Content/publicAssets/img/partners/binance.png" alt="partner 1" /> </a>
+
+                <a href="#"><img src="~/Content/publicAssets/img/partners/kraken.png" alt="partner 1" /> </a>
+                <a href="#"><img src="~/Content/publicAssets/img/partners/kucoin.png" alt="partner 1" /> </a>
+
+            </div>
+        </div>
+    </div>
+    <!-- end partners -->
+    <!-- Benefits -->
+    <section class="py-24 dark:bg-jacarta-900">
+        <div class="container">
+            <div class="mx-auto mb-12 max-w-xl text-center">
+                <h2 class="mb-6 text-center font-display text-3xl font-medium text-jacarta-700 dark:text-white">
+                    How can Trading Manitou AI<br>Benefit Users?
+                </h2>
+                <p class="text-lg dark:text-jacarta-300">
+                    Designed to provide you with a safe & flawless AI bot trading experience.
+                </p>
+            </div>
+            <div class="lg:flex lg:flex-nowrap lg:space-x-10">
+                <div class="lg:w-[43%]">
+                    <!-- tabs -->
+                    <ul class="nav nav-tabs mb-12 space-y-2" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link nav-link--style-2 active group relative flex w-full border-b border-jacarta-100 p-6 text-left dark:border-jacarta-600"
+                                    id="ownership-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#ownership"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="ownership"
+                                    aria-selected="true">
+                                <!--<svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    height="24"
+                                    class="mr-2 h-8 w-8 flex-shrink-0 fill-accent"
+                                  >
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                      d="M17 15.245v6.872a.5.5 0 0 1-.757.429L12 20l-4.243 2.546a.5.5 0 0 1-.757-.43v-6.87a8 8 0 1 1 10 0zM12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12zm0-2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
+                                    />
+                                  </svg>
+                                -->
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 24 24"
+                                     width="24"
+                                     height="24"
+                                     class="mr-2 h-8 w-8 flex-shrink-0 fill-accent">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path d="M6.75 2.5A4.25 4.25 0 0 1 11 6.75V11H6.75a4.25 4.25 0 1 1 0-8.5zm0 10.5H11v4.25A4.25 4.25 0 1 1 6.75 13zm10.5-10.5a4.25 4.25 0 1 1 0 8.5H13V6.75a4.25 4.25 0 0 1 4.25-4.25zM13 13h4.25A4.25 4.25 0 1 1 13 17.25V13z" />
+                                </svg>
+
+
+
+
+                                <div>
+                                    <span class="mb-2 mt-1 block font-display text-xl font-medium group-hover:text-accent dark:text-white">Trade 24/7</span>
+                                    <div class="nav-link-content hidden">
+                                        <p class="text-jacarta-500 dark:text-jacarta-300">
+                                            <ul>
+                                                <li>- Cloud based</li>
+                                                <li>- High availability</li>
+                                                <li>- Fully automated.</li>
+                                            </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link nav-link--style-2 group relative flex w-full border-b border-jacarta-100 p-6 text-left dark:border-jacarta-600"
+                                    id="voting-power-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#voting-power"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="voting-power"
+                                    aria-selected="false">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 24 24"
+                                     width="24"
+                                     height="24"
+                                     class="mr-2 h-8 w-8 flex-shrink-0 fill-accent">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path d="M21 2.992v18.016a1 1 0 0 1-.993.992H3.993A.993.993 0 0 1 3 21.008V2.992A1 1 0 0 1 3.993 2h16.014c.548 0 .993.444.993.992zm-9.707 10.13l-2.475-2.476-1.414 1.415 3.889 3.889 5.657-5.657-1.414-1.414-4.243 4.242z" />
+                                </svg>
+
+                                <div>
+                                    <span class="mb-2 mt-1 block font-display text-xl font-medium text-jacarta-700 group-hover:text-accent dark:text-white">Easy Access</span>
+                                    <div class="nav-link-content hidden">
+                                        <p class="text-jacarta-500 dark:text-jacarta-300">
+                                            <ul>
+                                                <li>- No expertise needed </li>
+                                                <li>- No installation</li>
+                                                <li>- 5 min. setup</li>
+                                            </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link nav-link--style-2 group relative flex w-full border-b border-jacarta-100 p-6 text-left dark:border-jacarta-600"
+                                    id="rewards-income-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#rewards-income"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="rewards-income"
+                                    aria-selected="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="h-8 w-8 mr-2 fill-accent">
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path d="M12 1a9 9 0 0 1 9 9v4a9 9 0 0 1-12.092 8.455c.128-.177.251-.357.369-.542l.17-.28a10.918 10.918 0 0 0 1.55-5.345L11 16V9h2v7a12.96 12.96 0 0 1-.997 5.001 7.026 7.026 0 0 0 2.27-.378c.442-1.361.693-2.808.724-4.31L15 16v-3.001h2V16c0 1.088-.102 2.153-.298 3.185a6.978 6.978 0 0 0 2.294-4.944L19 14v-4A7 7 0 0 0 7.808 4.394L6.383 2.968A8.962 8.962 0 0 1 12 1zm-5 9a5 5 0 1 1 10 0v1h-2v-1a3 3 0 0 0-5.995-.176L9 10v6c0 1.567-.4 3.04-1.104 4.323l-.024.04c-.23.414-.491.808-.782 1.179a9.03 9.03 0 0 1-1.237-.97l-.309-.3A8.97 8.97 0 0 1 3 14v-4c0-2.125.736-4.078 1.968-5.617l1.426 1.425a6.966 6.966 0 0 0-1.39 3.951L5 10v4c0 1.675.588 3.212 1.57 4.417a6.91 6.91 0 0 0 .426-2.176L7 16v-6z"></path>
+                                </svg>
+
+                                <div>
+                                    <span class="mb-2 mt-1 block font-display text-xl font-medium text-jacarta-700 group-hover:text-accent dark:text-white">Ø Emotion</span>
+                                    <div class="nav-link-content hidden">
+                                        <p class="text-jacarta-500 dark:text-jacarta-300">
+                                            <ul>
+                                                <li>- Data-driven</li>
+                                                <li>- No FOMO & FUD</li>
+                                                <li>- No human errors</li>
+                                            </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link nav-link--style-2 group relative flex w-full border-b border-jacarta-100 p-6 text-left dark:border-jacarta-600"
+                                    id="complete-decentralization-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#complete-decentralization"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="complete-decentralization"
+                                    aria-selected="false">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="mr-2 h-8 w-8 flex-shrink-0 fill-accent">
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path d="M10.758 11.828l7.849-7.849 1.414 1.414-1.414 1.415 2.474 2.474-1.414 1.415-2.475-2.475-1.414 1.414 2.121 2.121-1.414 1.415-2.121-2.122-2.192 2.192a5.002 5.002 0 0 1-7.708 6.294 5 5 0 0 1 6.294-7.708zm-.637 6.293A3 3 0 1 0 5.88 13.88a3 3 0 0 0 4.242 4.242z"></path>
+                                </svg>
+
+
+                                <div>
+                                    <span class="mb-2 mt-1 block font-display text-xl font-medium text-jacarta-700 group-hover:text-accent dark:text-white">Secure</span>
+                                    <div class="nav-link-content hidden">
+                                        <p class="text-jacarta-500 dark:text-jacarta-300">
+                                            <ul>
+                                                <li>- Consistent encryption</li>
+                                                <li>- Manipulation resistant</li>
+                                                <li>- No access to your funds</li>
+                                            </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link nav-link--style-2 group relative flex w-full border-b border-jacarta-100 p-6 text-left dark:border-jacarta-600"
+                                    id="nft-yield-farming-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#nft-yield-farming"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="nft-yield-farming"
+                                    aria-selected="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="h-8 w-8 mr-2 fill-accent">
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path d="M19.375 15.103A8.001 8.001 0 0 0 8.03 5.053l-.992-1.737A9.996 9.996 0 0 1 17 3.34c4.49 2.592 6.21 8.142 4.117 12.77l1.342.774-4.165 2.214-.165-4.714 1.246.719zM4.625 8.897a8.001 8.001 0 0 0 11.345 10.05l.992 1.737A9.996 9.996 0 0 1 7 20.66C2.51 18.068.79 12.518 2.883 7.89L1.54 7.117l4.165-2.214.165 4.714-1.246-.719zm8.79 5.931L10.584 12l-2.828 2.828-1.414-1.414 4.243-4.242L13.414 12l2.829-2.828 1.414 1.414-4.243 4.242z"></path>
+                                </svg>
+
+                                <div>
+                                    <span class="mb-2 mt-1 block font-display text-xl font-medium text-jacarta-700 group-hover:text-accent dark:text-white">AI-Engine</span>
+                                    <div class="nav-link-content hidden">
+                                        <p class="text-jacarta-500 dark:text-jacarta-300">
+                                            <ul>
+                                                <li>- Optimized performance</li>
+                                                <li>- Extensively tested</li>
+                                                <li>- Beat pro traders</li>
+                                            </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex items-center justify-center lg:w-[57%] overflow-hidden lg:overflow-visible">
+                    <!-- content -->
+                    <div class="tab-content flex-1">
+                        <div class="tab-pane fade show active relative"
+                             id="ownership"
+                             role="tabpanel"
+                             aria-labelledby="ownership-tab">
+                            <figure class="flex items-center justify-center">
+                                <img src="~/Content/publicAssets/img/dao/01-cloud-based.jpg"
+                                     alt=""
+                                     class="rounded-full border border-jacarta-100 p-14 dark:border-jacarta-600" />
+                                <img src="~/Content/publicAssets/img/dao/3d_elements_circle.png" alt="" class="absolute animate-spin-slow" />
+                            </figure>
+                        </div>
+                        <div class="tab-pane fade relative"
+                             id="voting-power"
+                             role="tabpanel"
+                             aria-labelledby="voting-power-tab">
+                            <figure class="flex items-center justify-center">
+                                <img src="~/Content/publicAssets/img/dao/02-easy-access.jpg"
+                                     alt=""
+                                     class="rounded-full border border-jacarta-100 p-14 dark:border-jacarta-600" />
+                                <img src="~/Content/publicAssets/img/dao/3d_elements_circle.png" alt="" class="absolute animate-spin-slow" />
+                            </figure>
+                        </div>
+                        <div class="tab-pane fade relative"
+                             id="rewards-income"
+                             role="tabpanel"
+                             aria-labelledby="rewards-income-tab">
+                            <figure class="flex items-center justify-center">
+                                <img src="~/Content/publicAssets/img/dao/03-database.jpg"
+                                     alt=""
+                                     class="rounded-full border border-jacarta-100 p-14 dark:border-jacarta-600" />
+                                <img src="~/Content/publicAssets/img/dao/3d_elements_circle.png" alt="" class="absolute animate-spin-slow" />
+                            </figure>
+                        </div>
+                        <div class="tab-pane fade relative"
+                             id="complete-decentralization"
+                             role="tabpanel"
+                             aria-labelledby="complete-decentralization-tab">
+                            <figure class="flex items-center justify-center">
+                                <img src="~/Content/publicAssets/img/dao/04-security.jpg"
+                                     alt=""
+                                     class="rounded-full border border-jacarta-100 p-14 dark:border-jacarta-600" />
+                                <img src="~/Content/publicAssets/img/dao/3d_elements_circle.png" alt="" class="absolute animate-spin-slow" />
+                            </figure>
+                        </div>
+                        <div class="tab-pane fade relative"
+                             id="nft-yield-farming"
+                             role="tabpanel"
+                             aria-labelledby="nft-yield-farming-tab">
+                            <figure class="flex items-center justify-center">
+                                <img src="~/Content/publicAssets/img/dao/05-AI.jpg"
+                                     alt=""
+                                     class="rounded-full border border-jacarta-100 p-14 dark:border-jacarta-600" />
+                                <img src="~/Content/publicAssets/img/dao/3d_elements_circle.png" alt="" class="absolute animate-spin-slow" />
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mx-auto mt-20 lg:flex lg:flex-nowrap lg:space-x-10 rounded-2lg bg-light-base py-5 px-10 text-center dark:bg-jacarta-700 sm:flex sm:items-center sm:text-left">
+
+
+
+                <h4 class="mb-2 text-center text-jacarta-700 dark:text-white sm:mb-0 sm:text-left">
+                    Get Your Free Demo Account
+                </h4>
+                <p style="color: aqua;"> Try out Trading Manitou with a free demo-account and explore our bots!</p>
+                <a href="@Url.Action("Register","Users")" class="inline-block rounded-full bg-accent py-3 px-5 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">Create Free-Demo Account</a>
+            </div>
+
+
+
+
+
+        </div>
+
+    </section>
+    <!-- end benefits -->
+    <!-- Video / FAQ -->
+    <section class="bg-light-base py-24 dark:bg-jacarta-800">
+        <div class="container">
+            <div class="mx-auto mb-12 max-w-xl text-center">
+                <h2 class="mb-6 text-center font-display text-3xl font-medium text-jacarta-700 dark:text-white">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-lg dark:text-jacarta-300">
+                    You have questions? We have answers!
+                </p>
+            </div>
+            <div class="lg:flex lg:flex-nowrap">
+                <div class="lg:w-[45%]">
+                    <figure class="relative mb-8 overflow-hidden rounded-3xl before:absolute before:inset-0 ">
+                        @*<a href="https://www.youtube.com/embed/fhCM-fDgpec"
+                           data-bs-toggle="modal"
+                           data-bs-target=".video-lightbox"
+                           class="js-video-modal-trigger absolute top-1/2 left-1/2 flex h-16 w-16 -translate-y-1/2 -translate-x-1/2 items-center justify-center rounded-full border-2 border-white transition-transform will-change-transform hover:scale-90">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 width="24"
+                                 height="24"
+                                 class="h-8 w-8 fill-white">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path d="M19.376 12.416L8.777 19.482A.5.5 0 0 1 8 19.066V4.934a.5.5 0 0 1 .777-.416l10.599 7.066a.5.5 0 0 1 0 .832z" />
+                            </svg>
+                        </a>*@
+                        @*<img src="~/Content/publicAssets/img/dao/video_cover_dao.jpg" class="w-full" alt=""  />*@
+                        <img src="~/Content/publicAssets/img/dao/2.png" class="w-full" alt=""  />
+                    </figure>
+                </div>
+                <div class="lg:w-[55%] lg:pl-24">
+                    <p class="mb-6 dark:text-jacarta-300">
+                        Feel free to send us a message. Fill in the form and we will contact you as soon as possible.
+                    </p>
+                    <a href="@Url.Action("Contact","Public")" class="mb-8 inline-block text-sm font-bold text-accent">Learn More</a>
+                    <div class="accordion mx-auto max-w-[35rem]" id="accordionFAQ">
+                        @foreach (var item in Model)
+                        {
+                            <div class="accordion-item mb-5 overflow-hidden rounded-lg border border-jacarta-100 dark:border-jacarta-600">
+                                <h2 class="accordion-header" id="faq-heading-1">
+                                    <button class="accordion-button collapsed relative flex w-full items-center justify-between bg-white px-4 py-3 text-left font-display text-sm text-jacarta-700 dark:bg-jacarta-700 dark:text-white"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#faq-@item.FaqID"
+                                            aria-expanded="false"
+                                            aria-controls="faq-1">
+                                        <span>@item.Question</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 24 24"
+                                             width="24"
+                                             height="24"
+                                             class="accordion-arrow h-4 w-4 shrink-0 fill-jacarta-700 transition-transform dark:fill-white">
+                                            <path fill="none" d="M0 0h24v24H0z"></path>
+                                            <path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z"></path>
+                                        </svg>
+                                    </button>
+                                </h2>
+                                <div id="faq-@item.FaqID"
+                                     class="accordion-collapse collapse"
+                                     aria-labelledby="faq-heading-1"
+                                     data-bs-parent="#accordionFAQ">
+                                    <div class="accordion-body border-t border-jacarta-100 bg-white p-4 dark:border-jacarta-600 dark:bg-jacarta-700">
+                                        <p class="dark:text-jacarta-200">
+                                            @item.Answer
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end video / faq -->
+    <!-- Partners -->
+    <section class="overflow-hidden py-24 dark:bg-jacarta-900">
+        <div class="container">
+            <div class="mx-auto mb-14 max-w-xl text-center">
+                <h2 class="mb-6 text-center font-display text-3xl font-medium text-jacarta-700 dark:text-white">
+                    Supported Exchanges And Dexs
+                </h2>
+                <p class="text-lg dark:text-jacarta-300">
+                    We support leading crypto exchanges. We are constantly improving our network.
+                </p>
+            </div>
+        </div>
+        <div class="mb-8 flex animate-marqueeRight space-x-8">
+
+
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/kraken.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/kucoin.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/bitfinex.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/OKX.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/huobi.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/bybit.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/mexc.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/gate.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/hotbit.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/lbank.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/upbit.jpg" alt="" />
+            </div>
+
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/coinsbit.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/coinstore.jpg" alt="" />
+            </div>
+
+
+        </div>
+
+        <div class="flex animate-marquee space-x-8">
+
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/pancakeswap.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/uniswap.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/alterdice.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/dextrade.jpg" alt="" />
+            </div>
+
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/binance.jpg" alt="" />
+            </div>
+            <div class="flex flex-shrink-0 items-center justify-center rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                <img src="~/Content/publicAssets/img/partners/cr/coinbase.jpg" alt="" />
+            </div>
+
+
+
+
+        </div>
+    </section>
+    <!-- end partners -->
+
+    <section class="relative pt-20">
+        <picture class="pointer-events-none absolute inset-0 -z-10 dark:hidden">
+            <img src="~/Content/publicAssets/img/gradient_light.jpg" alt="gradient" class="h-full w-full" />
+        </picture>
+        <picture class="pointer-events-none absolute inset-0 -z-10 hidden dark:block">
+            <img src="~/Content/publicAssets/img/gradient_dark.jpg" alt="gradient dark" class="h-full w-full" />
+        </picture>
+        <div class="container">
+            <div class="flex flex-col items-center space-y-10 lg:flex-row lg:space-y-0 lg:space-x-4">
+                <div class="mb-10 lg:order-1 lg:w-2/4 xl:w-[30%]">
+                    <div class="text-center lg:text-left">
+                        <h2 class="mb-6 font-display text-xl text-jacarta-700 dark:text-white lg:pr-4">
+                            Download Trading Manitou AI app
+                            <span class="text-jacarta-300">to track your Coin portfolio and discover drops</span>
+                        </h2>
+                        <div class="inline-flex space-x-4">
+                            <a href="#"
+                               class="group flex items-center rounded-full bg-white py-3 px-6 text-center font-semibold text-jacarta-500 shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 24 24"
+                                     class="mr-2 -mt-1 inline-block h-5 w-5 fill-jacarta-500 transition-colors group-hover:fill-white">
+                                    <g>
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path fill-rule="nonzero"
+                                              d="M11.624 7.222c-.876 0-2.232-.996-3.66-.96-1.884.024-3.612 1.092-4.584 2.784-1.956 3.396-.504 8.412 1.404 11.172.936 1.344 2.04 2.856 3.504 2.808 1.404-.06 1.932-.912 3.636-.912 1.692 0 2.172.912 3.66.876 1.512-.024 2.472-1.368 3.396-2.724 1.068-1.56 1.512-3.072 1.536-3.156-.036-.012-2.94-1.128-2.976-4.488-.024-2.808 2.292-4.152 2.4-4.212-1.32-1.932-3.348-2.148-4.056-2.196-1.848-.144-3.396 1.008-4.26 1.008zm3.12-2.832c.78-.936 1.296-2.244 1.152-3.54-1.116.048-2.46.744-3.264 1.68-.72.828-1.344 2.16-1.176 3.432 1.236.096 2.508-.636 3.288-1.572z" />
+                                    </g>
+                                </svg>
+                                App Store
+                            </a>
+                            <a href="#"
+                               class="flex items-center rounded-full bg-white py-3 px-6 text-center font-semibold text-jacarta-500 shadow-white-volume transition-all hover:bg-accent-dark hover:text-white hover:shadow-accent-volume">
+                                <svg width="17"
+                                     height="18"
+                                     viewBox="0 0 17 18"
+                                     class="mr-2 inline-block"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_1429_17255)">
+                                        <path fill-rule="evenodd"
+                                              clip-rule="evenodd"
+                                              d="M0.815635 0.506775C0.615202 0.718493 0.5 1.04436 0.5 1.46779V16.5292C0.5 16.9527 0.615202 17.2785 0.823128 17.4829L0.877451 17.528L9.46423 9.08873V8.8991L0.869958 0.46167L0.815635 0.506775Z"
+                                              fill="url(#paint0_linear_1429_17255)" />
+                                        <path fill-rule="evenodd"
+                                              clip-rule="evenodd"
+                                              d="M12.3212 11.9129L9.45703 9.09707V8.90008L12.3221 6.08423L12.3839 6.12197L15.7725 8.01455C16.7429 8.55213 16.7429 9.43766 15.7725 9.98261L12.3839 11.8752C12.383 11.8752 12.3212 11.9129 12.3212 11.9129Z"
+                                              fill="url(#paint1_linear_1429_17255)" />
+                                        <path fill-rule="evenodd"
+                                              clip-rule="evenodd"
+                                              d="M12.3835 11.8751L9.45751 8.99854L0.816406 17.4912C1.13204 17.8244 1.6631 17.8622 2.2569 17.5363L12.3835 11.8751Z"
+                                              fill="url(#paint2_linear_1429_17255)" />
+                                        <path fill-rule="evenodd"
+                                              clip-rule="evenodd"
+                                              d="M12.3835 6.12303L2.2569 0.469231C1.66403 0.136005 1.13204 0.18111 0.816406 0.514336L9.45657 8.99872L12.3835 6.12303Z"
+                                              fill="url(#paint3_linear_1429_17255)" />
+                                        <path opacity="0.2"
+                                              fill-rule="evenodd"
+                                              clip-rule="evenodd"
+                                              d="M12.322 11.8145L2.26472 17.4305C1.70275 17.7481 1.20167 17.726 0.878542 17.4379L0.824219 17.4913L0.878542 17.5364C1.20167 17.8236 1.70275 17.8466 2.26472 17.529L12.3913 11.8752L12.322 11.8145Z"
+                                              fill="black" />
+                                        <path opacity="0.12"
+                                              fill-rule="evenodd"
+                                              clip-rule="evenodd"
+                                              d="M15.7704 9.88407L12.3125 11.8144L12.3743 11.8751L15.7629 9.98256C16.2481 9.71009 16.4869 9.35477 16.4869 8.99854C16.456 9.3244 16.2097 9.63461 15.7704 9.88407Z"
+                                              fill="black" />
+                                        <path opacity="0.25"
+                                              fill-rule="evenodd"
+                                              clip-rule="evenodd"
+                                              d="M2.25613 0.567505L15.7713 8.11388C16.2106 8.35598 16.4569 8.67355 16.4953 8.99942C16.4953 8.6441 16.2565 8.28786 15.7713 8.01539L2.25613 0.46901C1.28581 -0.0759346 0.5 0.377879 0.5 1.46777V1.56626C0.5 0.476374 1.28581 0.0299246 2.25613 0.567505Z"
+                                              fill="white" />
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1429_17255"
+                                                        x1="8.69318"
+                                                        y1="1.3059"
+                                                        x2="-5.02929"
+                                                        y2="5.02617"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#00A0FF" />
+                                            <stop offset="0.007" stop-color="#00A1FF" />
+                                            <stop offset="0.26" stop-color="#00BEFF" />
+                                            <stop offset="0.512" stop-color="#00D2FF" />
+                                            <stop offset="0.76" stop-color="#00DFFF" />
+                                            <stop offset="1" stop-color="#00E3FF" />
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_1429_17255"
+                                                        x1="17.0352"
+                                                        y1="8.99899"
+                                                        x2="0.264462"
+                                                        y2="8.99899"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#FFE000" />
+                                            <stop offset="0.409" stop-color="#FFBD00" />
+                                            <stop offset="0.775" stop-color="#FFA500" />
+                                            <stop offset="1" stop-color="#FF9C00" />
+                                        </linearGradient>
+                                        <linearGradient id="paint2_linear_1429_17255"
+                                                        x1="10.7924"
+                                                        y1="10.5634"
+                                                        x2="0.0306903"
+                                                        y2="28.9927"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#FF3A44" />
+                                            <stop offset="1" stop-color="#C31162" />
+                                        </linearGradient>
+                                        <linearGradient id="paint3_linear_1429_17255"
+                                                        x1="-1.35877"
+                                                        y1="-4.5032"
+                                                        x2="3.44229"
+                                                        y2="3.72749"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#32A071" />
+                                            <stop offset="0.069" stop-color="#2DA771" />
+                                            <stop offset="0.476" stop-color="#15CF74" />
+                                            <stop offset="0.801" stop-color="#06E775" />
+                                            <stop offset="1" stop-color="#00F076" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_1429_17255">
+                                            <rect width="16" height="17.5238" fill="white" transform="translate(0.5 0.238037)" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                Google play
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-3 text-center lg:order-2 lg:w-1/4 lg:self-end xl:w-[40%]">
+                    <img src="~/Content/publicAssets/img/features-mc/mobile_app.png" class="inline-block" alt="" />
+                </div>
+                <div class="mb-10 hidden lg:order-3 lg:block lg:w-2/4 xl:w-[30%]">
+                    <div class="flex items-center space-x-8 lg:pl-6">
+                        <div class="inline-block flex-shrink-0 rounded-2.5xl border border-jacarta-100 bg-white p-6">
+                            <img src="~/Content/publicAssets/img/qr.png" alt="" />
+                        </div>
+                        <div class="text-left">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 class="mb-2 h-6 w-6 fill-jacarta-700 dark:fill-white">
+                                <g>
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path d="M7.828 11H20v2H7.828l5.364 5.364-1.414 1.414L4 12l7.778-7.778 1.414 1.414z" />
+                                </g>
+                            </svg>
+                            <span class="text-lg text-jacarta-700 dark:text-white">Scan to download Trading Manitou AI app</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

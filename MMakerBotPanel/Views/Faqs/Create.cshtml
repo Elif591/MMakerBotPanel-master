@@ -1,0 +1,152 @@
+﻿@model MMakerBotPanel.Database.Model.Faq
+
+@{
+
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<link href="~/Content/light/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/light/assets/css/forms/switches.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/assets/css/elements/alert.css">
+<style>
+    .btn-light {
+        border-color: transparent;
+    }
+</style>
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+        <div class="row layout-spacing">
+            <div class="col-lg-12">
+                @if (ViewBag.HelpError != null)
+                {
+                    <div class="alert alert-gradient mb-4" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" data-dismiss="alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>@ViewBag.HelpError</div>
+                }
+                @if (ViewBag.HomeError != null)
+                {
+                    <div class="alert alert-gradient mb-4" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" data-dismiss="alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>@ViewBag.HomeError</div>
+                }
+                @if (ViewBag.modelStateError != null)
+                {
+                    <div class="alert alert-gradient mb-4" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" data-dismiss="alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>@ViewBag.modelStateError</div>
+                }
+
+                <div class="statbox widget box box-shadow" style="margin-top:1.3rem">
+                    <div class="widget-header">
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                <h4 style="margin-left: 7.5rem; margin-top: 2rem">Create Question - Answer</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-content widget-content-area custom-autocomplete">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.HiddenFor(model => model.FaqID)
+                            <form style="padding:1rem">
+                                <div class="row">
+                                    <div class="col-md-1">
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="width:8rem">Question</span>
+                                            </div>
+
+                                            @Html.EditorFor(model => model.Question, new { htmlAttributes = new { @class = "form-control alloptions", id = "Question", maxlength = "200" } })
+
+                                        </div>
+
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="width:8rem">Answer</span>
+                                            </div>
+                                            @Html.TextAreaFor(model => model.Answer, 17, 0, htmlAttributes: new { @class = "form-control alloptions", id = "ansswer", name = "Answer", maxlength = "1000", value = "" })
+                                            <script>
+
+                                            </script>
+                                        </div>
+                                        <div class="widget-content widget-content-area text-center" style="float:left">
+                                            <button class="btn btn-warning mb-2 mr-2 btn-rounded" type="submit">Creating <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" >
+                                        <div class="col-lg-12 col-12 layout-spacing">
+                                            <div class="widget-content widget-content-area text-center">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-4 col-6">
+                                                        <h6 style="margin-bottom: 1rem; margin-right: 1rem"> Panel</h6>
+                                                        <label class="switch s-icons s-outline  s-outline-secondary  mb-4 mr-2">
+                                                            <input type="checkbox" id="Panel" name="Panel" for="Panel" value="true" checked="@Model.Panel">
+
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3 col-sm-4 col-6">
+                                                        <h6 style="margin-bottom:1rem">HelpDesk</h6>
+                                                        <label class="switch s-icons s-outline  s-outline-info  mb-4 mr-2">
+                                                            <input type="checkbox" id="HelpDesk" name="HelpDesk" for="HelpDesk" value="true" checked="@Model.HelpDesk">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3 col-sm-4 col-6">
+                                                        <h6 style="margin-bottom:1rem; margin-right:1rem">Home</h6>
+                                                        <label class="switch s-icons s-outline  s-outline-danger  mb-4 mr-2">
+                                                            <input type="checkbox" id="Home" name="Home" for="Home" value="true" checked="@Model.Home">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+
+                                    </div>
+                                </div>
+                            </form>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Content/light/assets/js/scrollspyNav.js"></script>
+<script src="~/Content/light/plugins/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+<script src="~/Content/light/plugins/bootstrap-maxlength/custom-bs-maxlength.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("input[type=checkbox]").change(function () {
+            $(this).prop("checked")
+            {
+                if ($(this)[0].checked) {
+                    $(this).val(true);
+                }
+                if (!$(this)[0].checked) {
+                    $(this).val(false);
+                }
+            };
+        });
+    });
+    $('#Question.alloptions').maxlength({
+        separator: ' of ',
+        preText: 'You have ',
+        postText: ' chars remaining.'
+    });
+    $('#ansswer.alloptions').maxlength({
+        separator: ' of ',
+        preText: 'You have ',
+        postText: ' chars remaining.'
+    });
+</script>

@@ -1,0 +1,183 @@
+﻿@{
+ Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+<!-- toastr -->
+<link href="~/Content/light/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/bootstrap-select/bootstrap-select.min.css">
+<link href="~/Content/light/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/jquery-step/jquery.steps.css">
+<style>
+    #formValidate .wizard > .content {
+        min-height: 25em;
+    }
+
+    #example-vertical.wizard > .content {
+        min-height: 24.5em;
+    }
+</style>
+
+<div class="main-container" id="container">
+    <div id="content" class="main-content">
+        <div class="container" style="display: flex; max-width: 56.333333% !important; padding: 0 32px !important; margin-left:auto; border-radius:5% ">
+            <div class="container">
+                <div class="row layout-top-spacing">
+                    <div id="basic" class="col-lg-12 layout-spacing">
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-content widget-content-area" style="border-radius:1rem">
+                                <form class="needs-validation" novalidate>
+                                    <div class="row">
+                                        <div class="col-12" style="padding:4rem">
+                                            <p>Wallet Address </p>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="validationTooltipAddress" placeholder="Wallet Address" required value="">
+                                                <div class="invalid-tooltip">
+                                                    Please define a wallet address
+                                                </div>
+                                            </div>
+                                            <p style="margin-top:3rem"> Etherscan API Key  </p>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="validationTooltipApiKey" placeholder="Etherscan API Key" required value="">
+                                                <div class="invalid-tooltip">
+                                                    Please define a Etherscan API Key
+                                                </div>
+                                            </div>
+                                            <div style="margin-top:3rem"> TTL  </div>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="validationTooltipTtlCountPrepend">Max TTL</span>
+                                                </div>
+                                                <input type="number" class="form-control" id="validationTooltipTtl" aria-describedby="validationTooltipTtlPrepend" required value="">
+                                                <div class="invalid-tooltip">
+                                                    Please define a TTL Count
+                                                </div>
+                                            </div>
+                                            <div style="margin-top:3rem">
+                                                <p> Check Control Minute  </p><select class="selectpicker" id="selectMinute"></select>
+                                                <button class="btn btn-success mt-2" type="submit" id="saveAddress" style="float:right">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/light/assets/js/forms/bootstrap_validation/bs_validation_script.js"></script>
+<script src="~/Content/light/assets/js/scrollspyNav.js"></script>
+<script src="~/Content/light/plugins/notification/snackbar/snackbar.min.js"></script>
+<script src="~/Content/light/assets/js/components/notification/custom-snackbar.js"></script>
+<script src="~/Content/light/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="~/Content/light/plugins/jquery-step/jquery.steps.min.js"></script>
+<script src="~/Content/light/plugins/jquery-step/custom-jquery.steps.js"></script>
+<script>
+    $(document).ready(function () {
+        document.querySelector("form").addEventListener("submit", function (e) {
+            e.preventDefault();
+        });
+        GetSelectCheckMinute();
+        $.ajax({
+            url: "/Wallet/GetWalletAddress",
+            type: "Get",
+            dataType: "Json",
+            success: function (result) {
+                if (!result) {
+                    $('#validationTooltipAddress').attr("value", "Wallet Address");
+                    $('#validationTooltipApiKey').attr("value", "Etherscan API Key");
+                }
+                else {
+                    $('#validationTooltipAddress').attr("value", result.WalletAddress);
+                    $('#validationTooltipApiKey').attr("value", result.EtherscanApiKey);
+                    $('#validationTooltipTtl').attr("value", result.TTEL);
+                    $('.selectpicker').selectpicker("val", result.CheckControlDate);
+                }
+            },
+            error: function (result) {
+
+
+            }
+        });
+
+        SaveWalletAddres();
+    });
+    function GetSelectCheckMinute() {
+        $.ajax({
+            url: '/Wallet/GetSelectCheckMinute',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $("#selectMinute").append("<option  value='" + result[i].Value + "'>" + result[i].Text + "</option>").selectpicker('refresh');
+                }
+
+                $('#selectMinute').selectpicker({
+                    size: '10'
+                });
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    function SaveWalletAddres() {
+        $('#saveAddress').click(function () {
+            var address = $('#validationTooltipAddress').val();
+            var apikey = $('#validationTooltipApiKey').val();
+            var ttl = $('#validationTooltipTtl').val();
+            var controlDate = $('.selectpicker').val();
+            if (address != "") {
+                $.ajax({
+                    url: "/Wallet/saveWalletAddress?address=" + address + "&apikey=" + apikey + "&ttl=" + ttl + "&controlDate=" + controlDate,
+                    type: "Get",
+                    dataType: "Json",
+                    success: function (result) {
+                        if (result) {
+                            Snackbar.show({
+                                text: 'Succesfully',
+                                actionTextColor: '#fff',
+                                backgroundColor: '#8dbf42',
+                                pos: 'top-left'
+                            });
+                        }
+                        else {
+                            Snackbar.show({
+                                text: 'Something went wrong',
+                                actionTextColor: '#fff',
+                                backgroundColor: '#e7515a'
+                            });
+                        }
+                    },
+                    error: function (result) {
+
+
+                    }
+                });
+            }
+
+        })
+
+    }
+
+
+    window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+
+</script>

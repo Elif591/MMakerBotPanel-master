@@ -1,0 +1,175 @@
+﻿@model MMakerBotPanel.Database.Model.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Trading Manitou AI V3.0 - Register</title>
+    <link rel="icon" type="image/x-icon" href="~/Content/assets/img/favicon.ico" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/assets/css/authentication/form-1.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/forms/theme-checkbox-radio.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/forms/switches.css">
+    <style>
+        .g-recaptcha div {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body class="form">
+
+    <div class="form-container">
+        <div class="form-form">
+            <div class="form-form-wrap">
+                <div class="form-container">
+                    <div class="form-content">
+
+                        <h1 class=""> Get started with a <br /> free account</h1>
+                        <p class="signup-link"> Already have an account? <a href="@Url.Action("Login","Users")"> Log in</a> </p>
+
+                        @if (ViewBag.error != null && ViewBag.error != "")
+                        {
+                            <div style="padding:5px;">
+                                <div class="alert alert-danger" style="margin:0;" role="alert">
+                                    @ViewBag.error
+                                </div>
+                            </div>
+                        }
+                        @using (Html.BeginForm("Register", "Users", FormMethod.Post, new { @class = "text-left" }))
+                        {
+                            <div class="form">
+                                <div id="username-field" class="field-wrapper input">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"> </path>
+                                        <circle cx="12" cy="7" r="4"> </circle>
+                                    </svg>
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                                </div>
+                                <div id="username-field" class="field-wrapper input">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"> </path>
+                                        <circle cx="12" cy="7" r="4"> </circle>
+                                    </svg>
+                                    @Html.EditorFor(model => model.SurName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
+                                </div>
+                                <div id="email-field" class="field-wrapper input">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign">
+                                        <circle cx="12" cy="12" r="4"> </circle>
+                                        <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"> </path>
+                                    </svg>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @placeholder = "Email Address" } })
+                                </div>
+                                <div id="password-field" class="field-wrapper input mb-2">
+                                    <svg style="cursor:pointer" id="Passtoggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"> </rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"> </path>
+                                    </svg>
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = "Password", @type = "password", @id = "Password" } })
+                                </div>
+                                <div id="password-field" class="field-wrapper input mb-2">
+                                    <svg style="cursor:pointer" id="PasstoggleAgain" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"> </rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"> </path>
+                                    </svg>
+                                    @Html.EditorFor(model => model.PassaportAgain, new { htmlAttributes = new { @class = "form-control form-control-user", @placeholder = "Repeat Password", @type = "password" } })
+                                </div>
+
+                                <div class="form-group">
+                                        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                                    </div>
+                                @*<div class="form-group">
+                                    <div class="g-recaptcha" data-sitekey="6Ld8zUAnAAAAAOSW6EEolYmgvd3tmCuYtmIMOi2g"></div>
+                                </div>*@
+
+                                <div class="d-sm-flex justify-content-between">
+                                    <div class="field-wrapper toggle-pass">
+                                        <p class="d-inline-block"> Show Password</p>
+                                        <label class="switch s-primary">
+                                            <input type="checkbox" id="toggle-password1" class="d-none">
+                                            <span class="slider round"> </span>
+                                        </label>
+                                    </div>
+                                    <div class="field-wrapper">
+                                        <button type="submit" class="btn btn-primary" value=""> Get Started!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <p class="terms-conditions"> © 2022 All Rights Reserved. Trading Manitou AI is a product of Designreset. <a href="javascript:void(0);"> Cookie Preferences</a>, <a href="javascript:void(0);"> Privacy</a>, and <a href="javascript:void(0);"> Terms</a> .</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-image">
+            <div class="l-image">
+            </div>
+        </div>
+    </div>
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="~/Content/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="~/Content/bootstrap/js/popper.min.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script src="~/Content/assets/js/authentication/form-1.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script>
+
+
+        $("#Passtoggle").on("click", function () {
+            var passLock = $('#Password').attr('type');
+            if (passLock === "password") {
+                $('#Password').attr('type', 'text');
+            } else {
+                $('#Password').attr('type', 'password');
+
+            }
+        })
+
+        $("#PasstoggleAgain").on("click", function () {
+            var passLock = $('.form-control-user').attr('type');
+            if (passLock === "password") {
+                $('.form-control-user').attr('type', 'text');
+            } else {
+                $('.form-control-user').attr('type', 'password');
+
+            }
+        })
+
+
+        $(function () {
+            function rescaleCaptcha() {
+                var width = $('.g-recaptcha').parent().width();
+                var scale;
+                if (width < 302) {
+                    scale = width / 302;
+                } else {
+                    scale = 1.0;
+                }
+
+                $('.g-recaptcha').css('transform', 'scale(' + scale + ')');
+                $('.g-recaptcha').css('-webkit-transform', 'scale(' + scale + ')');
+                $('.g-recaptcha').css('transform-origin', '0 0');
+                $('.g-recaptcha').css('-webkit-transform-origin', '0 0');
+            }
+
+            rescaleCaptcha();
+            $(window).resize(function () { rescaleCaptcha(); });
+
+        });
+    </script>
+
+</body>
+</html>

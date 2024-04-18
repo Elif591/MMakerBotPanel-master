@@ -1,0 +1,597 @@
+﻿
+@model IEnumerable<MMakerBotPanel.Database.Model.ExchangeApi>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!--  BEGIN CUSTOM STYLE FILE  -->
+<link href="~/Content/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Styles.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/table/datatable/datatables.css">
+<link rel="stylesheet" type="text/css" href="~/Content/assets/css/forms/theme-checkbox-radio.css">
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/table/datatable/custom_dt_custom.css">
+<link href="~/Content/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/bootstrap-select/bootstrap-select.min.css">
+<link href="~/Content/plugins/tagInput/tags-input.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/Content/plugins/font-icons/fontawesome/css/regular.css">
+<link rel="stylesheet" href="~/Content/plugins/font-icons/fontawesome/css/fontawesome.css">
+<!--  END CUSTOM STYLE FILE  -->
+<style>
+    .tags-input-wrapper input {
+        margin: 0 auto;
+    }
+
+    .feather-icon .icon-section {
+        padding: 30px;
+    }
+
+        .feather-icon .icon-section h4 {
+            color: #bfc9d4;
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0;
+            margin-bottom: 16px;
+        }
+
+    .feather-icon .icon-content-container {
+        padding: 0 16px;
+        width: 86%;
+        margin: 0 auto;
+        border: 1px solid #191e3a;
+        border-radius: 6px;
+    }
+
+    .feather-icon .icon-section p.fs-text {
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+
+    .feather-icon .icon-container {
+        cursor: pointer;
+    }
+
+        .feather-icon .icon-container svg {
+            color: #bfc9d4;
+            margin-right: 6px;
+            vertical-align: middle;
+            width: 20px;
+            height: 20px;
+            fill: rgba(0, 23, 55, 0.08);
+        }
+
+        .feather-icon .icon-container:hover svg {
+            color: #888ea8;
+        }
+
+        .feather-icon .icon-container span {
+            display: none;
+        }
+
+        .feather-icon .icon-container:hover span {
+            color: #888ea8;
+        }
+
+    .feather-icon .icon-link {
+        color: #888ea8;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+
+    /*FAB*/
+    .fontawesome .icon-section {
+        padding: 30px;
+    }
+
+        .fontawesome .icon-section h4 {
+            color: #bfc9d4;
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0;
+            margin-bottom: 16px;
+        }
+
+    .fontawesome .icon-content-container {
+        padding: 0 16px;
+        width: 86%;
+        margin: 0 auto;
+        border: 1px solid #191e3a;
+        border-radius: 6px;
+    }
+
+    .fontawesome .icon-section p.fs-text {
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+
+    .fontawesome .icon-container {
+        cursor: pointer;
+    }
+
+        .fontawesome .icon-container i {
+            font-size: 20px;
+            color: #bfc9d4;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .fontawesome .icon-container:hover i {
+            color: #888ea8;
+        }
+
+        .fontawesome .icon-container span {
+            color: #888ea8;
+            display: none;
+        }
+
+        .fontawesome .icon-container:hover span {
+            color: #888ea8;
+        }
+
+    .fontawesome .icon-link {
+        color: #888ea8;
+        font-weight: 600;
+        font-size: 14px;
+    }
+</style>
+<!--  END CUSTOM STYLE FILE  -->
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+        <div class="row layout-spacing">
+            <!-- Content -->
+            <div class="col-xl-4 col-lg-6 col-md-5 col-sm-12 layout-top-spacing">
+                <div class="user-profile layout-spacing">
+                    <div class="widget-content widget-content-area">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="">Info</h3>
+                            <a href="@Url.Action("MyProfile","Users")" class="mt-2 edit-profile">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="text-center user-info">
+                            <img id="avatar" alt="avatar" style="width:90px;">
+                            <p class="">@ViewBag.name @ViewBag.surname</p>
+                           
+                            <div class="icon-container">
+                                
+                                <a href="@Url.Action("RiskTest" , "Users")"><i data-feather="external-link"></i><span class="icon-name"></span> </a> 
+                            </div>
+                        </div>
+
+                        <div class="user-info-list">
+                            <div class="">
+                                <ul class="contacts-block list-unstyled">
+                                    <li class="contacts-block__item">
+                                        <a href="mailto:example@mail.com">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
+                                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                                <polyline points="22,6 12,13 2,6"></polyline>
+                                            </svg>@ViewBag.email
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="exchangeApi col-md-5 col-sm-12 layout-top-spacing">
+                <div class="row layout-spacing">
+                    <div class="col-lg-12">
+                        <div id="alert"></div>
+                        <div class="statbox widget box box-shadow">
+                            <div class="widget-content widget-content-area" id="KeyList" style="display:flex; flex-direction:column; align-items:center">
+                                <button class="btn btn-success mb-2" data-toggle="modal" data-target="#fadeleftModal" id="CreateNew">+ Create New</button>
+                                <div class="table-responsive mb-4">
+
+                                    <table id="style-3" class="table style-3  table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:7rem">Exchange</th>
+                                                <th style="width:7rem">Key</th>
+                                                <th style="width:25rem">Value</th>
+                                                <th style="width:5rem" class="text-center"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+
+                                                <tr>
+                                                    <td>@item.Exchange</td>
+                                                    <td>@item.ExchangeApiKey</td>
+                                                    <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 2rem">@item.Value</td>
+                                                    <td class="text-center">
+                                                        <ul class="table-controls">
+                                                            <li><a href="" class="bs-tooltip EditModal" data="@item.ExchangeApiID" data-toggle="modal" data-target="#fadeupModal" data-placement="top" title="Edit" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a></li>
+                                                            <li><a href="" class="bs-tooltip DeleteModal" data="@item.ExchangeApiID" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-6 mb-1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-wrapper">
+        <div class="footer-section f-section-1">
+            <p class="">Copyright © 2022 Trading Manitou AI, All rights reserved.</p>
+        </div>
+        <div class="footer-section f-section-2">
+            <p class="">
+                Coded with
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </p>
+        </div>
+    </div>
+    <div id="fadeleftModal" class="modal animated fadeInLeft custo-fadeInLeft" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Key</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="display:flex;">
+                        <div style="margin-right:0.7rem">
+                            <p>Exchange</p>
+                            <select class="selectpicker" id="cexEx" data-live-search="true">
+                            </select>
+                        </div>
+                        <div>
+                            <p>Key</p>
+                            <select class="selectpicker" id="keyEx" data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p>Value</p>
+                        <input type="text" class="form-control" id="valueInput" placeholder="...">
+                    </div>
+
+                </div>
+                <div class="modal-footer md-button">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                    <button type="button" class="btn btn-primary" id="keySave">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fadeupModal" class="modal animated fadeInUp custo-fadeInUp" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Key</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="display:flex;">
+                        <div style="margin-right:0.7rem">
+                            <p>Exchange</p>
+                            <select class="selectpicker" id="EditcexEx" data-live-search="true">
+                            </select>
+                        </div>
+                        <div>
+                            <p>Key</p>
+                            <select class="selectpicker" id="EditkeyEx" data-live-search="true">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p>Value</p>
+                        <input type="text" class="form-control" id="EditvalueInput" placeholder="...">
+                    </div>
+                </div>
+                <div class="modal-footer md-button">
+                    <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                    <button type="button" id="editSave" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/plugins/table/datatable/datatables.js"></script>
+<script src="~/Content/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="~/Content/plugins/tagInput/tags-input.js"></script>
+<script src="~/Content/plugins/font-icons/feather/feather.min.js"></script>
+<script>
+    feather.replace();
+    var instance = new TagsInput({
+        selector: 'skill-input'
+    });
+    instance.addData(['PHP', 'Wordpress', 'Javascript', 'jQuery'])
+</script>
+<script>
+    $(document).ready(function () {
+        GetUsername();
+        SaveNewKey();
+        $('#CreateNew').click(function () {
+            $('option').remove();
+            GetKeys();
+            GetCexExchange();
+        });
+        EditModal();
+        SaveEditModal();
+        Delete();
+        GetUserTestBadge();
+
+        c3 = $('#style-3').DataTable({
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [5, 10, 20, 50],
+            "pageLength": 5
+        });
+
+        multiCheck(c3);
+    });
+
+    function GetUserTestBadge() {
+        $.ajax({
+            url: '/Users/UserTestBadge',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                
+                if (!result) {
+                    var badge = "<span class='badge badge-dark'>Risk estimation not calculated</span>";
+                    $(".icon-container").append(badge);
+                }
+                else
+                {
+                    if (result == "Conservative Investor") {
+                        var badge = "<span class='badge badge-success'>" + result + "</span>";
+                        $(".icon-container").append(badge);
+                    } else if (result == "Balanced Investor") {
+                        var badge = "<span class='badge badge-warning'>" + result + "</span>";
+                        $(".icon-container").append(badge);
+                    } else {
+                        var badge = "<span class='badge badge-danger'>" + result + "</span>";
+                        $(".icon-container").append(badge);
+                    }
+
+                }
+              
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+
+
+
+    function GetCexExchange() {
+        $.ajax({
+            url: '/CexExchangeApi/GetCexExchange',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $("#cexEx").append("<option  style='color:white' value='" + result[i].Key + "'>" + result[i].Value + "</option>").selectpicker('refresh');
+                }
+
+                $('#cexEx').selectpicker({
+                    size: '10'
+                });
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+    function GetKeys() {
+        $.ajax({
+            url: '/CexExchangeApi/GetKeys',
+            type: "GET",
+            dataType: "json",
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $("#keyEx").append("<option  style='color:white' value='" + result[i].Key + "'>" + result[i].Value + "</option>").selectpicker('refresh');
+                }
+
+                $('#keyEx').selectpicker({
+                    size: '10'
+                });
+            },
+            error: function () {
+
+            }
+
+        });
+
+    }
+
+
+    function GetUsername() {
+        $.ajax({
+            url: "/Users/GetUserName",
+            type: "POST",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                console.log(result);
+                $('#avatar').attr('src', `data:image/${result.ImageType};base64,${result.Image}`);
+            }
+        });
+    }
+
+    function SaveNewKey() {
+        $('#keySave').click(function () {
+            $.ajax({
+                url: "/CexExchangeApi/SaveNewKey",
+                type: "GET",
+                dataType: 'json',
+                data: {
+                    cexEx: $('#cexEx').val(),
+                    keyEx: $('#keyEx').val(),
+                    value: $('#valueInput').val(),
+                    passphrase: $('#passPhrase').val()
+                },
+                success: function (result) {
+                    if (result == true) {
+                        window.location.reload();
+                    } else {
+                        var html = " <div class='alert alert-danger mb-4' role='alert'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x close' data-dismiss='alert'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></button> <strong>You cannot create from the same pair twice.!</strong> </div>";
+                        $('#alert').append(html);
+                    }
+                }
+            });
+        });
+    }
+
+    function EditModal() {
+        $('#style-3').on('click', '.EditModal', function () {
+            $('option').remove();
+            var id = $(this).attr('data');
+            $.ajax({
+                url: '/CexExchangeApi/EditModal',
+                type: "Post",
+                dataType: "json",
+                data: {
+                    'Id': id
+                },
+                success: function (result) {
+                    $('#EditcexEx').selectpicker('val', result.Exchange);
+                    $('#EditkeyEx').selectpicker('val', result.ExchangeApiKey);
+                    $('#EditvalueInput').val(result.Value);
+                    $('#EditpassphraseInput').val(result.PassPhrase);
+                    $("#EditcexEx").attr('disabled', true);
+                    $('#EditcexEx').selectpicker('refresh');
+                    $("#EditkeyEx").attr('disabled', true);
+                    $('#EditkeyEx').selectpicker('refresh');
+                },
+                error: function () {
+
+                }
+            });
+
+            $.ajax({
+                url: '/CexExchangeApi/GetCexExchange',
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        $("#EditcexEx").append("<option  style='color:white' value='" + result[i].Key + "'>" + result[i].Value + "</option>").selectpicker('refresh');
+                    }
+
+                    $('#EditcexEx').selectpicker({
+                        size: '10'
+                    });
+                },
+                error: function () {
+
+                }
+            });
+            $.ajax({
+                url: '/CexExchangeApi/GetKeys',
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        $("#EditkeyEx").append("<option  style='color:white' value='" + result[i].Key + "'>" + result[i].Value + "</option>").selectpicker('refresh');
+                    }
+
+                    $('#EditkeyEx').selectpicker({
+                        size: '10'
+                    });
+                },
+                error: function () {
+
+                }
+
+            });
+        });
+    }
+
+    function SaveEditModal() {
+        var id = "";
+        $('#style-3').on('click', '.EditModal', function () {
+            id = $(this).attr('data');
+        });
+        $('#editSave').click(function () {
+            var value = $('#EditvalueInput').val();
+            var passphrase = $('#EditpassphraseInput').val();
+            $.ajax({
+                url: '/CexExchangeApi/SaveEditModal?Id=' + id + '&value=' + value + '&passphrase=' + passphrase ,
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    $('#EditkeyEx').selectpicker({
+                        size: '10'
+                    });
+                    window.location.reload();
+                },
+                error: function () {
+
+                }
+
+            });
+        })
+    }
+
+    function Delete() {
+
+
+        $('.DeleteModal').click(function () {
+
+            var id = $(this).attr('data');
+            $.ajax({
+                url: '/CexExchangeApi/Delete?Id=' + id,
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    if (result) {
+                        window.location.reload();
+                    } else {
+                        var html = " <div class='alert alert-danger mb-4' role='alert'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'> <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x close' data-dismiss='alert'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></button> <strong>Oops! Something went wrong...</strong> </div>";
+                        $('#alert').append(html);
+                    }
+
+                },
+                error: function () {
+
+                }
+
+            });
+        })
+
+    }
+
+</script>

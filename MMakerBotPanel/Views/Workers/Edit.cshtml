@@ -1,0 +1,473 @@
+﻿@model MMakerBotPanel.Database.Model.Worker
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--  BEGIN CUSTOM STYLE FILE  -->
+<link href="~/Content/plugins/select2/select2.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="~/Content/plugins/amCharts/stock-chart/index.css" />
+<link href="~/Content/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/components/custom-counter.css" rel="stylesheet" type="text/css">
+<link href="~/Content/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/assets/css/forms/theme-checkbox-radio.css">
+<link href="~/Content/assets/css/tables/table-basic.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/assets/css/forms/theme-checkbox-radio.css">
+<link rel="stylesheet" type="text/css" href="~/Content/plugins/bootstrap-select/bootstrap-select.min.css">
+<link href="~/Content/light/plugins/notification/snackbar/snackbar.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/components/tabs-accordian/custom-tabs.css" rel="stylesheet" type="text/css" />
+<!--  END CUSTOM STYLE FILE  -->
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div id="basic" class="col-lg-12 layout-spacing" style="margin-top:2rem">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-content widget-content-area" style="border-radius: 0.5rem;">
+
+
+                    <div class="row">
+                        <div class="container">
+                            <div class="icon--counter-container input-group mb-4">
+
+                                <div class="counter-container" style=" display: grid; justify-items: center;">
+                                    <div class="counter-content">
+                                        <h1 class="ico-counter1 ico-counter">@Model.DaysRemaining</h1>
+                                    </div>
+                                    <p class="ico-counter-text">Days</p>
+                                </div>
+                                <div class="counter-container" style=" display: grid; justify-items: center;">
+                                    <div class="counter-content">
+                                        <h1 class="ico-counter2 ico-counter">@Model.HoursRemaining</h1>
+                                    </div>
+                                    <p class="ico-counter-text">Hours</p>
+                                </div>
+                            </div>
+                            <div class="input-group mb-4" style="justify-content:center">
+                                <a id="ExtendTime" class="btn btn-outline-warning mb-2" data="@Model.WorkerID" data-toggle="modal" data-target=".bd-example-modal-lg">Extend Time</a>
+                            </div>
+
+                            @using (Html.BeginForm("Edit", "Workers", FormMethod.Post, new { @class = "row layout-top-spacing" }))
+                            {
+                                @Html.HiddenFor(x => x.WorkerID);
+                                <div class="col-6">
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="width:8rem">Worker name</span>
+                                        </div>
+                                        @Html.EditorFor(model => model.WorkerName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+
+                                    <div class="input-group mb-4" style="margin-top: 1.5rem">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="width:8rem">Start Date</span>
+                                        </div>
+                                        @Html.EditorFor(model => model.StartingDate, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    </div>
+                                </div>
+                                <div class="col-6 ">
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="width:8rem">Worker State</span>
+                                        </div>
+                                        @Html.EditorFor(model => model.WorkerState, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    </div>
+
+                                    <div class="input-group mb-4" style="margin-top: 1.5rem">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" style="width:8rem">End Date</span>
+                                        </div>
+                                        @Html.EditorFor(model => model.EndingDate, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-12" style="margin-top: 3rem;">
+                                    <div class="input-group mb-4" style="justify-content:center">
+                                        <button type="submit" value="Save" class="btn btn-outline-success mb-2">Save</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="basic" class="col-lg-12 layout-spacing">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-content widget-content-area" style="border-radius: 0.5rem;">
+                    @if (Model.Product.workerType != MMakerBotPanel.Models.WORKERTYPE.DexGridWorker)
+                    {
+                        <div class="row">
+                            <div class="col-lg-6 col-12 mx-auto">
+                                <div class="input-group mb-4">
+                                    <div class="form-group">
+                                        <span class="control-label">Cex Exchange</span>
+                                    </div>
+                                    @Html.DropDownListFor(model => model.WorkerDetail.CexExchange, new SelectList(ViewBag.UserExchange), new { @class = "placeholder js-states form-control", id = "Detail_CexExchange" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 mx-auto">
+                                <div class="form-group">
+                                    <span class="control-label">Parity</span>
+                                </div>
+                                <div class="input-group mb-4">
+                                    <select id="paritySelect" class="placeholder js-states form-control" value="false"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-12 mx-auto chart" style="display:none">
+                            <div class="form-group" style="margin-left: 2rem;">
+                                <span class="control-label">Chart</span>
+                            </div>
+                            <div id="chartContainer" style="height: auto; margin-right: 0.5rem; margin-left: 0.5rem;">
+                                <div id="chartcontrols" style="padding-left:15px"></div>
+                                <div id="chartdiv"></div>
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Product.workerType == MMakerBotPanel.Models.WORKERTYPE.CexGridWorker)
+                    {
+                        <div class="widget-content widget-content-area border-top-tab">
+                            <ul class="nav nav-tabs mb-3 mt-3" id="borderTop" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="border-top-home-tab" data-toggle="tab" href="#border-top-home" role="tab" aria-controls="border-top-home" aria-selected="true"> Grid Automatic </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="border-top-profile-tab" data-toggle="tab" href="#border-top-profile" role="tab" aria-controls="border-top-profile" aria-selected="false"> Grid Manual</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="borderTopContent" data="@Model.WorkerID">
+                                <div class="tab-pane fade show active" id="border-top-home" role="tabpanel" aria-labelledby="border-top-home-tab">
+                                    <div class="container">
+                                        <span style="margin-top:1rem">Time Range</span>
+                                        <div style="display:flex; justify-content:space-between">
+
+                                            <select class="selectpicker" id="timeRange" value="false"></select>
+                                            <div>
+                                                <button class="btn btn-outline-success mb-2" id="calculate">Calculate</button>
+                                            </div>
+                                        </div>
+                                        <span>Price Range</span>
+                                        <input class="form-control" id="priceRange" disabled />
+                                        <span>Grids</span>
+                                        <input class="form-control" disabled id="gridCount" />
+                                        <span>Profit/Grid</span>
+                                        <input class="form-control" disabled id="profitGrid" />
+                                        <span>Take Profit</span>
+                                        <input class="form-control" disabled id="takeProfit" />
+                                        <span>Stop loss</span>
+                                        <input class="form-control" disabled id="stopLoss" />
+                                        <span>Available&nbsp;&nbsp; <span id="currentUSDT"></span> &nbsp;USDT</span>
+                                        <div style="display:block">
+                                            <input class="form-control" id="minUsdtAmountminUsdtAmount" />
+                                            <div class="invalid-feedback" id="autoMintether">
+                                                USDT amount is insufficient
+                                            </div>
+                                            <div class="invalid-feedback" id="autoinvalidBalance">
+                                                Insufficient balance
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; justify-content:space-between; margin-top:1rem">
+                                            <button class="btn btn-outline-success mb-2" id="automaticGridStart" data="@Model.WorkerID">Start</button>
+                                            <button class="btn btn-outline-danger mb-2" id="autoGridStop" data="@Model.WorkerID">Stop</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="border-top-profile" role="tabpanel" aria-labelledby="border-top-profile-tab">
+                                    <div class="container">
+                                        <span style="margin-top:1rem">Price Range</span>
+                                        <div class="row" style="display:flex; justify-content:space-between">
+                                            <div class="col-6"> <input class="form-control" id="manualMaxPriceRange" placeholder="Upper Price" required /></div>
+                                            <div class="col-6" style="display:block">
+                                                <input class="form-control" id="manualMinPriceRange" placeholder="Lower Price" required />
+                                                <div class="invalid-feedback">
+                                                    Lower limit must be greater than 8244.50
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span>Grids</span>
+                                        <div style="display:block">
+                                            <input class="form-control" id="manualGridCount" placeholder="2-170" />
+                                            <div class="invalid-feedback" id="invalid-GridCount">
+                                                The number of grids must be between 2 and 170
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; justify-content:center; margin-top:2rem">
+                                            <button class="btn btn-outline-success mb-2" id="manualCalculate">Calculate</button>
+                                        </div>
+                                        <span>Profit/Grid</span>
+                                        <input class="form-control" disabled id="manualProfitGrid" />
+                                        <span>Take Profit</span>
+                                        <input class="form-control" disabled id="manualTakeProfit" />
+                                        <span>Stop loss</span>
+                                        <input class="form-control" disabled id="manualStopLoss" />
+                                        <span>Available&nbsp;&nbsp; <span id="manualCurrentUSDT"></span> &nbsp;USDT</span>
+
+                                        <div style="display:block">
+                                            <input class="form-control" id="manualMinUsdtAmount" />
+                                            <div class="invalid-feedback" id="manualMintether">
+                                                USDT amount is insufficient
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; justify-content:space-between; margin-top:1rem">
+                                            <button class="btn btn-outline-success mb-2" id="manualGridStart" data="@Model.WorkerID">Start</button>
+                                            <button class="btn btn-outline-danger mb-2" id="manualGridStop" data="@Model.WorkerID">Stop</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Product.workerType == MMakerBotPanel.Models.WORKERTYPE.AdvancedMMakerBot)
+                    {
+                        <div class="widget-content widget-content-area border-top-tab">
+                            <ul class="nav nav-tabs mb-3 mt-3" id="borderTop" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="border-top-home-tab" data-toggle="tab" href="#border-top-home" role="tab" aria-controls="border-top-home" aria-selected="true">CEX Market Maker Bot</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="border-top-profile-tab" data-toggle="tab" href="#border-top-profile" role="tab" aria-controls="border-top-profile" aria-selected="false">DEX Market Maker Bot</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="borderTopContent" data="@Model.WorkerID">
+                                <div class="tab-pane fade show active" id="border-top-home" role="tabpanel" aria-labelledby="border-top-home-tab">
+                                    <div class="container">
+                                        <span>Risk Level</span>
+                                        <input class="form-control" id="riskLevel" disabled />
+                                        <span>Take Profit</span>
+                                        <input class="form-control" id="takeProfitMaker" />
+                                        <span>Stop loss</span>
+                                        <input class="form-control" id="stopLossMaker" />
+                                        <span>Available&nbsp;&nbsp; <span id="currentUSDT"></span> &nbsp;USDT</span>
+                                        <div style="display:block">
+                                            <input class="form-control" id="minUsdtMMakerBot" placeholder="250" />
+                                            <div class="invalid-feedback" id="minTetherMMakerBot">
+                                                USDT amount is insufficient
+                                            </div>
+                                            <div class="invalid-feedback" id="invalikBalanceMMakerBot">
+                                                Insufficient balance
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; justify-content:space-between; margin-top:1rem">
+                                            <button class="btn btn-outline-success mb-2" id="makerStart" data="@Model.WorkerID">Start</button>
+                                            <button class="btn btn-outline-danger mb-2" id="makerStop" data="@Model.WorkerID">Stop</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="border-top-profile" role="tabpanel" aria-labelledby="border-top-profile-tab">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button class="dexConnectWalletMaker  btn btn-dark margin-top-20" style="float: left; margin-bottom: 2rem; max-width: inherit;">Connect Metamask</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                @Html.DropDownListFor(model => model.WorkerDetail.DexExchange, new SelectList(ViewBag.DexExchange), new { @class = "placeholder js-states form-control", id = "Detail_DexExchange" })
+                                            </div>
+                                            <div class="col-6">
+                                                <input class="form-control" id="tokenAddressMaker" placeholder="0x0000....." required />
+                                            </div>
+                                        </div>
+                                        <span>Pair</span>
+                                        <input class="form-control" disabled id="dexPairMaker" />
+                                        <span>Amount</span>
+                                        <input class="form-control" id="dexAmountMaker" />
+                                        <div style="display:flex; justify-content:center; margin-top:2rem">
+                                            <button class="btn btn-outline-success mb-2" id="dexCalculateMaker">Calculate</button>
+                                        </div>
+                                        <span>1 Hour Volume</span>
+                                        <input class="form-control" id="dexVolumeMaker" />
+                                        <span>Available&nbsp;&nbsp; <span id="wbnbCurrentMaker"></span></span>
+                                        <div style="display:block">
+                                            <input class="form-control" placeholder="0.01" id="dexMinWBNBAmountMaker" />
+                                            <div class="invalid-feedback" id="dexMinWBNBMaker">
+                                                WBNB amount is insufficient
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; justify-content:space-between; margin-top:1rem">
+                                            <button class="btn btn-outline-success mb-2" id="dexStartMaker" data="@Model.WorkerID">Start</button>
+                                            <button class="btn btn-outline-danger mb-2" id="dexStopMaker" data="@Model.WorkerID">Stop</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="widget-content widget-content-area border-top-tab">
+                            <ul class="nav nav-tabs mb-3 mt-3" id="borderTop" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="border-top-home-tab" data-toggle="tab" href="#border-top-home" role="tab" aria-controls="border-top-home" aria-selected="true">Dex Grid Bot</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="borderTopContent" data="@Model.WorkerID">
+
+                                <div class="tab-pane fade show active" id="border-top-home" role="tabpanel" aria-labelledby="border-top-home-tab">
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12">
+
+                                                <button class="dexConnectWallet  btn btn-dark margin-top-20" style="float: left; margin-bottom: 2rem; max-width: inherit;">Connect Metamask</button>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+
+                                                @Html.DropDownListFor(model => model.WorkerDetail.DexExchange, new SelectList(ViewBag.DexExchange), new { @class = "placeholder js-states form-control", id = "Detail_DexExchange" })
+                                            </div>
+                                            <div class="col-6">
+
+                                                <input class="form-control" id="tokenAddress" placeholder="0x0000....." required />
+                                            </div>
+                                        </div>
+                                        <span>Pair</span>
+                                        <input class="form-control" disabled id="dexPair" />
+                                        <span style="margin-top:1rem">Price Range</span>
+                                        <div class="row" style="display:flex; justify-content:space-between">
+                                            <div class="col-6"> <input class="form-control" id="dexMaxPriceRange" placeholder="Upper Price" required /></div>
+                                            <div class="col-6" style="display:block">
+                                                <input class="form-control" id="dexMinPriceRange" placeholder="Lower Price" required />
+                                            </div>
+                                        </div>
+                                        <span>Grids</span>
+                                        <div style="display:block">
+                                            <input class="form-control" id="dexGridCount" placeholder="2-170" />
+                                            <div class="invalid-feedback" id="invalid-GridCount">
+                                                The number of grids must be between 2 and 170
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; justify-content:center; margin-top:2rem">
+                                            <button class="btn btn-outline-success mb-2" id="dexCalculate">Calculate</button>
+                                        </div>
+                                        <span>Profit/Grid</span>
+                                        <input class="form-control" disabled id="dexProfitGrid" />
+                                        <span>Take Profit</span>
+                                        <input class="form-control" disabled id="dexTakeProfit" />
+                                        <span>Stop loss</span>
+                                        <input class="form-control" disabled id="dexStopLoss" />
+                                        <span>Available&nbsp;&nbsp; <span id="wbnbCurrent"></span></span>
+                                        <div style="display:block">
+                                            <input class="form-control" id="dexMinWBNBAmount" />
+                                            <div class="invalid-feedback" id="dexMinWBNB">
+                                                WBNB amount is insufficient
+                                            </div>
+                                        </div>
+                                        <div style="display:flex; justify-content:space-between; margin-top:1rem">
+                                            <button class="btn btn-outline-success mb-2" id="dexStart" data="@Model.WorkerID">Start</button>
+                                            <button class="btn btn-outline-danger mb-2" id="dexStop" data="@Model.WorkerID">Stop</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ProductName"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <button class="enableEthereumButton  btn btn-dark margin-top-20" style="float:right;">Connect Metamask</button>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped mb-4" style="margin-top:1rem">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>State</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Days</th>
+                                    <th>Period</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="Product"></td>
+                                    <td id="State"></td>
+                                    <td id="StartDate"></td>
+                                    <td id="EndDate"></td>
+                                    <td id="Days" class="text-center"></td>
+                                    <td>
+                                        <div class="n-chk">
+                                            <label class="new-control new-radio radio-warning">
+                                                <input type="radio" class="new-control-input" name="custom-radio-1" value="1">
+                                                <span class="new-control-indicator"></span>Yearly
+                                            </label>
+                                        </div>
+
+
+                                        <div class="n-chk">
+                                            <label class="new-control new-radio radio-warning">
+                                                <input type="radio" class="new-control-input" name="custom-radio-1" value="2">
+                                                <span class="new-control-indicator"></span>Monthly
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7"> </div>
+                        <div class="col-lg-5">
+                            <div class="row">
+                                <div class="col-6">
+                                    <select class="selectpicker" id="priceName" data-width="fit" data-style="btn btn-outline-secondary">
+                                    </select>
+                                </div>
+                                <div class="col-6" style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
+                                    <span class="badge badge-secondary" style="font-size:1rem"> Total: <strong id="price" style="font-size:2rem"></strong> </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn DiscardModal" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                    <button type="button" class="btn btn-primary BuyButton">Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Content/plugins/select2/select2.min.js"></script>
+    <script src="~/Content/plugins/amCharts/index.js"></script>
+    <script src="~/Content/plugins/amCharts/xy.js"></script>
+    <script src="~/Content/plugins/amCharts/stock.js"></script>
+    <script src="~/Content/plugins/amCharts/themes/Dark.js"></script>
+    <script src="~/Content/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/Content/light/plugins/notification/snackbar/snackbar.min.js"></script>
+    <script src="~/Content/light/assets/js/components/notification/custom-snackbar.js"></script>
+    <script src="~/Content/dist/web3.min.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="~/Content/plugins/counter/jquery.countTo.js"></script>
+    <script src="~/Content/assets/js/components/custom-counter.js"></script>
+    <script src="~/Content/Chart.js"></script>
+    <script src="~/Content/ExtendTime.js"></script>
+    <script src="~/Content/CexGridStrategy.js"></script>
+    <script src="~/Content/MakerStrategy.js"></script>
+    <script src="~/Content/DexGridStrategy.js"></script>
+    <script src="~/Content/DexMakerStrategy.js"></script>
+
+    <script type="text/javascript">
+        checkall('todoAll', 'todochkbox');
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>

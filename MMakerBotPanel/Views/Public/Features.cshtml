@@ -1,0 +1,482 @@
+﻿
+@{
+    ViewBag.Title = "Features";
+    Layout = "~/Views/Shared/_PublicLayout.cshtml";
+}
+
+<main class="overflow-x-hidden">
+
+    <!-- Hero -->
+    <section class="hero relative py-20 md:pt-32">
+        <picture class="pointer-events-none absolute inset-0 -z-10">
+            <img src="~/Content/publicAssets/img/gradient_dark.jpg" alt="gradient dark" class="h-full w-full" />
+        </picture>
+        <img src="~/Content/publicAssets/img/patterns/pattern_donut.png" alt="pattern donut" class="absolute right-0 top-0 -z-10" />
+
+        <div class="container">
+            <div class="mx-auto max-w-2xl pt-24 text-center">
+                <h1 class="mb-6 font-display text-5xl text-white lg:text-6xl">Welcome to the Trading Manitou AI v3.0</h1>
+                <p class="mx-auto mb-8 max-w-md text-lg leading-normal text-jacarta-50">
+                    Trade crypto like a pro without being one.
+                    Use our powerful trading bot
+                    and algorithmic strategies.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- end hero -->
+    <!-- Intro Video -->
+    <div class="relative mx-auto max-w-[90rem]">
+        <img src="~/Content/publicAssets/img/nft-game/crypto_icons.png" class="pointer-events-none absolute -top-1/4 animate-fly" alt="" />
+        @*<div class="container">
+            <figure class="relative overflow-hidden rounded-3xl before:absolute before:inset-0 before:bg-jacarta-900/25">
+                <img src="~/Content/publicAssets/img/trailer-jpg.jpg" class="w-full" alt="video" />
+                <a href="https://www.youtube.com/embed/fhCM-fDgpec"
+                   data-bs-toggle="modal"
+                   data-bs-target=".video-lightbox"
+                   class="js-video-modal-trigger absolute top-1/2 left-1/2 flex h-24 w-24 -translate-y-1/2 -translate-x-1/2 items-center justify-center rounded-full border-2 border-white transition-transform will-change-transform hover:scale-90">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24"
+                         width="24"
+                         height="24"
+                         class="h-8 w-8 fill-white">
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path d="M19.376 12.416L8.777 19.482A.5.5 0 0 1 8 19.066V4.934a.5.5 0 0 1 .777-.416l10.599 7.066a.5.5 0 0 1 0 .832z"></path>
+                    </svg>
+                </a>
+            </figure>
+        </div>*@
+    </div>
+    <!-- end intro video -->
+    <!-- Statistic / Promo -->
+    <section class="relative py-12 lg:py-36 mb-mt-m">
+        <picture class="pointer-events-none absolute inset-0 -z-10 after:absolute after:bottom-0 after:h-1/3 after:w-full after:bg-gradient-to-t after:from-[#010107]">
+            <img src="~/Content/publicAssets/img/gradient_creative.jpg" alt="gradient" class="h-full w-full -scale-y-100" />
+        </picture>
+        <div class="container -mt-20 lg:pb-32 mb-pt-m">
+            <h2 class="mb-12 max-w-5xl font-display text-5xl text-white lg:text-[6rem]">
+                Trading Manitou automated crypto currency trading.
+            </h2>
+            <p class="mb-20 max-w-4xl text-3xl font-medium text-white lg:ml-36">
+                Algorithmic trading bots require a continous monitoring of the markets not to miss the best timing for placing orders that result in profitable trades.
+            </p>
+            <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+                <div>
+                    <div>
+                        <span class="text-fill-transparent inline-block bg-gradient-to-r from-[#FFE993] to-[#FFB770] bg-clip-text font-display text-5xl font-semibold">1M+</span>
+                    </div>
+                    <span class="text-lg text-white">Active Users</span>
+                </div>
+                <div>
+                    <div>
+                        <span class="text-fill-transparent inline-block bg-gradient-to-r from-[#FFE993] to-[#FFB770] bg-clip-text font-display text-5xl font-semibold">$115M</span>
+                    </div>
+                    <span class="text-lg text-white">Already Earned</span>
+                </div>
+                <div>
+                    <div>
+                        <span class="text-fill-transparent inline-block bg-gradient-to-r from-[#FFE993] to-[#FFB770] bg-clip-text font-display text-5xl font-semibold">4.8</span>
+                    </div>
+                    <span class="text-lg text-white">Average Ratings</span>
+                </div>
+                <div>
+                    <div>
+                        <span class="text-fill-transparent inline-block bg-gradient-to-r from-[#FFE993] to-[#FFB770] bg-clip-text font-display text-5xl font-semibold">250+</span>
+                    </div>
+                    <span class="text-lg text-white">Coin Exchange</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promo 1 -->
+        <div class="container pt-32">
+            <div class="items-center justify-between lg:flex">
+                <div class="relative text-center lg:w-1/2">
+                    <img src="~/Content/publicAssets/img/nft-game/gradient_glow_large_1.png" alt="" loading="lazy" class="absolute scale-150" />
+                    <img src="~/Content/publicAssets/img/features-mc/gfx-03.png" alt="" loading="lazy" class="relative -top-10 inline-block" />
+                    <!-- <img src="img/hero/3D_elements.png" alt="" loading="lazy" class="absolute top-10 animate-fly" /> -->
+                </div>
+                <div class="lg:w-[45%] lg:pl-16">
+                    <h2 class="mb-6 font-display text-2xl text-white">
+                        Trade 24/7
+                    </h2>
+                    <p class="mb-8 text-lg leading-normal text-jacarta-200">
+                        In fact, downtime of the servers running the trading bots or of the internet connection can severly degrade the overall performance. But running and maintaining own servers with financial industry grade reliability requires great expertise, efforts and investments.
+                    </p>
+                    <p class="mb-12 text-jacarta-200">
+                        Therefore, SmithBot runs its extensively tested algorithmic trading agents exclusively in the cloud environment of a leading provider. The hardware and network connections are highly redundant and there are safeguards against power blackouts and other critical events. Thus, we achieve levels of availability that are almost impossible to achieve when operating your own servers.
+                    </p>
+                    <a href="#"
+                       class="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+                        Come Discover
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end statistic / promo -->
+    <!-- Promo 2 -->
+    <section class="bg-[#010107] py-12 lg:pb-32">
+        <div class="container">
+            <div class="items-center justify-between lg:flex">
+                <div class="mb-12 lg:w-[45%] lg:pr-16">
+                    <h2 class="mb-6 font-display text-2xl text-white">
+                        Easy Access
+                    </h2>
+                    <p class="mb-8 text-lg leading-normal text-jacarta-200">
+                        We believe, you shouldn’t have to spend weeks and month learning trading strategies and tweaking parameters to be able to set up a profitable trading bot. That is why we offer you a large selection of pre-trained and tested bots for immediate use. The Trading Manitou AI cloud application provides you with easy-to-use ranking and visualization functions so that you can easily compare different bots and choose the ones that suit you the best.
+                    </p>
+                    <p class="mb-12 text-jacarta-200">
+                        The Trading Manitou AI application is also designed with an intuitive user interface, focusing on the functions you really need without overwhelming users with a large number of unnecessary or rarely used items. And as it is provided in the cloud, Trading Manitou AI is ready for you instanteneously without any lenghty preparations. The application works in almost any modern web browser on almost any device.
+                    </p>
+                    <a href="@Url.Action("Register","Users")"
+                       class="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+                        Get Started
+                    </a>
+                </div>
+                <div class="relative text-center lg:w-1/2">
+                    <!-- <img
+                      src="img/features-mc/gfx-04-1.png"
+                      loading="lazy"
+                      alt=""
+                      class="pointer-events-none absolute scale-150"
+                    /> -->
+                    <!-- Slider -->
+                    <div class="swiper single-slider">
+                        <div class="swiper-wrapper">
+
+                            <!-- <div class="swiper-slide">
+                              <img src="img/nft-game/robot_large_3.png" alt="" class="inline-block" />
+                            </div> -->
+
+                            <div class="swiper-slide">
+                                <img src="~/Content/publicAssets/img/transparent_pixel.png"
+                                     data-src="../../Content/publicAssets/img/features-mc/gfx-04-1.png"
+                                     alt=""
+                                     width="398"
+                                     height="564"
+                                     class="swiper-lazy inline-block border-0" />
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <img src="~/Content/publicAssets/img/transparent_pixel.png"
+                                     data-src="../../Content/publicAssets/img/features-mc/gfx-04-2.png"
+                                     alt=""
+                                     width="398"
+                                     height="564"
+                                     class="swiper-lazy inline-block border-0" />
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <img src="~/Content/publicAssets/img/transparent_pixel.png"
+                                     data-src="../../Content/publicAssets/img/features-mc/gfx-04-3.png"
+                                     alt=""
+                                     width="398"
+                                     height="564"
+                                     class="swiper-lazy inline-block border-0" />
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Slider Navigation -->
+                    <div class="mt-6 flex justify-center space-x-3">
+                        <div class="swiper-button-prev-5 group z-10 !flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white p-3 text-base shadow-white-volume">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 width="24"
+                                 height="24"
+                                 class="fill-jacarta-700 group-hover:fill-accent">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path d="M10.828 12l4.95 4.95-1.414 1.414L8 12l6.364-6.364 1.414 1.414z" />
+                            </svg>
+                        </div>
+                        <div class="swiper-button-next-5 group z-10 !flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white p-3 text-base shadow-white-volume">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24"
+                                 width="24"
+                                 height="24"
+                                 class="fill-jacarta-700 group-hover:fill-accent">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <img src="~/Content/publicAssets/img/nft-game/crypto_icons_1.png"
+                         alt=""
+                         loading="lazy"
+                         class="pointer-events-none absolute -top-10 z-10 animate-fly" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end promo 2 -->
+    <!-- Promo 3 -->
+    <div class="container pt-32 pb-32 bg-jacarta-900" style="background: none;">
+        <div class="items-center justify-between lg:flex">
+            <div class="relative text-center lg:w-1/2">
+                <img src="~/Content/publicAssets/img/nft-game/gradient_glow_large_1.png" alt="" loading="lazy" class="absolute scale-150" />
+                <img src="~/Content/publicAssets/img/features-mc/ai-engine.png" alt="" loading="lazy" class="relative -top-10 inline-block" />
+                <img src="~/Content/publicAssets/img/hero/3D_elements.png" alt="" loading="lazy" class="absolute top-10 animate-fly" />
+            </div>
+            <div class="lg:w-[45%] lg:pl-16">
+                <h2 class="mb-6 font-display text-2xl text-white">
+                    AI-ENGINE
+                </h2>
+                <p class="mb-8 text-lg leading-normal text-jacarta-200">
+                    The future of our economy will be increasingly decided by ever better algorithms surpassing humans in productivity and performance. Trading cryptocurrencies will be no exception to this. Traders developed many strategies and the most successful of them achieved remarkable profits. Artificial Intelligence, however, has the potential to make them all obsolete. It completely changes the game because its capabilities are far beyond our imagination. This exciting development has just started!
+
+
+                </p>
+                <p class="mb-12 text-jacarta-200">
+                    Trading Manitou AI gives you the chance to benefit from Artificial Intelligence, too. Available only for rich financial institutions in the past, it now opens up for everyone. The Trading Manitou AI team consists of reputable experts in this field with access to the data and computational resources required to train and validate complex AI-algorithms for you. We provide you with our own specialized AI-methods highly optimized for trading financial assets and not available anywhere else. And we take care that all relevant real-world effects such as trading fees and slippage are taken into account as well as of generalization to future market data.
+                </p>
+                <a href="@Url.Action("Register","Users")"
+                   class="inline-block rounded-full bg-accent py-3 px-8 text-center font-semibold text-white shadow-accent-volume transition-all hover:bg-accent-dark">
+                    Get Started
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- end statistic / promo -->
+    <!-- Features -->
+    <!--<section class="bg-[#010107] py-12 lg:py-24">
+        <div class="container relative overflow-hidden">
+            <div class="mx-auto mb-12 max-w-lg text-center">
+                <h2 class="mb-6 text-center font-display text-3xl font-medium text-white md:text-5xl">
+                    Trading Manitou AI Features
+                </h2>
+                <p class="text-lg text-jacarta-300">
+                    Designed to provide you with a safe & flawless AI bot trading experience.
+                </p>
+            </div>-->
+
+            <!-- Slider -->
+            <!--<div class="swiper card-slider-3-columns-large-gap xl:!overflow-visible">
+                <div class="swiper-wrapper">-->
+                    <!-- Slides -->
+
+                    <!--<div class="swiper-slide">
+                        <div class="rounded-2.5xl bg-jacarta-800 p-10">
+                            <div class="mb-4 md:mb-0">
+                                <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                                    <g clip-path="url(#clip0_1766_5760)">
+                                        <path d="M36 16h4a2 2 0 012 2v24a2 2 0 01-2 2H8a2 2 0 01-2-2V18a2 2 0 012-2h4v-2a12 12 0 0124 0v2zM22 31.464V36h4v-4.536a4 4 0 10-4 0zM32 16v-2a8 8 0 00-16 0v2h16z"
+                                              fill="url(#paint0_linear_1766_5760)" />
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1766_5760"
+                                                        x1="24"
+                                                        y1="2"
+                                                        x2="24"
+                                                        y2="44"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#8358FF" />
+                                            <stop offset="1" stop-color="#FD9BFF" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_1766_5760"><path fill="#fff" d="M0 0h48v48H0z" /></clipPath>
+                                    </defs>
+                                </svg>
+                                <h3 class="mb-4 font-display text-lg text-white">No expertise needed</h3>
+                                <p class="text-jacarta-300">
+                                    Optimized and tested algorithms. No expertise needed. Easy interface, no useless options.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="rounded-2.5xl bg-jacarta-800 p-10">
+                            <div class="mb-4 md:mb-0">
+                                <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                                    <g clip-path="url(#clip0_1766_5760)">
+                                        <path d="M36 16h4a2 2 0 012 2v24a2 2 0 01-2 2H8a2 2 0 01-2-2V18a2 2 0 012-2h4v-2a12 12 0 0124 0v2zM22 31.464V36h4v-4.536a4 4 0 10-4 0zM32 16v-2a8 8 0 00-16 0v2h16z"
+                                              fill="url(#paint0_linear_1766_5760)" />
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1766_5760"
+                                                        x1="24"
+                                                        y1="2"
+                                                        x2="24"
+                                                        y2="44"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#8358FF" />
+                                            <stop offset="1" stop-color="#FD9BFF" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_1766_5760"><path fill="#fff" d="M0 0h48v48H0z" /></clipPath>
+                                    </defs>
+                                </svg>
+                                <h3 class="mb-4 font-display text-lg text-white">Data-driven</h3>
+                                <p class="text-jacarta-300">
+                                    Strictly analytical decision making. Forget about "Fear Of Missing Out" and "Fear, Uncertainty and Doubt". Eliminates the weakest link in trading.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="rounded-2.5xl bg-jacarta-800 p-10">
+                            <div class="mb-4 md:mb-0">
+                                <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                                    <g clip-path="url(#clip0_1766_5760)">
+                                        <path d="M36 16h4a2 2 0 012 2v24a2 2 0 01-2 2H8a2 2 0 01-2-2V18a2 2 0 012-2h4v-2a12 12 0 0124 0v2zM22 31.464V36h4v-4.536a4 4 0 10-4 0zM32 16v-2a8 8 0 00-16 0v2h16z"
+                                              fill="url(#paint0_linear_1766_5760)" />
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1766_5760"
+                                                        x1="24"
+                                                        y1="2"
+                                                        x2="24"
+                                                        y2="44"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#8358FF" />
+                                            <stop offset="1" stop-color="#FD9BFF" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_1766_5760"><path fill="#fff" d="M0 0h48v48H0z" /></clipPath>
+                                    </defs>
+                                </svg>
+                                <h3 class="mb-4 font-display text-lg text-white">Performance</h3>
+                                <p class="text-jacarta-300">
+                                    Proprietary problem-specific AI-algorithms. Simulated and live tested on real data under real conditions. Leading performance under real conditions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="rounded-2.5xl bg-jacarta-800 p-10">
+                            <div class="mb-4 md:mb-0">
+                                <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                                    <g clip-path="url(#clip0_1648_19589)">
+                                        <path d="M18.66 23H23a9 9 0 019 9H17.998L18 34h16v-2a11.156 11.156 0 00-1.772-6H38a10 10 0 019.032 5.702C42.302 37.944 34.644 42 26 42c-5.522 0-10.2-1.18-14-3.25V20.142A13.935 13.935 0 0118.66 23zM8 18a2 2 0 011.986 1.766L10 20v18a2 2 0 01-2 2H4a2 2 0 01-2-2V20a2 2 0 012-2h4zM27.292 7.15l.708.71.708-.708a5 5 0 117.07 7.072L28 22l-7.78-7.78a5 5 0 117.072-7.07z"
+                                              fill="url(#paint0_linear_1648_19589)" />
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1648_19589"
+                                                        x1="24.516"
+                                                        y1="5.669"
+                                                        x2="24.516"
+                                                        y2="42"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#8358FF" />
+                                            <stop offset="1" stop-color="#FD9BFF" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_1648_19589"><path fill="#fff" d="M0 0h48v48H0z" /></clipPath>
+                                    </defs>
+                                </svg>
+                                <h3 class="mb-4 font-display text-lg text-white">Cloud Based</h3>
+                                <p class="text-jacarta-300">
+                                    Monitors the markets and places orders 24/7. ?? help you generate revenue on our platform ⁠— from
+                                    direct sales to secondary sales
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="rounded-2.5xl bg-jacarta-800 p-10">
+                            <div class="mb-4 md:mb-0">
+                                <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                                    <g clip-path="url(#clip0_1766_5774)">
+                                        <path d="M20 39.496V32.8c0-2.566 1.99-4.584 4.934-5.736A16.963 16.963 0 0019 26c-3.78 0-7.272 1.234-10.094 3.32A16.033 16.033 0 0020 39.496zm17.76-7.324C36.97 31.106 34.34 30 31 30c-4.012 0-7 1.594-7 2.8V40a15.993 15.993 0 0013.76-7.828zM19.1 23a4.5 4.5 0 100-9 4.5 4.5 0 000 9zM31 25a4 4 0 100-8 4 4 0 000 8zm-7 19C12.954 44 4 35.046 4 24S12.954 4 24 4s20 8.954 20 20-8.954 20-20 20z"
+                                              fill="url(#paint0_linear_1766_5774)" />
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1766_5774"
+                                                        x1="24"
+                                                        y1="4"
+                                                        x2="24"
+                                                        y2="44"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#8358FF" />
+                                            <stop offset="1" stop-color="#FD9BFF" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_1766_5774"><path fill="#fff" d="M0 0h48v48H0z" /></clipPath>
+                                    </defs>
+                                </svg>
+                                <h3 class="mb-4 font-display text-lg text-white">High availability</h3>
+                                <p class="text-jacarta-300">
+                                    Observed uptime of well over 99.9%. ?? we’ll help you generate revenue on our platform ⁠— from
+                                    direct sales to secondary sales
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="rounded-2.5xl bg-jacarta-800 p-10">
+                            <div class="mb-4 md:mb-0">
+                                <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                                    <g clip-path="url(#clip0_1766_5788)">
+                                        <path d="M22 4c8.136 0 14.852 6.072 15.868 13.93l4.5 7.078c.296.466.236 1.16-.45 1.456L38 28.14V34c0 2.21-1.79 4-4 4h-3.998L30 44H12v-7.388c0-2.36-.872-4.594-2.488-6.61A15.929 15.929 0 016 20c0-8.836 7.164-16 16-16zm-1.06 11.526a3.498 3.498 0 00-4.95 0 3.496 3.496 0 000 4.948L22 26.486l6.01-6.012a3.496 3.496 0 000-4.948 3.498 3.498 0 00-4.95 0L22 16.586l-1.06-1.06z"
+                                              fill="url(#paint0_linear_1766_5788)" />
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1766_5788"
+                                                        x1="24.268"
+                                                        y1="4"
+                                                        x2="24.268"
+                                                        y2="44"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#8358FF" />
+                                            <stop offset="1" stop-color="#FD9BFF" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_1766_5788"><path fill="#fff" d="M0 0h48v48H0z" /></clipPath>
+                                    </defs>
+                                </svg>
+                                <h3 class="mb-4 font-display text-lg text-white">Fully Automated</h3>
+                                <p class="text-jacarta-300">
+                                    Bots run without any human intervention. ?? we’ll help you generate revenue on our platform — from direct sales to secondary sales
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="rounded-2.5xl bg-jacarta-800 p-10">
+                            <div class="mb-4 md:mb-0">
+                                <svg width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-8">
+                                    <g clip-path="url(#clip0_1766_5760)">
+                                        <path d="M36 16h4a2 2 0 012 2v24a2 2 0 01-2 2H8a2 2 0 01-2-2V18a2 2 0 012-2h4v-2a12 12 0 0124 0v2zM22 31.464V36h4v-4.536a4 4 0 10-4 0zM32 16v-2a8 8 0 00-16 0v2h16z"
+                                              fill="url(#paint0_linear_1766_5760)" />
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear_1766_5760"
+                                                        x1="24"
+                                                        y1="2"
+                                                        x2="24"
+                                                        y2="44"
+                                                        gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#8358FF" />
+                                            <stop offset="1" stop-color="#FD9BFF" />
+                                        </linearGradient>
+                                        <clipPath id="clip0_1766_5760"><path fill="#fff" d="M0 0h48v48H0z" /></clipPath>
+                                    </defs>
+                                </svg>
+                                <h3 class="mb-4 font-display text-lg text-white">Consistent encryption</h3>
+                                <p class="text-jacarta-300">
+                                    Applies established standards of data security. Relies on genuine data from reputable sources. Assets always stay on your exchange.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>-->
+
+            <!-- Slider dots -->
+            <!--<div class="swiper-pagination-1 mt-10 text-center"></div>
+        </div>
+    </section>-->
+    <!-- end features -->
+
+</main>

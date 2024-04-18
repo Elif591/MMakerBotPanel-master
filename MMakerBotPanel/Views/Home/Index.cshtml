@@ -1,0 +1,759 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+<link href="~/Content/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+<link href="~/Content/assets/css/dashboard/dash_2.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
+<!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="row layout-top-spacing">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="row widget-statistic">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="widget widget-one_hybrid widget-followers">
+                            <div class="widget-heading">
+                                <div class="w-icon">
+                                    <div class="css-9a5dmo"><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg></div>
+                                </div>
+                                <p class="w-value" id="totalOrders"></p>
+                                <h5 class="">Total Order</h5>
+                            </div>
+                            <div class="widget-content">
+                                <div class="w-chart">
+                                    <div id="hybrid_followers"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4  col-md-4 col-sm-4 col-12">
+                        <div class="widget widget-one_hybrid widget-referral">
+                            <div class="widget-heading">
+                                <div class="w-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+                                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                    </svg>
+                                </div>
+                                <p class="w-value" id="activeOrders"></p>
+                                <h5 class="">Active Orders</h5>
+                            </div>
+                            <div class="widget-content">
+                                <div class="w-chart">
+                                    <div id="hybrid_followers1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                        <div class="widget widget-one_hybrid widget-engagement">
+                            <div class="widget-heading">
+                                <div class="w-icon">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                </div>
+                                <p class="w-value" id="usdtValue"></p>
+                                <h5 class="">USDT value of pending orders</h5>
+                            </div>
+                            <div class="widget-content">
+                                <div class="w-chart">
+                                    <div id="hybrid_followers3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-chart-one">
+                    <div class="widget-heading">
+                        <h5 class="">Profit</h5>
+                        <ul class="tabs tab-pills">
+                            <li><a href="javascript:void(0);" id="tb_1" class="tabmenu">Daily</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="tabs tab-content">
+                            <div id="content_1" class="tabcontent">
+                                <div id="revenueMonthly"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-activity-three">
+
+                    <div class="widget-heading">
+                        <h5 class="">Notifications</h5>
+                    </div>
+
+                    <div class="widget-content">
+
+                        <div class="mt-container mx-auto">
+                            <div class="timeline-line">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-table-two">
+                    <div class="widget-heading">
+                        <h5 class="">Workers</h5>
+                    </div>
+                    <div class="widget-content">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><div class="th-content">Worker name</div></th>
+                                        <th><div class="th-content">End date</div></th>
+                                        <th><div class="th-content">#</div></th>
+                                        <th><div class="th-content">Status</div></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-account-invoice-one">
+                    <div class="widget-content">
+                        <div class="invoice-box">
+
+                            <div class="acc-total-info" style="display: flex; justify-content: space-evenly;">
+                                <h5>Balance</h5>
+                                <p class="acc-amount" id="totalBalance"></p>
+                            </div>
+
+                            <div class="inv-detail" id="balanceDetail">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-wrapper">
+            <div class="footer-section f-section-1">
+                <p class="">Copyright © 2022 Trading Manitou AI, All rights reserved.</p>
+            </div>
+            <div class="footer-section f-section-2">
+                <p class="">
+                    Coded with
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+<script src="~/Content/plugins/apex/apexcharts.min.js"></script>
+<script src="~/Content/assets/js/dashboard/dash_2.js"></script>
+@*<script src="~/Content/assets/js/dashboard/dash_1.js"></script>*@
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+<script>
+
+    $(document).ready(function () {
+        GetWorkerInfo();
+        GetTotalOrders();
+        GetActiveOrders();
+        GetBalance();
+
+        GetServiceControl();
+        GetWorkerStatusinfo();
+        GetTakeProfitAndStoplossInfo();
+        GetNewMessage();
+        GetActiveOrdersUSDT();
+        GetChartData();
+        GetWorkerExpiredInfo();
+    });
+
+    function GetWorkerInfo() {
+            $.ajax({
+                url: '/Home/GetWorkerInfo',
+                type: 'get',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.length > 0) {
+                        var tbody = "";
+                        for (var i = 0; i < result.length; i++) {
+                            var workerId = result[i].WorkerID;
+                            var editUrl = '@Url.Action("Edit", "Workers")' + '?id=' + workerId;
+                            tbody = "<tr>" +
+                                "<td><div class='td-content customer-name'>" + result[i].WorkerName + "</div></td>" +
+                                "<td><div class='td-content product-brand'>" + result[i].EndingDate + "</div></td>" +
+                                "<td><div class='td-content'><a href='" + editUrl + "'><div class='css-9a5dmo'><svg viewBox='0 0 24 24' width='20' height='20' stroke='#2196f3' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'><circle cx='12' cy='12' r='10'></circle><polyline points='16 12 12 8 8 12'></polyline><line x1='12' y1='16' x2='12' y2='8'></line></svg></div></a></div></td>";
+                            if (result[i].WorkerState != 2)
+                            {
+                                tbody += "<td><div class='td-content'><div class='css-9a5dmo'><svg viewBox='0 0 24 24' width='20' height='20' stroke='#e7515a' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'><circle cx='12' cy='12' r='10'></circle><line x1='10' y1='15' x2='10' y2='9'></line><line x1='14' y1='15' x2='14' y2='9'></line></svg></div></div></td>";
+                            } else
+                            {
+                                tbody += "<td><div class='td-content'><div class='css-9a5dmo'><svg viewBox='0 0 24 24' width='24' height='24' stroke='#8dbf42' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'><circle cx='12' cy='12' r='10'></circle><polygon points='10 8 16 12 10 16 10 8'></polygon></svg></div></div></td>";
+                            }
+                            tbody += "</tr>";
+                            $('.tbody').append(tbody);
+                        }
+
+                    }
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+    function GetTotalOrders() {
+            $.ajax({
+                url: '/Home/GetTotalOrders',
+                type: 'get',
+                dataType: 'json',
+                success: function (result) {
+                    $('#totalOrders').html(result);
+                },
+                error: function (result) {
+
+                }
+            });
+        }
+
+    function GetActiveOrders() {
+            $.ajax({
+                url: '/Home/GetActiveOrders',
+                type: 'get',
+                dataType: 'json',
+                success: function (result) {
+                    $('#activeOrders').html(result);
+                },
+                error: function (result) {
+
+                }
+            });
+       }
+
+    function GetBalance() {
+        $.ajax({
+            url: '/Home/GetUsdtBalaance',
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                var html = "";
+                var totalBalance = "";
+                for (var i = 0; i < result.length; i++) {
+                    if (result[i].Balance != "0,000") {
+                        html = " <div class='info-detail-1'>" +
+                            "<p>" + result[i].Exchange + "</p>" +
+                            "<p> $ " + result[i].Balance + "</p>" +
+                            "</div > ";
+                        $("#balanceDetail").append(html);
+                        html = "";
+                    }
+                    totalBalance = result[i].total;
+                }
+                $("#totalBalance").html("$ " + totalBalance +"");
+
+            },
+            error: function (result) {
+
+            }
+        });
+    }
+
+    function GetNewMessage() {
+        $.ajax({
+            url: '/Home/AdminNewMessage',
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                var html = "";
+                for (var i = 0; i < result.length; i++) {
+                    html = "<div class='item-timeline timeline-new'>" +
+                        "<div class='t-dot'>" +
+                        "<div class='t-success'>" +
+                        "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'>" +
+                        "<polyline points='20 6 9 17 4 12'></polyline>" +
+                        "</svg>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='t-content'>" +
+                        "<div class='t-uppercontent'>" +
+                        "<h5>New Message</h5>" +
+                        "<span class=''>" + result[i].Date + "</span>" +
+                        "</div>" +
+                        "<p><span>" + result[i].Message + "</span></p>" +
+                        "<div class='tags'>" +
+                        "<div class='badge badge-success'>Answered</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>";
+                    $(".timeline-line").append(html);
+                    html = "";
+                }
+
+            },
+            error: function (result) {
+
+            }
+
+
+        });
+        }
+
+    function GetServiceControl() {
+        $.ajax({
+            url: '/Home/GetServicesControl',
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                var html = "";
+                for (var i = 0; i < result.length; i++) {
+                    html = "<div class='item-timeline timeline-new'>" +
+                        "<div class='t-dot'>";
+                    if (result[i].Status == false) {
+                        html += "<div class='t-danger'>";
+                    } else {
+                        html += "<div class='t-dark'>";
+                    }
+                    html += "   <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-server'>" +
+                        "<rect x='2' y='2' width='20' height='8' rx='2' ry='2'></rect>" +
+                        "<rect x='2' y='14' width='20' height='8' rx='2' ry='2'></rect>" +
+                        "<line x1='6' y1='6' x2='6' y2='6'></line>" +
+                        "<line x1='6' y1='18' x2='6' y2='18'></line>" +
+                        "</svg>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='t-content'>" +
+                        "<div class='t-uppercontent'>" +
+                        "<h5>" + result[i].ServiceName + "</h5>" +
+                        "</div>" +
+                        "<div class='tags'>";
+                    if (result[i].Status != false) {
+                        html += "<div class='badge badge-success'>Working</div>";
+                    } else {
+                        html += "<div class='badge badge-danger'>Repair</div>";
+                    }
+                    html += "</div></div></div>";
+                    $(".timeline-line").append(html);
+                    html = "";
+                }
+
+
+            },
+            error: function (result) {
+
+            }
+        })
+
+    }
+
+    function GetWorkerStatusinfo(){
+        $.ajax({
+            url: '/Home/GetWorkerStartStopInfo',
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                var html = "";
+                for (var i = 0; i < result.length; i++) {
+                     html = "<div class='item-timeline timeline-new'>" +
+                        "<div class='t-dot'>";
+                    if (result[i].WorkStatus == false) {
+                        html += "<div class='t-danger'>";
+                    } else {
+                        html += "<div class='t-primary'>";
+                    }
+                    html += "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-file'>" +
+                        "<path d='M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'></path>" +
+                        "<polyline points='13 2 13 9 20 9'></polyline>" +
+                        "</svg>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='t-content'>" +
+                        "<div class='t-uppercontent'>" +
+                        "</div>" +
+                        "<p>" + result[i].WorkerName + "</p>" +
+                        "<div class='tags'>";
+                    if (result[i].WorkStatus == false) {
+                        html += "<div class='badge badge-danger'>Stop</div>";
+                    } else {
+                        html += "<div class='badge badge-success'>Start</div>";
+                    }
+                    html += "</div>" +
+                        "</div>" +
+                        "</div>";
+                    $(".timeline-line").append(html);
+                    html = "";
+                }
+            },
+            error: function (result) {
+
+            }
+        });
+    }
+
+    function GetTakeProfitAndStoplossInfo() {
+        $.ajax({
+            url: '/Home/GetTakeProfitAndStoplossInfo',
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                var html = "";
+                for (var i = 0; i < result.length; i++) {
+
+                     html = "<div class='item-timeline timeline-new'>" +
+                        "<div class='t-dot'>";
+                    if (result[i].WorkStatus == "Take Profit") {
+                        html += "<div class='t-warning'>";
+                    } else {
+                        html += "<div class='t-danger'>";
+                    }
+                    html += "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-mail'>" +
+                        "<path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'></path>" +
+                        "<polyline points='22,6 12,13 2,6'></polyline>" +
+                        "</svg>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='t-content'>" +
+                        "<div class='t-uppercontent'>" +
+                        "<h5>" + result[i].WorkerName + "</h5>" +
+                        "</div>" +
+                        "<div class='tags'>";
+                    if (result[i].WorkStatus == "Take Profit") {
+                        html += "<div class='badge badge-primary'>" + result[i].WorkStatus + "</div>";
+                    } else {
+                        html += "<div class='badge badge-danger'>" + result[i].WorkStatus +"</div>";
+                    }
+                    html += "</div> </div> </div> ";
+                    $(".timeline-line").append(html);
+                    html = "";
+                }
+            },
+            error: function (result) {
+
+            }
+        });
+    }
+
+    function GetWorkerExpiredInfo() {
+        $.ajax({
+            url: '/Home/GetWorkerExpiredInfo',
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                var html = "";
+                for (var i = 0; i < result.length; i++) {
+
+                    html = "<div class='item-timeline timeline-new'>" +
+                        "<div class='t-dot'>";
+                    html += "<div class='t-danger'>";
+
+                    html += "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-mail'>" +
+                        "<path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'></path>" +
+                        "<polyline points='22,6 12,13 2,6'></polyline>" +
+                        "</svg>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class='t-content'>" +
+                        "<div class='t-uppercontent'>" +
+                        "<h5>" + result[i].Key + "</h5>" +
+                        "</div>" +
+                        "<div class='tags'>";
+
+                    html += "<div class='badge badge-primary'>" + result[i].Value + "</div>";
+                   
+                    html += "</div> </div> </div> ";
+                    $(".timeline-line").append(html);
+                    html = "";
+                }
+            },
+            error: function (result) {
+
+            }
+        });
+    }
+
+    function GetActiveOrdersUSDT() {
+        $.ajax({
+            url: '/Home/UnrealizedOrdersUsdt',
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                $('#usdtValue').html(result);
+            },
+            error: function (result) {
+
+            }
+        });
+    }
+
+    function GetChartData() {
+        $.ajax({
+            url: '/Home/GetChartData',
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+
+                var usdtData = [];
+                var profitData = [];
+                var days = [];
+                var dailyProfit = 0;
+                const currentDate = new Date();
+                for (var i = 0; i < result.length; i++) {
+                    usdtData.push(result[i].UsdtBalance);
+                    profitData.push(result[i].profit);
+                    days.push(result[i].Date)
+                    if (result[i].Date == currentDate.toLocaleDateString("en-US", { weekday: "short" })) {
+                        dailyProfit = result[i].UsdtBalance - result[i -1].UsdtBalance
+                    }
+                }
+                var options1 = {
+                    chart: {
+                        fontFamily: 'Quicksand, sans-serif',
+                        height: 365,
+                        type: 'area',
+                        zoom: {
+                            enabled: false
+                        },
+                        dropShadow: {
+                            enabled: true,
+                            opacity: 0.3,
+                            blur: 5,
+                            left: -7,
+                            top: 22
+                        },
+                        toolbar: {
+                            show: false
+                        },
+                        events: {
+                            mounted: function (ctx, config) {
+                                const highest1 = ctx.getHighestValueInSeries(0);
+                                const highest2 = ctx.getHighestValueInSeries(1);
+
+                                ctx.addPointAnnotation({
+                                    x: new Date(ctx.w.globals.seriesX[0][ctx.w.globals.series[0].indexOf(highest1)]).getTime(),
+                                    y: highest1,
+                                    label: {
+                                        style: {
+                                            cssClass: 'd-none'
+                                        }
+                                    },
+                                    customSVG: {
+                                        SVG: '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#1b55e2" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>',
+                                        cssClass: undefined,
+                                        offsetX: -8,
+                                        offsetY: 5
+                                    }
+                                })
+
+                                ctx.addPointAnnotation({
+                                    x: new Date(ctx.w.globals.seriesX[1][ctx.w.globals.series[1].indexOf(highest2)]).getTime(),
+                                    y: highest2,
+                                    label: {
+                                        style: {
+                                            cssClass: 'd-none'
+                                        }
+                                    },
+                                    customSVG: {
+                                        SVG: '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#e7515a" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>',
+                                        cssClass: undefined,
+                                        offsetX: -8,
+                                        offsetY: 5
+                                    }
+                                })
+                            },
+                        }
+                    },
+                    colors: ['#1b55e2', '#e7515a'],
+                    dataLabels: {
+                        enabled: false
+                    },
+                    markers: {
+                        discrete: [{
+                            seriesIndex: 0,
+                            dataPointIndex: 7,
+                            fillColor: '#000',
+                            strokeColor: '#000',
+                            size: 5
+                        }, {
+                            seriesIndex: 2,
+                            dataPointIndex: 11,
+                            fillColor: '#000',
+                            strokeColor: '#000',
+                            size: 4
+                        }]
+                    },
+                    subtitle: {
+                        text: 'Total Profit',
+                        align: 'left',
+                        margin: 0,
+                        offsetX: -10,
+                        offsetY: 35,
+                        floating: false,
+                        style: {
+                            fontSize: '14px',
+                            color: '#888ea8'
+                        }
+                    },
+                    title: {
+                        text: '$' + dailyProfit,
+                        align: 'left',
+                        margin: 0,
+                        offsetX: -10,
+                        offsetY: 0,
+                        floating: false,
+                        style: {
+                            fontSize: '25px',
+                            color: '#bfc9d4'
+                        },
+                    },
+                    stroke: {
+                        show: true,
+                        curve: 'smooth',
+                        width: 2,
+                        lineCap: 'square'
+                    },
+                    series: [{
+                        name: 'USDT',
+                        data: usdtData
+                    }, {
+                        name: 'Profit',
+                        data: profitData
+                    }],
+                    labels:days,
+                    xaxis: {
+                        axisBorder: {
+                            show: false
+                        },
+                        axisTicks: {
+                            show: false
+                        },
+                        crosshairs: {
+                            show: true
+                        },
+                        labels: {
+                            offsetX: 0,
+                            offsetY: 5,
+                            style: {
+                                fontSize: '12px',
+                                fontFamily: 'Quicksand, sans-serif',
+                                cssClass: 'apexcharts-xaxis-title',
+                            },
+                        }
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value, index) {
+                                return (value)
+                            },
+                            offsetX: -22,
+                            offsetY: 0,
+                            style: {
+                                fontSize: '12px',
+                                fontFamily: 'Quicksand, sans-serif',
+                                cssClass: 'apexcharts-yaxis-title',
+                            },
+                        }
+                    },
+                    grid: {
+                        borderColor: '#191e3a',
+                        strokeDashArray: 5,
+                        xaxis: {
+                            lines: {
+                                show: true
+                            }
+                        },
+                        yaxis: {
+                            lines: {
+                                show: false,
+                            }
+                        },
+                        padding: {
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            left: -10
+                        },
+                    },
+                    legend: {
+                        position: 'top',
+                        horizontalAlign: 'right',
+                        offsetY: -50,
+                        fontSize: '16px',
+                        fontFamily: 'Quicksand, sans-serif',
+                        markers: {
+                            width: 10,
+                            height: 10,
+                            strokeWidth: 0,
+                            strokeColor: '#fff',
+                            fillColors: undefined,
+                            radius: 12,
+                            onClick: undefined,
+                            offsetX: 0,
+                            offsetY: 0
+                        },
+                        itemMargin: {
+                            horizontal: 0,
+                            vertical: 20
+                        }
+                    },
+                    tooltip: {
+                        theme: 'dark',
+                        marker: {
+                            show: true,
+                        },
+                        x: {
+                            show: false,
+                        }
+                    },
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            type: "vertical",
+                            shadeIntensity: 1,
+                            inverseColors: !1,
+                            opacityFrom: .28,
+                            opacityTo: .05,
+                            stops: [45, 100]
+                        }
+                    },
+                    responsive: [{
+                        breakpoint: 575,
+                        options: {
+                            legend: {
+                                offsetY: -30,
+                            },
+                        },
+                    }]
+                }
+
+                var chart1 = new ApexCharts(
+                    document.querySelector("#revenueMonthly"),
+                    options1
+                );
+                chart1.render();
+            },
+            error: function (result){
+
+            }
+        });
+    }
+
+
+</script>

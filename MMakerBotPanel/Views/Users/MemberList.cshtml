@@ -1,0 +1,158 @@
+﻿@model IEnumerable<MMakerBotPanel.Database.Model.User>
+
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/datatables.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/assets/css/forms/theme-checkbox-radio.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/dt-global_style.css">
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/table/datatable/custom_dt_custom.css">
+
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="row layout-top-spacing layout-spacing">
+            <div class="col-lg-12">
+                <div class="statbox widget box box-shadow">
+                    <div class="widget-content widget-content-area">
+                        <div class="table-responsive mb-4">
+                            <table id="style-2" class="table style-2  table-hover">
+
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <th class="text-center">Image</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Suspended</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr style="text-align: center;">
+                                            <td class="text-center">
+                                                <span><img src="data:image/png;base64, @item.Image" class="rounded-circle profile-img" alt="avatar"></span>
+                                            </td>
+                                            <td>@item.Name</td>
+                                            <td>@item.SurName</td>
+                                            <td>@item.Email</td>
+
+                                            @if (item.Disabled == true)
+                                            {
+                                                <td class="text-center"><span class="badge badge-danger">Suspended</span></td>
+
+                                            }
+                                            else
+                                            {
+                                                <td class="text-center"><span class="badge badge-success">Active</span></td>
+                                                
+                                            }
+                                            <td class="text-center">
+                                            <button class="bs-tooltip suspended" style="border:none ; background-color: #ffffff;" data="@item.UserID" title="Suspended"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></button>
+                                            <a href="@Url.Action("MemberDetail" , "Users" , new {id = item.UserID})" class="bs-tooltip Edit"  style="border:none ; background-color: #ffffff;" data-toggle="tooltip" data-placement="top" title="Detail" data-original-title="Detail"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-6 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/light/plugins/table/datatable/datatables.js"></script>
+<script>
+
+    c2 = $('#style-2').DataTable({
+        "oLanguage": {
+            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+            "sLengthMenu": "Results :  _MENU_",
+        },
+        "lengthMenu": [5, 10, 20, 50],
+        "pageLength": 5
+    });
+
+    multiCheck(c2);
+
+
+    $(document).ready(function () {
+        Status();
+    });
+
+    function Status()
+    {
+        $('#style-2').on('click', '.suspended', function () {
+            var id = $(this).attr('data');
+            var status = "";
+
+            $.ajax({
+                url: '/Users/Status?id=' + id,
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    if (result == true) {
+                        status = "Suspended";
+                    } else {
+                        status = "Active";
+                    }
+
+                    Badge(status, id)
+                },
+                error: function () {
+
+                }
+
+            });
+        });
+    }
+
+    function Badge(status, id)
+    {
+        if (status == "Active") {
+            $.ajax({
+                url: '/Users/Suspended?id=' + id,
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    window.location.reload();
+
+                },
+                error: function () {
+
+                }
+
+            });
+
+
+        }
+        else {
+            $.ajax({
+                url: '/Users/Active?id=' + id,
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    window.location.reload();
+
+                },
+                error: function () {
+
+                }
+
+            });
+
+        }
+    }
+
+</script>

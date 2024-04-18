@@ -1,0 +1,678 @@
+﻿@model MMakerBotPanel.Database.Model.ExchangeApi
+
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<link href="~/Content/light/assets/css/apps/notes.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/light/plugins/loaders/custom-loader.css" rel="stylesheet" type="text/css" />
+<!--  BEGIN CONTENT AREA  -->
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="row app-notes layout-top-spacing" id="cancel-row">
+            <div class="col-lg-12">
+                <div class="app-container">
+                    <div class="app-note-container">
+                        <div id="ct" class="note-container note-grid">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  END CONTENT AREA  -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="~/Content/light/assets/js/ie11fix/fn.fix-padStart.js"></script>
+<script src="~/Content/light/assets/js/apps/notes.js"></script>
+<script src="~/Content/light/assets/js/scrollspyNav.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script>
+    $(document).ready(function () {
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='binance'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Binance'>Binance</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentBinance'>" +
+            " <p class='note-description' id='descriptionBinance' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Alterdice'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Alterdice'>Alterdice</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content'  id='contentAlterdice'>" +
+            " <p class='note-description' id='descriptionAlterdice' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='dex'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Dextrade'>Dextrade</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentDex'>" +
+            " <p class='note-description' id='descriptionDex' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Bitfinex'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Bitfinex'>Bitfinex</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentBitfinex'>" +
+            " <p class='note-description' id='descriptionBitfinex' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Bybit'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Bybit'>Bybit</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentBybit'>" +
+            " <p class='note-description' id='descriptionBybit' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Gateio'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Gateio'>Gateio</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentGateio'>" +
+            " <p class='note-description' id='descriptionGateio' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Huobi'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Huobi'>Huobi</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentHuobi'>" +
+            " <p class='note-description' id='descriptionHuobi' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Kraken'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Kraken'>Kraken</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentKraken'>" +
+            " <p class='note-description' id='descriptionKraken' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Kucoin'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Kucoin'>Kucoin</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentKucoin'>" +
+            " <p class='note-description' id='descriptionKucoin' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Lbank'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Lbank'>Lbank</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentLbank'>" +
+            " <p class='note-description' id='descriptionLbank' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Mexc'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Mexc'>Mexc</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentMexc'>" +
+            " <p class='note-description' id='descriptionMexc' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='OKX'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='OKX'>OKX</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentOKX'>" +
+            " <p class='note-description' id='descriptionOKX' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Coinsbit'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Coinsbit'>Coinsbit</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentCoinsbit'>" +
+            " <p class='note-description' id='descriptionCoinsbit' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Bitget'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Bitget'>Bitget</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentBitget'>" +
+            " <p class='note-description' id='descriptionBitget' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+
+        var statusCard = "";
+        statusCard = "<div class='note-item all-notes note-fav' id='Probit'>" +
+            " <div class='note-inner-content' style = 'margin-left:2rem; margin-right:2rem; height:5rem' >" +
+            " <div class='note-content'> " +
+            " <p class='note-title' data-noteTitle='Probit'>Probit</p>" +
+            " <div style='display:flex; justify-content:space-between'>" +
+            " <div class='note-description-content' id='contentProbit'>" +
+            " <p class='note-description' id='descriptionProbit' data-noteDescription='Time'>Time:</p>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div>" +
+            " </div> ";
+        $('.note-grid').append(statusCard);
+
+        Status();
+        setInterval(Status, 5000);
+
+
+    });
+    function Status()
+    {
+        BinanceStatus();
+        AlterdiceStatus();
+        DextradeStatus();
+        BitfinexStatus();
+        BybitStatus();
+        GateioStatus();
+        HuobiStatus();
+        KrakenStatus();
+        KucoinStatus();
+        LbankStatus();
+        MexcStatus();
+        OKXStatus(); 
+        CoinsbitStatus(); 
+        BitGetStatus(); 
+        ProbitStatus();
+    }
+
+    function BinanceStatus() {
+        $('#binance').removeClass("note-fav").addClass("note-work");
+        $('#descriptionBinance').remove();
+        $('#contentBinance').append("<p class='meta-time' id='metaBinance'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/BinanceStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result)
+            {
+                for (var i = 0; i < result.length; i++)
+                {
+                    $('#metaBinance').remove();
+                    if (result[i].Value) {
+                        $('#contentBinance').html(" <p class='note-description' id='descriptionBinance' data-noteDescription='Time'>Time: " + result[i].date +"</p>");
+                    }
+                    else {
+                        $('#binance').removeClass("note-work").addClass("note-important");
+                        $('#contentBinance').html(" <p class='note-description'id='descriptionBinance'  data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+
+    }
+    function AlterdiceStatus() {
+        $('#Alterdice').removeClass("note-fav").addClass("note-work");
+        $('#descriptionAlterdice').remove();
+        $('#contentAlterdice').append("<p class='meta-time' id='metaAlterdice'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/AlterdiceStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result)
+            {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaAlterdice').remove();
+                    if (result[i].Value) {
+                        $('#contentAlterdice').html(" <p class='note-description'id='descriptionAlterdice' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Alterdice').removeClass("note-work").addClass("note-important");
+                        $('#contentAlterdice').html(" <p class='note-description'id='descriptionAlterdice' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function DextradeStatus() {
+        $('#dex').removeClass("note-fav").addClass("note-work");
+        $('#descriptionDex').remove();
+        $('#contentDex').append("<p class='meta-time' id='metaDex'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/DextradeStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaDex').remove();
+                    if (result[i].Value) {
+                        $('#contentDex').html(" <p class='note-description'id='descriptionDex' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#dex').removeClass("note-work").addClass("note-important");
+                        $('#contentDex').html(" <p class='note-description'id='descriptionDex' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function BitfinexStatus() {
+        $('#Bitfinex').removeClass("note-fav").addClass("note-work");
+        $('#descriptionBitfinex').remove();
+        $('#contentBitfinex').append("<p class='meta-time' id='metaBitfinex'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/BitfinexStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaBitfinex').remove();
+                    if (result[i].Value) {
+                        $('#contentBitfinex').html(" <p class='note-description'id='descriptionBitfinex' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Bitfinex').removeClass("note-work").addClass("note-important");
+                        $('#contentBitfinex').html(" <p class='note-description'id='descriptionBitfinex' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function BybitStatus() {
+        $('#Bybit').removeClass("note-fav").addClass("note-work");
+        $('#descriptionBybit').remove();
+        $('#contentBybit').append("<p class='meta-time' id='metaBybit'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/BybitStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaBybit').remove();
+                    if (result[i].Value) {
+                        $('#contentBybit').html(" <p class='note-description'id='descriptionBybit' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Bybit').removeClass("note-work").addClass("note-important");
+                        $('#contentBybit').html(" <p class='note-description'id='descriptionBybit' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function CoinbaseStatus() {
+        $('#Coinbase').removeClass("note-fav").addClass("note-work");
+        $('#descriptionCoinbase').remove();
+        $('#contentCoinbase').append("<p class='meta-time' id='metaCoinbase'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/CoinbaseStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaCoinbase').remove();
+                    if (result[i].Value) {
+                        $('#contentCoinbase').html(" <p class='note-description'id='descriptionCoinbase' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Coinbase').removeClass("note-work").addClass("note-important");
+                        $('#contentCoinbase').html(" <p class='note-description'id='descriptionCoinbase' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function GateioStatus() {
+        $('#Gateio').removeClass("note-fav").addClass("note-work");
+        $('#descriptionGateio').remove();
+        $('#contentGateio').append("<p class='meta-time' id='metaGateio'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/GateioStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaGateio').remove();
+                    if (result[i].Value) {
+                        $('#contentGateio').html(" <p class='note-description'id='descriptionGateio' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Gateio').removeClass("note-work").addClass("note-important");
+                        $('#contentGateio').html(" <p class='note-description'id='descriptionGateio' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function HuobiStatus() {
+        $('#Huobi').removeClass("note-fav").addClass("note-work");
+        $('#descriptionHuobi').remove();
+        $('#contentHuobi').append("<p class='meta-time' id='metaHuobi'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/HuobiStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaHuobi').remove();
+                    if (result[i].Value) {
+                        $('#contentHuobi').html(" <p class='note-description'id='descriptionHuobi' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Huobi').removeClass("note-work").addClass("note-important");
+                        $('#contentHuobi').html(" <p class='note-description'id='descriptionHuobi' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function KrakenStatus() {
+        $('#Kraken').removeClass("note-fav").addClass("note-work");
+        $('#descriptionKraken').remove();
+        $('#contentKraken').append("<p class='meta-time' id='metaKraken'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/KrakenStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaKraken').remove();
+                    if (result[i].Value) {
+                        $('#contentKraken').html(" <p class='note-description'id='descriptionKraken' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Kraken').removeClass("note-work").addClass("note-important");
+                        $('#contentKraken').html(" <p class='note-description'id='descriptionKraken' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function KucoinStatus() {
+        $('#Kucoin').removeClass("note-fav").addClass("note-work");
+        $('#descriptionKucoin').remove();
+        $('#contentKucoin').append("<p class='meta-time' id='metaKucoin'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/KucoinStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaKucoin').remove();
+                    if (result[i].Value) {
+                        $('#contentKucoin').html(" <p class='note-description'id='descriptionKucoin' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Kucoin').removeClass("note-work").addClass("note-important");
+                        $('#contentKucoin').html(" <p class='note-description'id='descriptionKucoin' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function LbankStatus() {
+        $('#Lbank').removeClass("note-fav").addClass("note-work");
+        $('#descriptionLbank').remove();
+        $('#contentLbank').append("<p class='meta-time' id='metaLbank'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/LbankStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaLbank').remove();
+                    if (result[i].Value) {
+                        $('#contentLbank').html(" <p class='note-description'id='descriptionLbank' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Lbank').removeClass("note-work").addClass("note-important");
+                        $('#contentLbank').html(" <p class='note-description'id='descriptionLbank' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function MexcStatus() {
+        $('#Mexc').removeClass("note-fav").addClass("note-work");
+        $('#descriptionMexc').remove();
+        $('#contentMexc').append("<p class='meta-time' id='metaMexc'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/MexcStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaMexc').remove();
+                    if (result[i].Value) {
+                        $('#contentMexc').html(" <p class='note-description'id='descriptionMexc' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Mexc').removeClass("note-work").addClass("note-important");
+                        $('#contentMexc').html(" <p class='note-description'id='descriptionMexc' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function OKXStatus() {
+        $('#OKX').removeClass("note-fav").addClass("note-work");
+        $('#descriptionOKX').remove();
+        $('#contentOKX').append("<p class='meta-time' id='metaOKX'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/OKXStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaOKX').remove();
+                    if (result[i].Value) {
+                        $('#contentOKX').html(" <p class='note-description'id='descriptionOKX' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#OKX').removeClass("note-work").addClass("note-important");
+                        $('#contentOKX').html(" <p class='note-description'id='descriptionOKX' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function CoinsbitStatus() {
+        $('#Coinsbit').removeClass("note-fav").addClass("note-work");
+        $('#descriptionCoinsbit').remove();
+        $('#contentCoinsbit').append("<p class='meta-time' id='metaCoinsbit'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/CoinsbitStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaCoinsbit').remove();
+                    if (result[i].Value) {
+                        $('#contentCoinsbit').html(" <p class='note-description'id='descriptionCoinsbit' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Coinsbit').removeClass("note-work").addClass("note-important");
+                        $('#contentCoinsbit').html(" <p class='note-description'id='descriptionCoinsbit' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function BitGetStatus() {
+        $('#Bitget').removeClass("note-fav").addClass("note-work");
+        $('#descriptionBitget').remove();
+        $('#contentBitget').append("<p class='meta-time' id='metaCoinsbit'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/BinanceStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaBitget').remove();
+                    if (result[i].Value) {
+                        $('#contentBitget').html(" <p class='note-description'id='descriptionBitget' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Bitget').removeClass("note-work").addClass("note-important");
+                        $('#contentBitget').html(" <p class='note-description'id='descriptionBitget' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+    function ProbitStatus() {
+        $('#Probit').removeClass("note-fav").addClass("note-work");
+        $('#descriptionProbit').remove();
+        $('#contentProbit').append("<p class='meta-time' id='metaProbit'><div class='spinner-border text-white align-self-center'>Loading...</div></p>");
+        $.ajax({
+            url: "/ExchangeStatus/BinanceStatusTime",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    $('#metaProbit').remove();
+                    if (result[i].Value) {
+                        $('#contentProbit').html(" <p class='note-description'id='descriptionProbit' data-noteDescription='Time'>Time: " + result[i].date + "</p>");
+                    }
+                    else {
+                        $('#Probit').removeClass("note-work").addClass("note-important");
+                        $('#contentProbit').html(" <p class='note-description'id='descriptionProbit' data-noteDescription='Time'>Time:maintenance </p>");
+                    }
+                }
+
+            }
+
+        });
+    }
+
+</script>

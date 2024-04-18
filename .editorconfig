@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0065: Yanlış yerleştirilmiş using yönergesi
+csharp_using_directive_placement = inside_namespace

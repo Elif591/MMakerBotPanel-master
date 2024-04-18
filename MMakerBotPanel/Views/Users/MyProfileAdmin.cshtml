@@ -1,0 +1,183 @@
+﻿@model MMakerBotPanel.Database.Model.User
+
+@{
+    ViewBag.Title = "MyProfileAdmin";
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<!--  BEGIN CUSTOM STYLE FILE  -->
+<link rel="stylesheet" type="text/css" href="~/Content/light/plugins/dropify/dropify.min.css">
+<link href="~/Content/light/assets/css/users/account-setting.css" rel="stylesheet" type="text/css" />
+<!--  END CUSTOM STYLE FILE  -->
+
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+
+        <div class="account-settings-container layout-top-spacing">
+
+            <form class="section general-info" enctype="multipart/form-data" id="myProfile">
+                @Html.AntiForgeryToken()
+                <div class="account-content">
+                    <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+                                <div class="info">
+                                    <h6 class="">General Information</h6>
+                                    <div class="row">
+                                        <div class="col-lg-11 mx-auto">
+                                            <div class="form">
+                                                <div class="row">
+
+                                                    <div class="col-xl-2 col-lg-12 col-md-4">
+                                                        <div class="upload mt-4 pr-md-4 ">
+                                                            <input type="file" for="File" class="dropify" data-max-file-size="1M" data-show-remove="false" data-default-file="" />
+                                                            <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> Upload Picture</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
+
+                                                        <div class="form-group">
+                                                            <label for="fullName">Name</label>
+                                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control mb-4", @placeholder = "Name", @id = "Name" } })
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="fullName">Surname</label>
+                                                            @Html.EditorFor(model => model.SurName, new { htmlAttributes = new { @class = "form-control mb-4", @placeholder = "Surname", @id = "SurName" } })
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="profession">Email</label>
+                                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", @disabled = "disabled" } })
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <svg style="cursor:pointer" id="toggle" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock">
+                                                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"> </rect>
+                                                                <path d="M7 11V7a5 5 0 0 1 10 0v4"> </path>
+                                                            </svg>
+                                                            <label for="profession">Password</label>
+
+                                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control mb-4" }, @id = "Password" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="account-settings-footer">
+                    <div class="as-footer-container">
+                        <button id="multiple-reset" class="btn btn-warning">Reset All</button>
+                        <div class="blockui-growl-message">
+                            <i class="flaticon-double-check"></i>&nbsp; Settings Saved Successfully
+                        </div>
+                        <input id="multiple-messages" class="btn btn-primary" type="submit" value="Save Changes" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--  BEGIN CUSTOM SCRIPTS FILE  -->
+<script src="~/Content/light/plugins/dropify/dropify.min.js"></script>
+<script src="~/Content/light/plugins/blockui/jquery.blockUI.min.js"></script>
+<!-- <script src="plugins/tagInput/tags-input.js"></script> -->
+<script src="~/Content/light/assets/js/users/account-settings.js"></script>
+<!--  END CUSTOM SCRIPTS FILE  -->
+<script>
+
+
+    $(function () {
+        $('.dropify').dropify();
+
+        resetPreview('File', 'data:image/jpg;base64,@Model.Image','Image');
+
+
+    })
+
+    function resetPreview(name, src, fname = '') {
+        let input = $('input[for="' + name + '"]');
+        let wrapper = input.closest('.dropify-wrapper');
+        let preview = wrapper.find('.dropify-preview');
+        let filename = wrapper.find('.dropify-filename-inner');
+        let render = wrapper.find('.dropify-render').html('');
+
+        input.val('').attr('for', fname);
+        wrapper.removeClass('has-error').addClass('has-preview');
+        filename.html(fname);
+
+        render.append($('<img /> ').attr('src', src).css('max-height', input.data('height') || ''));
+        preview.fadeIn();
+
+    }
+
+    $(document).ready(function () {
+
+
+        document.querySelector("#myProfile").addEventListener("submit", function (e) {
+            e.preventDefault();    //stop form from submitting
+        });
+
+
+        $('#Password').attr('type', 'password');
+
+        $("#toggle").on("click", function () {
+            var passLock = $('#Password').attr('type');
+            if (passLock === "password") {
+                $('#Password').attr('type', 'text');
+            } else {
+                $('#Password').attr('type', 'password');
+
+            }
+        })
+
+
+
+        $('#multiple-messages').click(function () {
+            var Image = $('img')[2].src;
+            var Name = $('#Name').val();
+            var SurName = $('#SurName').val();
+            var Password = $('#Password').val();
+
+            $.ajax({
+                url: '/Users/MyProfileAdmin',
+                type: "post",
+                dataType: "json",
+                data: {
+                    'Image': Image,
+                    'Name': Name,
+                    'SurName': SurName,
+                    'Password': Password,
+                   },
+                success: function (result) {
+                    if (result == true) {
+                        window.location.reload();
+                    }
+
+                },
+                error: function () {
+
+                }
+
+            });
+        })
+
+
+
+    })
+
+
+
+
+
+    //$('#multiple-messages')
+
+
+
+
+</script>

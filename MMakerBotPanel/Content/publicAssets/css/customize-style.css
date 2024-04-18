@@ -1,0 +1,29 @@
+.max-h-7 {
+    max-height: 2.3rem;
+}
+.mt-f-link li a { color:#a1a2b3; }
+.mt-f-link li a:hover { color:white; }
+
+
+
+
+
+@media (max-width: 1023px) {
+
+  .mobil-menu-pt {margin-top: 99px; }
+  .close-mr {margin-right: 12px;}
+
+  .mb-mt-m { margin-top:30px }
+  .mb-pt-m { padding-top: 80px;}
+
+
+
+
+  }
+
+
+
+
+
+
+
